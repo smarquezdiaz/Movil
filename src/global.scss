@@ -43,9 +43,31 @@ body {
 }
 .main-button {
     --background: #060A30; 
+    --color: white;   
+    width: 30%;                     
+}
+.secondary-button {
+    --background: #A90B71; 
     --color: white;                        
 }
 h1 {
-    --color: #060A30 !important;                        
+    color: #060A30 !important;                     
+}
+.generic-input {
+    border-radius: 15px;
+    border: 1px solid #666877;
+    --padding-bottom: 10px;
+    --padding-end: 10px;
+    --padding-start: 10px;
+    --padding-top: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+.divider{
+    border-top: 4px solid #060A30;
+    border-radius: 20px;
+}
+ion-label {
+    --color: #060A30 !important;      
 }
 
