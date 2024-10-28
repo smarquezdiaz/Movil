@@ -1,15 +1,5 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true"  class="main-container">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">login</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<app-header></app-header>
+<ion-content   class="main-container">
   <ion-card class="login-container">
     <ion-card-header>
       <ion-card-title>Bienvenido</ion-card-title>
@@ -24,7 +14,7 @@
           <ion-input-password-toggle slot="end"></ion-input-password-toggle>
         </ion-input>
         <div>
-          <ion-button fxLayoutAlign="center" [routerLink]="['/login/register']">INGRESAR</ion-button>
+          <ion-button class="main-button" fxLayoutAlign="center" [routerLink]="['/login/register']">REGISTRARSE</ion-button>
         </div>
       </form>
     </ion-card-content>

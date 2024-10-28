@@ -9,6 +9,7 @@ import { LoginPageRoutingModule } from './login-routing.module';
 import { LoginPage } from './login.page';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterLink } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { RouterLink } from '@angular/router';
     LoginPageRoutingModule,
     FlexLayoutModule,
     RouterLink,
-  
+    SharedModule
   ],
   declarations: [LoginPage]
 })
