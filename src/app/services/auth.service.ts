@@ -14,4 +14,8 @@ export class AuthService {
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(environment.api + environment.backend.user + `/all`);
   }
+
+  getHolaMundo(): Observable<any> {
+    return this.http.get<any>(environment.api + `/holaMundo`);
+  }
 }

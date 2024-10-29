@@ -11,6 +11,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterLink } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -19,7 +20,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     LoginPageRoutingModule,
     FlexLayoutModule,
     RouterLink,
-    SharedModule
+    SharedModule,
   ],
   declarations: [LoginPage]
 })
