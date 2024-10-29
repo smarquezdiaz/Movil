@@ -22,8 +22,8 @@
         <ion-input-password-toggle slot="end"></ion-input-password-toggle>
       </ion-input>
       <div class="button-container">
-        <ion-button class="secondary-button">Cancelar</ion-button>
-        <ion-button class="main-button">Crear</ion-button>
+        <ion-button class="secondary-button" routerLink="/login/register">Cancelar</ion-button>
+        <ion-button class="main-button" (click)="openModal()">Crear</ion-button>
       </div>
     </form>
   </div>

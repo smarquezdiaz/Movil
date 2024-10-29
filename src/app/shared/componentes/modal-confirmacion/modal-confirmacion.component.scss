@@ -1,0 +1,18 @@
+.title-dialog {
+    display: flex;
+    justify-content: center;
+}
+.icon-dialog {
+    display: flex;
+    width: 35px;
+    height: 35px;
+    justify-self: end;
+}
+.button-container-dialog {
+    display: flex;
+    justify-content: center;
+    gap: 15%;
+}
+.dialog-container {
+    padding: 5%;
+}

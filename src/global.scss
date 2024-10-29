@@ -43,15 +43,14 @@ body {
 }
 .main-button {
     --background: #060A30; 
-    --color: white;   
-    width: 30%;                     
+    --color: white;                       
 }
 .secondary-button {
     --background: #A90B71; 
     --color: white;                        
 }
 h1 {
-    color: #060A30 !important;                     
+    color: #060A30 ;                     
 }
 .generic-input {
     border-radius: 15px;
@@ -69,5 +68,12 @@ h1 {
 }
 ion-label {
     --color: #060A30 !important;      
+}
+ion-modal {
+    --width: fit-content;
+    --min-width: 350px;
+    --height: fit-content;
+    --border-radius: 6px;
+    --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
 }
 

@@ -1,0 +1,9 @@
+<div class="dialog-container">
+  <ion-icon class="icon-dialog" name="close-outline" (click)="cancelar()"></ion-icon>
+  <h1 class="title-dialog">Confirmar acción</h1>
+  <p style="color: #71717A; font-size: 14px;">¿Estas seguro que deseas realizar esta acción?</p>
+  <div class="button-container-dialog">
+    <ion-button class="secondary-button" (click)="cancelar()">Cancelar</ion-button>
+    <ion-button class="main-button" (click)="confirmar()">Confirmar</ion-button>
+  </div>
+</div>

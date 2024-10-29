@@ -1,0 +1,24 @@
+.dialog-container {
+    padding: 5%;
+}
+.dialog-container-header {
+    display: flex;
+    justify-content: center;
+    gap: 2%;
+}
+.dialog-container-header ion-icon{
+    display: flex;
+    align-self: center;
+    width: 20px;
+    height: 20px;
+    color: #16A34A;
+}
+.dialog-container-header h1{
+    color: #16A34A;
+}
+.icon-dialog {
+    display: flex;
+    width: 35px;
+    height: 35px;
+    justify-self: end;
+}
