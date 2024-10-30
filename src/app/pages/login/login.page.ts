@@ -13,29 +13,8 @@ export class LoginPage implements OnInit {
 
   constructor(
     private route : Router,
-    private authService :AuthService,
-    private empresaService: EmpresaService
   ) { }
 
   ngOnInit() {
-    /* const empresa = {
-      id: 4,
-      nombre: 'Prueba',
-      ubicacion: 'Prueba',
-      imagen: 'Prueba',
-      nit: 'Prueba',
-      usuario: 'Prueba',
-      contrasenia: 'Prueba',
-      rol: 'Prueba',
-    }
-    this.empresaService.crearEmpresa(empresa).subscribe({
-      next: (response) => 
-        {
-          console.log(response);
-        },
-        error: (error) => {
-          console.error('Error en el servicio:', error);
-        }
-    }); */
   }
 }

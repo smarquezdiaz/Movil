@@ -2,19 +2,19 @@
 <ion-content>
   <div class="form-container">
     <h1>Datos Empresa</h1>
-    <form action="">
+    <form [formGroup]="form"     action="">
       <ion-label>Nombre*</ion-label>
-      <ion-input class="generic-input" label-placement="stacked" fill="outline" placeholder="Nuevo nombre"></ion-input>
+      <ion-input formControlName="nombre" class="generic-input" label-placement="stacked" fill="outline" placeholder="Nuevo nombre"></ion-input>
       <ion-label>Ubicación*</ion-label>
-      <ion-input class="generic-input" label-placement="stacked" fill="outline" placeholder="Nueva ubicación"></ion-input>
+      <ion-input formControlName="ubicacion" class="generic-input" label-placement="stacked" fill="outline" placeholder="Nueva ubicación"></ion-input>
       <ion-label>Nit*</ion-label>
-      <ion-input class="generic-input" label-placement="stacked" fill="outline" placeholder="Nuevo nit"></ion-input>
+      <ion-input formControlName="nit" class="generic-input" label-placement="stacked" fill="outline" placeholder="Nuevo nit"></ion-input>
       <hr class="divider">
       <h1>Datos Usuario</h1>
       <ion-label>Nombre Usuario*</ion-label>
-      <ion-input class="generic-input" label-placement="stacked" fill="outline" placeholder="Nuevo nombre usuario"></ion-input>
+      <ion-input formControlName="usuario" class="generic-input" label-placement="stacked" fill="outline" placeholder="Nuevo nombre usuario"></ion-input>
       <ion-label>Contraseña*</ion-label>
-      <ion-input type="password" class="generic-input" label-placement="stacked" fill="outline" placeholder="Nueva Contraseña">
+      <ion-input formControlName="contrasenia" type="password" class="generic-input" label-placement="stacked" fill="outline" placeholder="Nueva Contraseña">
         <ion-input-password-toggle slot="end"></ion-input-password-toggle>
       </ion-input>
       <ion-label>Confirmar Contraseña*</ion-label>
