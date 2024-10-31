@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Empresa } from 'src/app/modelos/empresa';
 import { EmpresaService } from 'src/app/services/empresa.service';
@@ -32,6 +32,7 @@ export class RegisterCompanyPage implements OnInit {
       confirmContrasenia: ['', Validators.required],
       rol: ['empresa', Validators.required],
     });
+    this.form.get('confirmContrasenia')?.setValidators([this.passwordValidator()]);
   }
 
   async openModal () {
@@ -63,4 +64,15 @@ export class RegisterCompanyPage implements OnInit {
     });
     modal1.present();
   }
+  public passwordValidator(): ValidatorFn {
+    return () => {
+      const password = this.form.get('contrasenia')?.value;
+      const repeat_password = this.form.get('confirmContrasenia')?.value;
+  
+      if (!password || !repeat_password) return { passwordMismatch: true };
+  
+      return password !== repeat_password ? { passwordMismatch: true } : null;
+    };
+  }
+  
 }
