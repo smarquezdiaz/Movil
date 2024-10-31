@@ -29,6 +29,7 @@ export class RegisterCompanyPage implements OnInit {
       nit: ['', Validators.required],
       usuario: ['', Validators.required],
       contrasenia: ['', Validators.required],
+      confirmContrasenia: ['', Validators.required],
       rol: ['empresa', Validators.required],
     });
   }

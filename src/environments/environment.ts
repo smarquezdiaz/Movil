@@ -7,7 +7,8 @@ export const environment = {
   api: 'http://localhost:8080',
   backend: {
     user: '/user',
-    empresa:  '/empresas'
+    empresa:  '/empresas',
+    convocatoria: '/convocatorias'
   }
 };
 

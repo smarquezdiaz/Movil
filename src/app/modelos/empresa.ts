@@ -7,6 +7,7 @@ export interface Empresa {
     usuario: string;
     contrasenia: string;
     rol?: string;
+    confirmContrasenia?: string;
   }
  
   
