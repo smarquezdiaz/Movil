@@ -10,6 +10,10 @@ const routes: Routes = [
   },  {
     path: 'register-company',
     loadChildren: () => import('./register-company/register-company.module').then( m => m.RegisterCompanyPageModule)
+  },
+  {
+    path: 'register-convocatoria',
+    loadChildren: () => import('./register-convocatoria/register-convocatoria.module').then( m => m.RegisterConvocatoriaPageModule)
   }
 
 ];

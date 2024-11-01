@@ -1,0 +1,29 @@
+ion-content {
+  --background: white;
+  background-color: white !important;
+}
+
+.title-container {
+  padding-left: 16px; 
+  margin-top: 16px; 
+}
+
+ion-title.small-title {
+  font-size: 17px;
+  color: #2C3E50;
+  font-weight: bold;
+}
+
+ion-button.small-button {
+  --background: #060A30;
+  --border-radius: 10px;
+  font-size: 12px; 
+  margin-top: 8px;
+  margin-left: 6px;
+  padding: 0 12px;
+  height: 30px; 
+  width: 125px;
+  display: inline-block; 
+  text-align: center; 
+  text-transform: none; 
+}
