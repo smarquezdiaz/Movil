@@ -1,0 +1,116 @@
+<ion-header>
+  <ion-toolbar style="--background: #060A30;">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Empresa o Estudiante</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" color="light">
+  <div class="user-selection">
+    <ion-card (click)="selectUser('empresa')" class="selection-card">
+      <ion-icon name="business-outline" class="icon-style"></ion-icon>
+    </ion-card>
+
+    <ion-card (click)="selectUser('estudiante')" class="selection-card">
+      <ion-icon name="person-outline" class="icon-style"></ion-icon>
+    </ion-card>
+  </div>
+
+  <ion-button expand="block" (click)="continue()" class="continue-button">Continuar</ion-button>
+</ion-content>
+
+<ion-footer>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="home">
+        <ion-icon name="home-outline"></ion-icon>
+        <ion-label>Home</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="search">
+        <ion-icon name="search-outline"></ion-icon>
+        <ion-label>Buscar</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="profile">
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-footer>
+
+<style>
+  ion-toolbar {
+    --background: #060A30;
+    --color: #FFFFFF;
+  }
+
+  .user-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .selection-card {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #060A30;
+    border-radius: 10px;
+  }
+
+  .icon-style {
+    font-size: 100px;
+    color: #060A30;
+  }
+
+  .continue-button {
+    background-color: #060A30;
+    color: #FFFFFF;
+    margin-top: 20px;
+    border-radius: 10px;
+  }
+
+  ion-tab-bar {
+    --background: #FFFFFF;
+  }
+
+  ion-tab-button {
+    color: #060A30;
+  }
+</style>
+
+<script>
+  import { Component } from '@angular/core';
+  import { Router } from '@angular/router';
+
+  @Component({
+    selector: 'app-select-user',
+    templateUrl: './select-user.page.html',
+    styleUrls: ['./select-user.page.scss'],
+  })
+  export class SelectUserPage {
+    selectedUser: string | null = null;
+
+    constructor(private router: Router) {}
+
+    selectUser(userType: string) {
+      this.selectedUser = userType;
+    }
+
+    continue() {
+      if (this.selectedUser) {
+        console.log('Usuario seleccionado:', this.selectedUser);
+      } else {
+        console.log('Por favor, selecciona un tipo de usuario');
+      }
+    }
+  }
+</script>
