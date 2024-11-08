@@ -7,3 +7,24 @@
     display: flex;
     justify-content: end;
 }
+.image-container {
+    display: flex;
+    justify-self: center;
+    margin: 20px;
+}
+.image-container ion-icon{
+    border: solid 1px black;
+    border-radius: 10px;
+    margin: auto;
+    color: gray;
+    font-size: 200px;
+}
+.image-button {
+    --background: #FFFF; 
+    --color: #060A30; 
+    border: 1px solid #060A30;   
+    border-radius: 15px;
+    display: flex;
+    justify-self: end;
+    margin-bottom: 10px;
+}
