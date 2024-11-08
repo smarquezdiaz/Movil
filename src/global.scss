@@ -66,6 +66,18 @@ h1 {
     border-radius: 15px;
     border: 1px solid #666877 !important;;
 }
+.generic-input .input-fill-outline.sc-ion-input-md-h {
+    --border-color: transparent !important; 
+    --border-radius: 0 !important;          
+    --padding-start: 0 !important;
+    --padding-end: 0 !important;
+    min-height: auto !important;           
+}
+
+.generic-input .sc-ion-input-md-h {
+    --border-width: 0 !important;          
+    --highlight-height: 0 !important;       
+}
 
 .divider{
     border-top: 4px solid #060A30;
