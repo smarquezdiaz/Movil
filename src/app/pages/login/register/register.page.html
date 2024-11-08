@@ -1,19 +1,13 @@
 <app-header backButton="/login"></app-header>
-
-<!-- <ion-content>
-  <ion-button routerLink="/login/register/register-company">Registrar Empresa</ion-button>
-</ion-content> -->
 <ion-content class="ion-padding">
+  <h1 fxLayoutAlign="center">Empresa o Estudiante</h1>
   <div class="user-selection">
-    <ion-card (click)="selectUser('empresa')" class="selection-card">
-      <ion-img src="assets/icon/company-icon.svg"></ion-img>
+    <ion-card  class="selection-card" routerLink="/login/register/register-company">
+      <ion-icon class="icon-select" name="business-outline"></ion-icon>
     </ion-card>
 
-    <ion-card (click)="selectUser('estudiante')" class="selection-card">
-      <ion-img src="assets/icon/student-icon.svg"></ion-img>
+    <ion-card class="selection-card" routerLink="/login/register/register-company">
+      <ion-icon class="icon-select" name="person-circle-outline" ></ion-icon>
     </ion-card>
   </div>
-
-  <ion-button expand="block" (click)="continue()" class="continue-button">Continuar</ion-button>
-  <app-subir-imagen></app-subir-imagen>
 </ion-content>
