@@ -5,7 +5,7 @@ import { ConvocatoriaService } from 'src/app/services/convocatoria.service';
 import { ModalConfirmacionComponent } from 'src/app/shared/componentes/modal-confirmacion/modal-confirmacion.component';
 import { ModalExitoComponent } from 'src/app/shared/componentes/modal-exito/modal-exito.component';
 import { Convocatoria } from 'src/app/modelos/convocatoria';
-import { IonDatetime } from '@ionic/angular';
+import { IonDatetime, IonModal } from '@ionic/angular';
 
 @Component({
   selector: 'app-register-convocatoria',
@@ -13,6 +13,7 @@ import { IonDatetime } from '@ionic/angular';
   styleUrls: ['./register-convocatoria.page.scss'],
 })
 export class RegisterConvocatoriaPage implements OnInit {
+  @ViewChild(IonModal) modal!: IonModal;
   form!: FormGroup;
   selectedImage: string | ArrayBuffer | null = null;
   selectedDate: string = '';
@@ -31,36 +32,39 @@ export class RegisterConvocatoriaPage implements OnInit {
       fechaInicio: ['', Validators.required],
       fechaFin: ['', Validators.required],
       cantidadMaxPost: ['', Validators.required],
-      imagen: ['', Validators.required]
-    });
+      imagen: [''],
+
+    }, { validators: [this.fechaFinNoMenorQueInicio] }
+    );
   }
 
   openDatetimeModal(field: 'fechaInicio' | 'fechaFin') {
     this.currentField = field;
-    this.modalCtrl.create({
-      component: IonDatetime,
-      componentProps: {
-        value: this.selectedDate
-      }
-    }).then(modal => {
-      modal.present();
-      modal.onDidDismiss().then((data) => {
-        if (data.data) {
-          this.selectedDate = data.data;
-          this.onDateChange();
-        }
-      });
-    });
+    let initialDate: Date;
+    if (this.form.get(field)?.value) {
+      initialDate = new Date(this.form.get(field)?.value);
+    } else {
+      initialDate = new Date();
+    }
+    this.modal.present();
   }
 
+  fechaFinNoMenorQueInicio(form: FormGroup) {
+    const fechaInicio = form.get('fechaInicio')?.value;
+    const fechaFin = form.get('fechaFin')?.value;
 
-  onDateChange() {
-    if (this.currentField === 'fechaInicio') {
-      this.form.controls['fechaInicio'].setValue(this.selectedDate);
-    } else if (this.currentField === 'fechaFin') {
-      this.form.controls['fechaFin'].setValue(this.selectedDate);
+
+    if (fechaInicio && fechaFin && new Date(fechaFin) < new Date(fechaInicio)) {
+      return { fechaFinMenorQueInicio: true };
     }
 
+    return null;
+  }
+
+  onDateSelected(event: any) {
+    const selectedDate = new Date(event.detail.value);
+    this.form.get(this.currentField)?.setValue(selectedDate.toISOString().split('T')[0]);
+    this.modal.dismiss();
   }
 
 
@@ -72,6 +76,10 @@ export class RegisterConvocatoriaPage implements OnInit {
       }
     });
     await modal.present();
+    const backdrop = document.querySelector('ion-backdrop');
+    if (backdrop) {
+      backdrop.setAttribute('tabindex', '-1');
+    }
   }
 
   registrarConvocatoria(convocatoriaData: Convocatoria) {
