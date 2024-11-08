@@ -17,3 +17,14 @@
     font-size: 200px; 
     margin-right: 8px; 
   }
+
+  ion-item[color="danger"] {
+    background-color: #f8d7da; 
+    border-left: 4px solid #f44336; 
+    margin-top: 10px; 
+  }
+  
+  ion-item[color="danger"] ion-label {
+    color: #ffffff;  
+    font-size: 14px;  
+  }
