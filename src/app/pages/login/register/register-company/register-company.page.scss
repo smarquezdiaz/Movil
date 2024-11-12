@@ -7,17 +7,16 @@
     display: flex;
     justify-content: end;
 }
-.image-container {
+.image-container{
     display: flex;
     justify-self: center;
-    margin: 20px;
+    padding: 0;
 }
-.image-container ion-icon{
+.image-container img{
     border: solid 1px black;
-    border-radius: 10px;
-    margin: auto;
-    color: gray;
-    font-size: 200px;
+    height: 250px;
+    width: 250px;
+    padding: 0 !important;
 }
 .image-button {
     --background: #FFFF; 
