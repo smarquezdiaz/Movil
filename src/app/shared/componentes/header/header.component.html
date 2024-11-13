@@ -1,7 +1,8 @@
 <ion-header>
   <ion-toolbar>
-     <ion-buttons slot="end">
+     <ion-buttons [ngClass]=" backButton ? 'header-buttons': 'one-header-buttons' " class="header-buttons">
       <ion-back-button icon="arrow-undo" color="light"  text="" *ngIf="backButton" [defaultHref]="backButton"></ion-back-button>
+      <ion-icon name="log-out-outline" size="large" *ngIf="logged" color="light" (click)="signUp()"></ion-icon>
      </ion-buttons>
   </ion-toolbar>
 </ion-header>

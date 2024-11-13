@@ -1,4 +1,11 @@
 ion-toolbar {
     --background: #060A30 !important;
 }
-
+.header-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+.one-header-buttons {
+    display: flex;
+    justify-content: end;
+}

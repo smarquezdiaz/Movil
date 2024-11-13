@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +10,17 @@ import { Component, Input, OnInit } from '@angular/core';
 export class HeaderComponent  implements OnInit {
 
   @Input() backButton!: string; 
+  @Input() logged!: string; 
 
-  constructor() { }
+  constructor(private router : Router,
+    private utilsService: UtilsService
+  ) { }
 
   ngOnInit() {}
+
+  signUp () {
+    this.utilsService.deleteLocalStorage('userId');
+    this.router.navigate(['/login']);
+  }
 
 }
