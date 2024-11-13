@@ -3,20 +3,20 @@
 </ion-header>
 
 
-
 <ion-content [formGroup]="form" class="ion-padding">
   <h1>Nueva Convocatoria</h1>
   <div>
     <ion-label position="stacked" label-placement="stacked">Nueva imagen*</ion-label>
   </div>
-  <div>
-    <ion-button fill="clear" (click)="fileInput.click()">
-      <div class="icon-frame" (click)="fileInput.click()" style="display: flex; align-items: center;">
-        <ion-icon name="images-outline" class="custom-icon"></ion-icon>
+
+  <ion-label style="margin-bottom: 10px;">Imagen Convocatoria*</ion-label>
+      <div class="image-container" *ngIf="!image">
+        <img src="assets/images/image.png" alt="">
       </div>
-    </ion-button>
-    <input type="file" #fileInput (change)="onImageSelected($event)" style="display: none;">
-  </div>
+      <div class="image-container" *ngIf="image">
+        <img [src]="image" alt="Uploaded Image" />
+      </div>
+      <ion-button fxLayoutAlign="end" class="image-button" (click)="changeImage()">Subir Imagen</ion-button>
 
   <ion-label>Título*</ion-label>
   <ion-input formControlName="titulo" class="generic-input" placeholder=" Nuevo título" label-placement="stacked"

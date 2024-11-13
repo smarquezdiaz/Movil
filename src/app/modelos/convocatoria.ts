@@ -1,6 +1,5 @@
-import { Empresa } from "./empresa";
-
 export interface Convocatoria {
+    titulo: string,
     descripcion: string;
     imagen: string;
     cantidadMaxPost: number;

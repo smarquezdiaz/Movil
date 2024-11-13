@@ -6,6 +6,8 @@ import { ModalConfirmacionComponent } from 'src/app/shared/componentes/modal-con
 import { ModalExitoComponent } from 'src/app/shared/componentes/modal-exito/modal-exito.component';
 import { Convocatoria } from 'src/app/modelos/convocatoria';
 import { IonDatetime, IonModal } from '@ionic/angular';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { ImagenService } from 'src/app/services/imagen.service';
 
 @Component({
   selector: 'app-register-convocatoria',
@@ -13,16 +15,18 @@ import { IonDatetime, IonModal } from '@ionic/angular';
   styleUrls: ['./register-convocatoria.page.scss'],
 })
 export class RegisterConvocatoriaPage implements OnInit {
+  
   @ViewChild(IonModal) modal!: IonModal;
   form!: FormGroup;
-  selectedImage: string | ArrayBuffer | null = null;
+  image: string | undefined;
   selectedDate: string = '';
   currentField!: 'fechaInicio' | 'fechaFin';
 
   constructor(
     private modalCtrl: ModalController,
     private formBuilder: FormBuilder,
-    private convocatoriaService: ConvocatoriaService
+    private convocatoriaService: ConvocatoriaService,
+    private imagenService: ImagenService
   ) { }
 
   ngOnInit() {
@@ -33,11 +37,48 @@ export class RegisterConvocatoriaPage implements OnInit {
       fechaFin: ['', Validators.required],
       cantidadMaxPost: ['', Validators.required],
       imagen: [''],
+      empresa: [2]
 
     }, { validators: [this.fechaFinNoMenorQueInicio] }
     );
   }
 
+  async changeImage() {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Photos,
+    });
+  
+    this.image = image.dataUrl;
+  }
+
+  async uploadImage(): Promise<string | null> {
+    if (this.image) {
+      const response = await fetch(this.image);
+      const blob = await response.blob();
+      const imageName = 'image_' + new Date().getTime() + '.jpg'; 
+      const file = new File([blob], imageName, { type: 'image/jpeg' });
+      const formData = new FormData();
+      formData.append('file', file);
+  
+      return new Promise((resolve, reject) => {
+        this.imagenService.subirImagen(formData).subscribe({
+          next: (response) => {
+            const imageUrl = response;  
+            resolve(imageUrl);
+          },
+          error: (error) => {
+            console.error('Error al subir la imagen:', error);
+            reject('Error al subir la imagen');
+          }
+        });
+      });
+    }
+    return null;  
+  }
+  
   openDatetimeModal(field: 'fechaInicio' | 'fechaFin') {
     this.currentField = field;
     let initialDate: Date;
@@ -68,6 +109,7 @@ export class RegisterConvocatoriaPage implements OnInit {
   }
 
 
+
   async openModal() {
     const modal = await this.modalCtrl.create({
       component: ModalConfirmacionComponent,
@@ -82,18 +124,24 @@ export class RegisterConvocatoriaPage implements OnInit {
     }
   }
 
-  registrarConvocatoria(convocatoriaData: Convocatoria) {
-    convocatoriaData.imagen = this.selectedImage as string;
-    this.convocatoriaService.crearConvocatoria(convocatoriaData).subscribe(
+  async registrarConvocatoria(convocatoria: Convocatoria) {
+    const imageUrl = await this.uploadImage();
+    console.log('imagen: ', imageUrl);
+    if (imageUrl) {
+      convocatoria.imagen = imageUrl;
+     }
+    console.log('Datos de la convocatoria que se enviarán:', convocatoria);
+    this.convocatoriaService.crearConvocatoria(convocatoria).subscribe(
       async (response: Convocatoria) => {
         console.log('Convocatoria creada:', response);
         await this.success();
       },
       error => {
-        console.error('Error al crear convocatoria:', error);
+        console.error('Error al crear convocatoria:', convocatoria);
       }
     );
   }
+
 
   async success() {
     const modal1 = await this.modalCtrl.create({
@@ -101,19 +149,5 @@ export class RegisterConvocatoriaPage implements OnInit {
     });
     await modal1.present();
   }
-
-  onImageSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.selectedImage = reader.result;
-        this.form.patchValue({ imagen: this.selectedImage });
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-
 
 }
