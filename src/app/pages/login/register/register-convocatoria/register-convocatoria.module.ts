@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { RegisterConvocatoriaPageRoutingModule } from './register-convocatoria-routing.module';
 
 import { RegisterConvocatoriaPage } from './register-convocatoria.page';
-
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
