@@ -40,6 +40,7 @@
 
 body {
     font-family: $font;
+    background-color: #F5F5F5;
 }
 .main-button {
     --background: #060A30; 
@@ -50,7 +51,8 @@ body {
     --color: white;                        
 }
 h1 {
-    color: #060A30 ;                     
+    color: #060A30 ;  
+    font-family: $font;                   
 }
 .generic-input {
     // border-radius: 15px;
@@ -77,5 +79,10 @@ ion-modal {
     --border-radius: 6px;
     --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
 }
-
+ion-content {
+    --background: #F5F5F5;
+}
+ion-col {
+    font-family: $font;
+}
 

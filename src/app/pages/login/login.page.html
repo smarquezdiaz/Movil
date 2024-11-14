@@ -5,16 +5,26 @@
       <ion-card-title>Bienvenido</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <form action="">
-        <ion-input type="text" fill="solid" label="Usuario" labelPlacement="floating" errorText="Usuario inválido"
+      <form action="" [formGroup]="form" (submit)="login()">
+        <ion-input type="text" fill="solid" label="Usuario" labelPlacement="floating" errorText="Usuario inválido" 
+        formControlName="usuario"
          >
         </ion-input>
         <ion-input type="password" fill="solid" label="Contraseña" labelPlacement="floating" errorText="Contraseña inválida"
+        formControlName="contrasenia"
          >
           <ion-input-password-toggle slot="end"></ion-input-password-toggle>
         </ion-input>
+        <ion-list>
+          <ion-item>
+            <ion-select formControlName="rol" interface="popover" placeholder="Selecccione tipo de usuario" (ionChange)="handleChange($event.detail.value)">
+              <ion-select-option value="empresa">EMPRESA</ion-select-option>
+              <ion-select-option  value="postulante">POSTULANTE</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
         <div>
-          <ion-button class="main-button" fxLayoutAlign="center" [routerLink]="['/home']">INGRESAR</ion-button>
+          <ion-button type="submit" class="main-button" fxLayoutAlign="center">INGRESAR</ion-button>
           <p fxLayoutAlign="center">¿No tienes cuenta? <a [routerLink]="['/login/register']">Regístrate</a></p>
         </div>
       </form>

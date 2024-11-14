@@ -8,6 +8,7 @@ import { Convocatoria } from 'src/app/modelos/convocatoria';
 import { IonDatetime, IonModal } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ImagenService } from 'src/app/services/imagen.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-register-convocatoria',
@@ -21,12 +22,14 @@ export class RegisterConvocatoriaPage implements OnInit {
   image: string | undefined;
   selectedDate: string = '';
   currentField!: 'fechaInicio' | 'fechaFin';
+  userId!: number;
 
   constructor(
     private modalCtrl: ModalController,
     private formBuilder: FormBuilder,
     private convocatoriaService: ConvocatoriaService,
-    private imagenService: ImagenService
+    private imagenService: ImagenService,
+    private utilsService: UtilsService
   ) { }
 
   ngOnInit() {
@@ -37,7 +40,7 @@ export class RegisterConvocatoriaPage implements OnInit {
       fechaFin: ['', Validators.required],
       cantidadMaxPost: ['', Validators.required],
       imagen: [''],
-      empresa: [2]
+      empresa: [this.userId = this.utilsService.getFromLocalStorage('userId')]
 
     }, { validators: [this.fechaFinNoMenorQueInicio] }
     );

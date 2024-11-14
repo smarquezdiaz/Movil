@@ -1,0 +1,21 @@
+.container-postulant{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+.container-postulant-img {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container-postulant img{
+    display: flex;
+    margin: 0;
+    justify-self: center;
+    align-self: center;
+    width: 40%;
+}
