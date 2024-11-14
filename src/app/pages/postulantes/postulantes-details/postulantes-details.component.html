@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Detalle de Postulante</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="postulante">
+    <ion-card-header>
+      <ion-card-title>{{ postulante.nombre }} {{ postulante.apellido }}</ion-card-title>
+      <ion-card-subtitle>{{ postulante.estado }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Carrera:</strong> {{ postulante.carrera }}</p>
+      <p><strong>Descripción:</strong> {{ postulante.descripcion }}</p>
+      <p><strong>Correo:</strong> {{ postulante.correo }}</p>
+      <p><strong>Celular:</strong> {{ postulante.celular }}</p>
+      <ion-button color="danger">Rechazar</ion-button>
+      <ion-button color="primary">Aceptar</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
