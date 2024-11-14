@@ -1,0 +1,24 @@
+@import 'src/theme/variables.scss';
+
+.header {
+  background-color: $color-primary-dark;
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ion-item {
+  --background: white;
+  --ion-item-background: $color-background;
+  border-bottom: 1px solid #ddd;
+}
+
+ion-label {
+  color: $color-primary-dark;
+}
+
+ion-note {
+  color: $color-accent;
+}
