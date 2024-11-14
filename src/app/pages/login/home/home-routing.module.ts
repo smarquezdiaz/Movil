@@ -7,7 +7,16 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage
+  },
+  {
+    path: 'mostrar-convocatoria',
+    loadChildren: () => import('./mostrar-convocatoria/mostrar-convocatoria.module').then( m => m.MostrarConvocatoriaPageModule)
+  },
+  {
+    path: 'mostrar-convocatoria/:id',
+    loadChildren: () => import('./mostrar-convocatoria/mostrar-convocatoria.module').then( m => m.MostrarConvocatoriaPageModule)
   }
+
 ];
 
 @NgModule({

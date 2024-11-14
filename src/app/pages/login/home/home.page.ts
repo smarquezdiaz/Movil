@@ -1,5 +1,7 @@
 import { KeyValue } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { forkJoin } from 'rxjs';
 import { ConvocatoriaInfo } from 'src/app/modelos/convocatoria';
 import { AuthService } from 'src/app/services/auth.service';
@@ -18,7 +20,9 @@ export class HomePage implements OnInit {
   userId!: number;
 
   constructor(private empresaService: EmpresaService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private navCtrl: NavController,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -27,12 +31,15 @@ export class HomePage implements OnInit {
     forkJoin([convocatorias$]).subscribe({
       next: ([convocatoriasBody]) => {
         this.list = convocatoriasBody.map((convocatoria: any) => ({
-          a: convocatoria.titulo,
-          b: convocatoria.cantidadMaxPost,
+          id: convocatoria.id,
+          titulo: convocatoria.titulo,
+          cantidadMaxPost: convocatoria.cantidadMaxPost,
         }));
       }
     })
   }
 
-  
+  mostrarConvocatoria(id: number) {
+    this.router.navigate(['/home/mostrar-convocatoria',id]);
+  }
 }

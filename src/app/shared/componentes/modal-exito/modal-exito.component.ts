@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 
@@ -9,6 +9,8 @@ import { ModalController } from '@ionic/angular';
 })
 export class ModalExitoComponent  implements OnInit {
 
+  @Input() ruta!: string;
+
   constructor(private modalCtrl: ModalController,
     private router: Router
   ) { }
@@ -17,7 +19,7 @@ export class ModalExitoComponent  implements OnInit {
 
   close() {
     this.modalCtrl.dismiss();
-    this.router.navigate(['/login']);
+    this.router.navigate([this.ruta]);
   }
 
 }

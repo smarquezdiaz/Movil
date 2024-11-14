@@ -8,6 +8,7 @@ import { Convocatoria } from 'src/app/modelos/convocatoria';
 import { IonDatetime, IonModal } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ImagenService } from 'src/app/services/imagen.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-register-convocatoria',
@@ -21,15 +22,18 @@ export class RegisterConvocatoriaPage implements OnInit {
   image: string | undefined;
   selectedDate: string = '';
   currentField!: 'fechaInicio' | 'fechaFin';
+  id!: number;
 
   constructor(
     private modalCtrl: ModalController,
     private formBuilder: FormBuilder,
     private convocatoriaService: ConvocatoriaService,
-    private imagenService: ImagenService
+    private imagenService: ImagenService,
+    private utilsService: UtilsService
   ) { }
 
   ngOnInit() {
+    this.id = this.utilsService.getFromLocalStorage('userId');
     this.form = this.formBuilder.group({
       titulo: ['', Validators.required],
       descripcion: ['', Validators.required],
@@ -37,10 +41,11 @@ export class RegisterConvocatoriaPage implements OnInit {
       fechaFin: ['', Validators.required],
       cantidadMaxPost: ['', Validators.required],
       imagen: [''],
-      empresa: [2]
+      empresa: ['']
 
     }, { validators: [this.fechaFinNoMenorQueInicio] }
     );
+    this.form.patchValue({empresa: this.id});
   }
 
   async changeImage() {
@@ -130,7 +135,7 @@ export class RegisterConvocatoriaPage implements OnInit {
     if (imageUrl) {
       convocatoria.imagen = imageUrl;
      }
-    console.log('Datos de la convocatoria que se enviarán:', convocatoria);
+    console.log('Datos de la convocatoria que se enviarÃ¡n:', convocatoria);
     this.convocatoriaService.crearConvocatoria(convocatoria).subscribe(
       async (response: Convocatoria) => {
         console.log('Convocatoria creada:', response);
@@ -146,6 +151,9 @@ export class RegisterConvocatoriaPage implements OnInit {
   async success() {
     const modal1 = await this.modalCtrl.create({
       component: ModalExitoComponent,
+      componentProps: {
+        ruta: '/home'
+      }
     });
     await modal1.present();
   }
