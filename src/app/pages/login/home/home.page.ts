@@ -26,7 +26,16 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.cargarConvocatorias();
+  }
+
+  ionViewWillEnter() {
+    this.cargarConvocatorias();
+  }
+
+  cargarConvocatorias () {
     this.userId = this.utilsService.getFromLocalStorage('userId');
+    console.log(this.userId);
     const convocatorias$ = this.empresaService.obtenerConvocatoriasPorEmpresa(this.userId);
     forkJoin([convocatorias$]).subscribe({
       next: ([convocatoriasBody]) => {
