@@ -1,0 +1,22 @@
+@import 'src/theme/variables.scss';
+
+ion-card {
+  background-color: $color-primary-light;
+  color: $color-background;
+}
+
+ion-card-title {
+  color: $color-primary-dark;
+}
+
+ion-card-subtitle {
+  color: $color-highlight;
+}
+
+ion-button {
+  margin-right: 10px;
+}
+
+ion-button[color="danger"] {
+  --background: $color-accent;
+}
