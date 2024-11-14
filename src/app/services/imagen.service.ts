@@ -19,7 +19,7 @@ export class ImagenService {
 
 
   obtenerImagen (nameImage: string) : Observable<any> {
-    return this.http.get(environment.api + environment.backend.imagen + /obtener-imagen/${nameImage}, 
+    return this.http.get(environment.api + environment.backend.imagen + `/obtener-imagen/${nameImage}`, 
       {responseType: 'blob'}
     );
   }

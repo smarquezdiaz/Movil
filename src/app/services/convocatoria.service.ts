@@ -16,6 +16,6 @@ export class ConvocatoriaService {
   }
 
   obtenerConvocatoria(id: number) : Observable<ConvocatoriaParaMostrar> {
-    return this.http.get<ConvocatoriaParaMostrar>(environment.api + environment.backend.convocatoria + /${id});
+    return this.http.get<ConvocatoriaParaMostrar>(environment.api + environment.backend.convocatoria + `/${id}`);
   }
 }
