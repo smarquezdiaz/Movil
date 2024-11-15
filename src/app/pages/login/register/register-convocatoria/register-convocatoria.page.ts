@@ -33,6 +33,7 @@ export class RegisterConvocatoriaPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.userId = this.utilsService.getFromLocalStorage('userId');
     this.form = this.formBuilder.group({
       titulo: ['', Validators.required],
       descripcion: ['', Validators.required],
@@ -44,6 +45,7 @@ export class RegisterConvocatoriaPage implements OnInit {
 
     }, { validators: [this.fechaFinNoMenorQueInicio] }
     );
+    this.form.patchValue({empresa: this.userId});
   }
 
   async changeImage() {
@@ -133,7 +135,7 @@ export class RegisterConvocatoriaPage implements OnInit {
     if (imageUrl) {
       convocatoria.imagen = imageUrl;
      }
-    console.log('Datos de la convocatoria que se enviarán:', convocatoria);
+    console.log('Datos de la convocatoria que se enviarÃ¡n:', convocatoria);
     this.convocatoriaService.crearConvocatoria(convocatoria).subscribe(
       async (response: Convocatoria) => {
         console.log('Convocatoria creada:', response);
@@ -149,6 +151,9 @@ export class RegisterConvocatoriaPage implements OnInit {
   async success() {
     const modal1 = await this.modalCtrl.create({
       component: ModalExitoComponent,
+      componentProps: {
+        ruta: '/home'
+      }
     });
     await modal1.present();
   }

@@ -1,5 +1,5 @@
 <ion-content>
-  <app-header  logged="true"></app-header> 
+  <app-header  logged="true"></app-header>
 
   <div class="title-container">
     <div class="titles-container">
@@ -15,12 +15,12 @@
     </ion-grid>
     <ion-grid [fixed]="true">
       <ion-row class="data" *ngFor="let item of list">
-        <ion-col *ngFor="let property of item | keyvalue ">{{property.value}}</ion-col>
-        <ion-col><ion-icon name="chevron-forward-outline"></ion-icon></ion-col>
+        <ion-col >{{item.titulo}}</ion-col>
+        <ion-col >{{item.cantidadMaxPost}}</ion-col>
+        <ion-col><ion-icon name="chevron-forward-outline" (click)="mostrarConvocatoria(item.id)"></ion-icon></ion-col>
       </ion-row>
     </ion-grid>
   </div>
 </ion-content>
 
 <app-bottom-menu></app-bottom-menu>
-

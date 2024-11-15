@@ -69,6 +69,9 @@ export class RegisterCompanyPage implements OnInit {
   async success () {
     const modal1 = await this.modalCtrl.create({
       component: ModalExitoComponent,
+      componentProps: {
+        ruta: '/login'
+      }
     });
     modal1.present();
   }

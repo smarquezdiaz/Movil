@@ -20,7 +20,7 @@
 
   <ion-label>Título*</ion-label>
   <ion-input formControlName="titulo" class="generic-input" placeholder=" Nuevo título" label-placement="stacked"
-    fill="outline" maxlength="25"></ion-input>
+    fill="outline" maxlength="50"></ion-input>
   <div *ngIf="form.get('titulo')?.errors && (form.get('titulo')?.dirty || form.get('titulo')?.touched)">
     <p *ngIf="form.get('titulo')?.hasError('required')">
       <ion-text color="danger">Campo obligatorio</ion-text>
@@ -28,7 +28,7 @@
   </div>
 
   <ion-label position="stacked">Descripción*</ion-label>
-  <ion-textarea formControlName="descripcion" placeholder="" class="generic-input" fill="outline" maxlength="150"
+  <ion-textarea formControlName="descripcion" placeholder="" class="generic-input" fill="outline" maxlength="255"
     style="height: 150px"></ion-textarea>
   <div *ngIf="form.get('descripcion')?.errors && (form.get('descripcion')?.dirty || form.get('descripcion')?.touched)">
     <p *ngIf="form.get('descripcion')?.hasError('required')">

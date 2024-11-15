@@ -5,7 +5,7 @@
     <form [formGroup]="form" action="">
       <ion-label>Nombre*</ion-label>
       <ion-input formControlName="nombre" class="generic-input" label-placement="stacked" fill="outline"
-        placeholder="Nuevo nombre" maxlength="25"></ion-input>
+        placeholder="Nuevo nombre" maxlength="50"></ion-input>
       <div *ngIf="form.get('nombre')?.errors && (form.get('nombre')?.dirty || form.get('nombre')?.touched)">
         <p *ngIf="form.get('nombre')?.hasError('required')">
           <ion-text color="danger">Campo obligatorio</ion-text>
@@ -13,7 +13,7 @@
       </div>
       <ion-label>Ubicación*</ion-label>
       <ion-input formControlName="ubicacion" class="generic-input" label-placement="stacked" fill="outline"
-        placeholder="Nueva ubicación" maxlength="25"></ion-input>
+        placeholder="Nueva ubicación" maxlength="100"></ion-input>
       <div *ngIf="form.get('ubicacion')?.errors && (form.get('ubicacion')?.dirty || form.get('ubicacion')?.touched)">
         <p *ngIf="form.get('ubicacion')?.hasError('required')">
           <ion-text color="danger">Campo obligatorio</ion-text>

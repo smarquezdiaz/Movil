@@ -1,0 +1,31 @@
+.container-mostrar-convocatoria {
+    padding: 20px;
+    height: 100%;
+}
+.container-mostrar-convocatoria h1{
+    font-size: 20px !important;
+}
+.container-mostrar-convocatoria p{
+    font-size: 20px;
+}
+.container-mostrar-convocatoria img{
+    width: 70%;
+    height: 70%;
+    margin: 10px;
+}
+.container-mostrar-convocatoria ion-icon{
+    font-size: 20px;
+    color: #060A30;
+}
+.container-mostrar-convocatoria ion-buttons{
+    height: 15%;                 
+}
+.container-mostrar-convocatoria ion-button{
+    --background: #060A30; 
+    --color: white;  
+    --border-radius: 15px;
+    --padding-top: 15px;
+    --padding-bottom: 15px;               
+}
+
+

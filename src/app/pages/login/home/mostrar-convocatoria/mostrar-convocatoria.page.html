@@ -1,0 +1,21 @@
+<app-header backButton="/home" logged="true"></app-header>
+
+<ion-content >
+  <div *ngIf="convocatoria" class="container-mostrar-convocatoria">
+    <h1 fxLayoutAlign="center">{{convocatoria.titulo}}</h1>
+    <div class="image-container" *ngIf="image" fxLayoutAlign="center">
+        <img [src]="image" alt="Uploaded Image" />
+    </div>
+    <hr class="divider-thin">
+    <p><strong>Descripción:</strong> <br></p>
+    <p>{{convocatoria.descripcion}}</p>
+    <div fxLayout="row" fxLayoutAlign="center center" style="gap: 20px;">
+        <ion-icon name="calendar-clear-sharp"></ion-icon>
+        <p>{{convocatoria.fechaInicio}} - {{convocatoria.fechaFin}}</p>
+    </div>
+    <hr class="divider-thin">
+    <ion-buttons fxLayoutAlign="center end">
+        <ion-button>Ver Postulantes</ion-button>
+    </ion-buttons>
+  </div>
+</ion-content>
