@@ -1,7 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Convocatoria, ConvocatoriaParaMostrar } from 'src/app/modelos/convocatoria';
 import { ConvocatoriaService } from 'src/app/services/convocatoria.service';
 import { ImagenService } from 'src/app/services/imagen.service';
@@ -20,7 +20,8 @@ export class MostrarConvocatoriaPage implements OnInit {
   constructor(private route: ActivatedRoute,
     private convocatoriaService: ConvocatoriaService,
     private imagenService: ImagenService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -62,4 +63,8 @@ export class MostrarConvocatoriaPage implements OnInit {
     return formattedDate;
   }
 
+  verPostulantes(){
+    console.log(this.convocatoria.id);
+    this.router.navigate(['/postulantes', this.convocatoria.id]);
+  }
 }

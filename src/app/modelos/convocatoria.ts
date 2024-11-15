@@ -16,7 +16,7 @@ cantidadMaxPost: number;
 }
 
 export interface ConvocatoriaParaMostrar {
-id?: string;
+id?: number;
 titulo: string;
 descripcion: string;
 imagen: string;

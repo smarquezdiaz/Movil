@@ -1,0 +1,18 @@
+<app-header backButton="/home" logged="true"></app-header>
+
+<ion-content>
+  <div class="header">
+    <h2>Convocatoria {{ convocatoriaId }}</h2>
+    <span>Nro. postulantes {{ postulantes.length }}</span>
+  </div>
+  
+  <ion-list>
+    <ion-item *ngFor="let postulante of postulantes" [routerLink]="['/postulante', postulante.id]">
+      <ion-label>
+        <h2>{{ postulante.nombre }} {{ postulante.apellido }}</h2>
+        <p>{{ postulante.correo }}</p>
+      </ion-label>
+      <ion-note slot="end" *ngIf="postulante.estado">{{ postulante.estado }}</ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>
