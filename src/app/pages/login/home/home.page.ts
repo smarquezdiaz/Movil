@@ -43,6 +43,7 @@ export class HomePage implements OnInit {
           id: convocatoria.id,
           titulo: convocatoria.titulo,
           cantidadMaxPost: convocatoria.cantidadMaxPost,
+          postulantes: convocatoria.postulantes,
         }));
       }
     })

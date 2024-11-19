@@ -16,7 +16,7 @@
     <ion-grid [fixed]="true">
       <ion-row class="data" *ngFor="let item of list">
         <ion-col >{{item.titulo}}</ion-col>
-        <ion-col >{{item.cantidadMaxPost}}</ion-col>
+        <ion-col >{{item.postulantes}}</ion-col>
         <ion-col><ion-icon name="chevron-forward-outline" (click)="mostrarConvocatoria(item.id)"></ion-icon></ion-col>
       </ion-row>
     </ion-grid>

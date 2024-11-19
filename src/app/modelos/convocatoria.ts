@@ -7,12 +7,14 @@ export interface Convocatoria {
   fechaInicio: Date;
   fechaFin: Date;
   empresa: number;
+  postulantes?: number;
 }
 
 export interface ConvocatoriaInfo {
 id: number;
 titulo: string;
 cantidadMaxPost: number;
+postulantes?: number;
 }
 
 export interface ConvocatoriaParaMostrar {
