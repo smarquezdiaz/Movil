@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -23,5 +23,10 @@ export class EmpresaService {
 
   obtenerConvocatoriasPorEmpresa( userId : number) : Observable<Array<Convocatoria>>{
     return this.http.get<Array<Convocatoria>>(environment.api + environment.backend.empresa + `/${userId}/convocatorias`,);
+  }
+
+  obtenerConvocatoriasFiltradas( userId : number, esVigente: boolean) : Observable<Array<Convocatoria>>{
+    const params = new HttpParams().set('esVigente', esVigente);
+    return this.http.get<Array<Convocatoria>>(environment.api + environment.backend.empresa + `/${userId}/convocatoriasVigentes`, { params });
   }
 }

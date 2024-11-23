@@ -1,9 +1,15 @@
 <ion-content>
-  <app-header  logged="true"></app-header>
+  <app-header  logged="true" title="Mis Convocatorias"></app-header>
 
   <div class="title-container">
     <div class="titles-container">
-      <h1>Mis Convocatorias</h1>
+      <!-- <h1>Mis Convocatorias</h1> -->
+      <ion-button class="second-button" (click)="cargarConvocatoriasVigentes()">
+        Vigentes
+      </ion-button>
+      <ion-button class="small-button" (click)="cargarConvocatoriasNoVigentes()">
+        No Vigentes
+      </ion-button>
       <ion-button class="small-button" routerLink="/login/register/register-convocatoria">
         Nueva <ion-icon name="add-outline" style="font-size: 25px;"></ion-icon>
       </ion-button>

@@ -53,3 +53,17 @@ ion-button.small-button {
   display: flex;
   justify-self: end;
 }
+ion-button.second-button {
+  --background: #A90B71;
+  --border-radius: 10px;
+  font-size: 12px; 
+  margin-top: 8px;
+  margin-left: 6px;
+  padding: 0 12px;
+  height: 30px; 
+  width: 125px;
+  display: inline-block; 
+  text-align: center; 
+  text-transform: none; 
+  color: #060A30;
+}
