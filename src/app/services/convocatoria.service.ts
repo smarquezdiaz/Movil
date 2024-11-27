@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Convocatoria, ConvocatoriaParaMostrar } from '../modelos/convocatoria';
+import { Convocatoria, ConvocatoriaParaMostrar, ConvocatoriaParaPostulantes } from '../modelos/convocatoria';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -16,6 +16,10 @@ export class ConvocatoriaService {
   }
 
   obtenerConvocatoria(id: number) : Observable<ConvocatoriaParaMostrar> {
-    return this.http.get<ConvocatoriaParaMostrar>(environment.api + environment.backend.convocatoria + /${id});
+    return this.http.get<ConvocatoriaParaMostrar>(environment.api + environment.backend.convocatoria + `/${id}`);
+  }
+
+  obtenerConvocatorias() : Observable<Array<ConvocatoriaParaPostulantes>> {
+    return this.http.get<Array<ConvocatoriaParaPostulantes>>(environment.api + environment.backend.convocatoria);
   }
 }

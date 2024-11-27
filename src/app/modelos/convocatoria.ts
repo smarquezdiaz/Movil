@@ -1,3 +1,5 @@
+import { Empresa } from "./empresa";
+
 export interface Convocatoria {
   id?: string;
   titulo: string;
@@ -7,16 +9,18 @@ export interface Convocatoria {
   fechaInicio: Date;
   fechaFin: Date;
   empresa: number;
+  postulantes?: number;
 }
 
 export interface ConvocatoriaInfo {
 id: number;
 titulo: string;
 cantidadMaxPost: number;
+postulantes?: number;
 }
 
 export interface ConvocatoriaParaMostrar {
-id?: string;
+id?: number;
 titulo: string;
 descripcion: string;
 imagen: string;
@@ -25,3 +29,14 @@ fechaInicio: string;
 fechaFin: string;
 empresa: number;
 }
+
+export interface ConvocatoriaParaPostulantes {
+  id?: number;
+  titulo: string;
+  descripcion: string;
+  imagen: string;
+  cantidadMaxPost: number;
+  fechaInicio: string;
+  fechaFin: string;
+  empresa: Empresa;
+  }

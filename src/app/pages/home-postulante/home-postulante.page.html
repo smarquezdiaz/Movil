@@ -1,8 +1,19 @@
 <app-header logged="true"></app-header>
 <ion-content class="container-postulant">
-  <div class="container-postulant-img">
-    <img src="assets/images/home.png" alt="">
-    <h1>En Construccion ...</h1>
+  <div class="container-postulant-img" ngIf="showTable">
+    <ion-itemngFor="let convocatoria of convocatoriaList">
+      <ion-label *ngIf="convocatoria" class="label-home">
+        <img [src]="convocatoria.empresa.img" alt="Uploaded Image" />
+        <div>
+          <p>{{convocatoria.empresa.nombre}}</p>
+          <h2>{{convocatoria.titulo}}</h2>
+          <div fxLayout="row" fxLayoutAlign="center center" style="gap: 20px;" class="mini-menu">
+            <ion-icon name="calendar-clear-sharp"></ion-icon>
+            <p>{{convocatoria.fechaInicio}} - {{convocatoria.fechaFin}}</p>
+          </div>
+        </div>
+      </ion-label>
+    </ion-item>
   </div>
 </ion-content>
 <app-bottom-menu></app-bottom-menu>
