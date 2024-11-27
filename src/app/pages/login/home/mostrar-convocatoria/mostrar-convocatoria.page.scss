@@ -18,12 +18,14 @@
     color: #060A30;
 }
 .container-mostrar-convocatoria ion-buttons{
-    height: fit-content;                 
+    height: 15%;                 
 }
 .container-mostrar-convocatoria ion-button{
     --background: #060A30; 
     --color: white;  
-    border-radius: 20px;
+    --border-radius: 15px;
     --padding-top: 15px;
-    --padding-bottom: 15px;                    
+    --padding-bottom: 15px;               
 }
+
+

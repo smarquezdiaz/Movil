@@ -15,7 +15,8 @@ const routes: Routes = [
   {
     path: 'mostrar-convocatoria/:id',
     loadChildren: () => import('./mostrar-convocatoria/mostrar-convocatoria.module').then( m => m.MostrarConvocatoriaPageModule)
-  }
+  },
+
 
 ];
 

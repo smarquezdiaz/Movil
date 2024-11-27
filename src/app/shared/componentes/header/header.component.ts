@@ -11,6 +11,7 @@ export class HeaderComponent  implements OnInit {
 
   @Input() backButton!: string; 
   @Input() logged!: string; 
+  @Input() title!: string; 
 
   constructor(private router : Router,
     private utilsService: UtilsService

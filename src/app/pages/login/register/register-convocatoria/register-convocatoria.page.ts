@@ -22,7 +22,7 @@ export class RegisterConvocatoriaPage implements OnInit {
   image: string | undefined;
   selectedDate: string = '';
   currentField!: 'fechaInicio' | 'fechaFin';
-  id!: number;
+  userId!: number;
 
   constructor(
     private modalCtrl: ModalController,
@@ -33,7 +33,7 @@ export class RegisterConvocatoriaPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.id = this.utilsService.getFromLocalStorage('userId');
+    this.userId = this.utilsService.getFromLocalStorage('userId');
     this.form = this.formBuilder.group({
       titulo: ['', Validators.required],
       descripcion: ['', Validators.required],
@@ -41,11 +41,11 @@ export class RegisterConvocatoriaPage implements OnInit {
       fechaFin: ['', Validators.required],
       cantidadMaxPost: ['', Validators.required],
       imagen: [''],
-      empresa: ['']
+      empresa: [this.userId = this.utilsService.getFromLocalStorage('userId')]
 
     }, { validators: [this.fechaFinNoMenorQueInicio] }
     );
-    this.form.patchValue({empresa: this.id});
+    this.form.patchValue({empresa: this.userId});
   }
 
   async changeImage() {

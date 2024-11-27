@@ -1,7 +1,7 @@
 <app-header logged="true"></app-header>
 <ion-content class="container-postulant">
   <div class="container-postulant-img" ngIf="showTable">
-    <ion-itemngFor="let convocatoria of convocatoriaList">
+    <ion-item *ngFor="let convocatoria of convocatoriaList">
       <ion-label *ngIf="convocatoria" class="label-home">
         <img [src]="convocatoria.empresa.img" alt="Uploaded Image" />
         <div>
