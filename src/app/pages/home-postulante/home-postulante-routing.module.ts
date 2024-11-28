@@ -7,7 +7,16 @@ const routes: Routes = [
   {
     path: '',
     component: HomePostulantePage
+  },
+  {
+    path: 'mostrar-convocatoria-postulante',
+    loadChildren: () => import('./mostrar-convocatoria-postulante/mostrar-convocatoria-postulante.module').then( m => m.MostrarConvocatoriaPostulantePageModule)
+  },
+  {
+    path: 'mostrar-convocatoria-postulante/:idConvocatoria',
+    loadChildren: () => import('./mostrar-convocatoria-postulante/mostrar-convocatoria-postulante.module').then( m => m.MostrarConvocatoriaPostulantePageModule)
   }
+
 ];
 
 @NgModule({

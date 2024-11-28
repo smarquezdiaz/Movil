@@ -1,0 +1,32 @@
+<app-header backButton="/home-postulante" logged="true"></app-header>
+
+<ion-content>
+  <div class="info-empresa-container">
+    <div class="image-container" *ngIf="imageEmpresa" fxLayoutAlign="center">
+      <img [src]="imageEmpresa" alt="Uploaded Image" />
+    </div>
+    <div>
+      <p>{{convocatoria.empresa.nombre}}</p>
+      <h2>{{convocatoria.titulo}}</h2>
+    </div>
+  </div>
+  <hr class="linea">
+  <div *ngIf="convocatoria" class="container-mostrar-convocatoria">
+    <div class="image-container" *ngIf="imageConvocatoria" fxLayoutAlign="center">
+        <img [src]="imageConvocatoria" alt="Uploaded Image" />
+    </div>
+    <hr class="linea">
+    <div class="info-pasantia">
+      <p><strong>Acerca de la pasantía</strong> <br></p>
+      <p>{{convocatoria.descripcion}}</p>
+      <div fxLayout="row" fxLayoutAlign="center center" style="gap: 20px;">
+          <ion-icon name="calendar-clear-sharp"></ion-icon>
+          <p>{{convocatoria.fechaInicio}} - {{convocatoria.fechaFin}}</p>
+      </div>
+    </div>
+    <hr class="linea">
+    <ion-buttons fxLayoutAlign="center end">
+      <ion-button>Aplicar</ion-button>
+    </ion-buttons>
+  </div>
+</ion-content>

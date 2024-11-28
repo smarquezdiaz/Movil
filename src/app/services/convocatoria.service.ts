@@ -22,4 +22,8 @@ export class ConvocatoriaService {
   obtenerConvocatorias() : Observable<Array<ConvocatoriaParaPostulantes>> {
     return this.http.get<Array<ConvocatoriaParaPostulantes>>(environment.api + environment.backend.convocatoria);
   }
+
+  obtenerConvocatoriaParaPostulante(id: number) : Observable<ConvocatoriaParaPostulantes> {
+    return this.http.get<ConvocatoriaParaPostulantes>(environment.api + environment.backend.convocatoria + `/postulante/${id}`);
+  }
 }

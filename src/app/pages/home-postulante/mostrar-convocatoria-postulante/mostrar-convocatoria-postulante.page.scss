@@ -1,0 +1,47 @@
+
+.info-empresa-container {
+    display: flex;
+    margin: 10px;
+    gap: 20px;
+}
+.info-empresa-container img{
+    height: 50px;
+    width: 50px;
+}
+.info-empresa-container p{
+    color: black;
+    font-weight: bold;
+    margin: 0;
+}
+.info-empresa-container h2{
+    color: #544C4C;
+    font-size: 12px;
+    margin: 0;
+}
+.linea {
+    border-top: 1px solid #544C4C;
+    border-radius: 15px;
+}
+.container-mostrar-convocatoria img{
+    width: 70%;
+    height: 70%;
+    margin: 10px;
+}
+.info-pasantia {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px;
+}
+.container-mostrar-convocatoria ion-buttons{
+    height: 15%;                 
+}
+.container-mostrar-convocatoria ion-button{
+    --background: #060A30; 
+    --color: white;  
+    --border-radius: 15px;
+    --padding-top: 15px;
+    --padding-bottom: 15px;               
+}
+
+
