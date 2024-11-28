@@ -1,0 +1,36 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Perfil Empresa</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="empresa">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ empresa.nombre }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <img [src]="empresa.logo" alt="Logo de la empresa" />
+        <p>{{ empresa.descripcion }}</p>
+        <p><strong>Email:</strong> {{ empresa.email }}</p>
+        <p><strong>Teléfono:</strong> {{ empresa.telefono }}</p>
+
+        <!-- Mostrar convocatorias -->
+        <ion-card *ngFor="let convocatoria of empresa.convocatorias">
+          <ion-card-header>
+            <ion-card-title>{{ convocatoria.titulo }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ convocatoria.descripcion }}</p>
+            <p><strong>Fechas:</strong> {{ convocatoria.fechaInicio }} - {{ convocatoria.fechaFin }}</p>
+          </ion-card-content>
+        </ion-card>
+
+        <!-- Botón para guardar cambios -->
+        <ion-button (click)="saveChanges()">Guardar Cambios</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
