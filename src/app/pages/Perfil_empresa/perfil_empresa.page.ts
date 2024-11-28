@@ -19,6 +19,9 @@ export class PerfilEmpresaPage implements OnInit {
   ) {
     this.idEmpresa = this.activatedRoute.snapshot.paramMap.get('id')!;
   }
+if (!this.idEmpresa) {
+      this.router.navigate(['/home']);
+    }
 
   ngOnInit() {
     this.loadEmpresa();
