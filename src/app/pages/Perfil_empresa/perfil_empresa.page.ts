@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PerfilEmpresaPage implements OnInit {
   empresa: Empresa | null = null;
-  idEmpresa: string;
+  idEmpresa: string | null = null;
 
   constructor(
     private empresaService: EmpresaService,
