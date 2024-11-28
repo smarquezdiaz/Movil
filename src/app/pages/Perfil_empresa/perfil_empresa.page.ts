@@ -31,11 +31,11 @@ export class PerfilEmpresaPage implements OnInit {
     });
   }
 
-  // Guardar cambios de la empresa
+ 
   saveChanges() {
     if (this.empresa) {
       this.empresaService.updateEmpresa(this.idEmpresa, this.empresa).subscribe((data) => {
-        this.empresa = data; // Actualizar los datos de la empresa con la respuesta
+        this.empresa = data;
       });
     }
   }
