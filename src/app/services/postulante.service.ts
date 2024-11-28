@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../modelos/user';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Postulante } from '../modelos/postulante';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,9 @@ export class PostulanteService {
 
   cambiarEstadoPostulante(idConvocatoria: number, idPostulante: number, estado: string): Observable<any> {
     return this.http.put<any>(`${environment.api}/convocatorias/${idConvocatoria}/postulantes/${idPostulante}/estado`, { estado });
+  }
+
+  registrarPostulante(postulante: Postulante): Observable<Postulante> {
+    return this.http.post<Postulante>(environment.api + environment.backend.postulante, postulante);
   }
 }

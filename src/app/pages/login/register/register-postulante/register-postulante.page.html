@@ -1,0 +1,94 @@
+<app-header backButton="/login/register"></app-header>
+<ion-content>
+  <div class="form-container">
+    <h1>Datos Postulante</h1>
+    <form [formGroup]="form" action="">
+      <ion-label>Nombre*</ion-label>
+      <ion-input formControlName="nombre" class="generic-input" label-placement="stacked" fill="outline"
+        placeholder="Nuevo nombre" maxlength="50"></ion-input>
+      <div *ngIf="form.get('nombre')?.errors && (form.get('nombre')?.dirty || form.get('nombre')?.touched)">
+        <p *ngIf="form.get('nombre')?.hasError('required')">
+          <ion-text color="danger">Campo obligatorio</ion-text>
+        </p>
+      </div>
+      <ion-label>Apellido*</ion-label>
+      <ion-input formControlName="apellido" class="generic-input" label-placement="stacked" fill="outline"
+        placeholder="Nuevo Apellido" maxlength="100"></ion-input>
+      <div *ngIf="form.get('apellido')?.errors && (form.get('apellido')?.dirty || form.get('apellido')?.touched)">
+        <p *ngIf="form.get('apellido')?.hasError('required')">
+          <ion-text color="danger">Campo obligatorio</ion-text>
+        </p>
+      </div>
+      <ion-label>Carrera*</ion-label>
+      <ion-input formControlName="carrera" class="generic-input" label-placement="stacked" fill="outline"
+        placeholder="ingrese su carrera" maxlength="12"></ion-input>
+      <div *ngIf="form.get('carrera')?.errors && (form.get('carrera')?.dirty || form.get('carrera')?.touched)">
+        <p *ngIf="form.get('carrera')?.hasError('required')">
+          <ion-text color="danger">Campo obligatorio</ion-text>
+        </p>
+      </div>
+      <ion-label>Descripción*</ion-label>
+      <ion-input formControlName="descripcion" class="generic-input" label-placement="stacked" fill="outline"
+        placeholder="Nueva descripcion" maxlength="100"></ion-input>
+      <div *ngIf="form.get('descripcion')?.errors && (form.get('descripcion')?.dirty || form.get('descripcion')?.touched)">
+        <p *ngIf="form.get('descripcion')?.hasError('required')">
+          <ion-text color="danger">Campo obligatorio</ion-text>
+        </p>
+      </div>
+      <ion-label>Celular*</ion-label>
+      <ion-input formControlName="celular" class="generic-input" label-placement="stacked" fill="outline"
+        placeholder="Nuevo celular" maxlength="100"></ion-input>
+      <div *ngIf="form.get('celular')?.errors && (form.get('celular')?.dirty || form.get('celular')?.touched)">
+        <p *ngIf="form.get('celular')?.hasError('required')">
+          <ion-text color="danger">Campo obligatorio</ion-text>
+        </p>
+      </div>
+      <ion-label>Correo*</ion-label>
+      <ion-input formControlName="correo" class="generic-input" label-placement="stacked" fill="outline"
+        placeholder="Nuevo correo" maxlength="100"></ion-input>
+      <div *ngIf="form.get('correo')?.errors && (form.get('correo')?.dirty || form.get('correo')?.touched)">
+        <p *ngIf="form.get('correo')?.hasError('required')">
+          <ion-text color="danger">Campo obligatorio</ion-text>
+        </p>
+      </div>
+      <hr class="divider">
+      <h1>Datos Usuario</h1>
+      <ion-label>Nombre Usuario*</ion-label>
+      <ion-input formControlName="usuario" class="generic-input" label-placement="stacked" fill="outline"
+        placeholder="Nuevo nombre usuario" maxlength="9"></ion-input>
+      <div *ngIf="form.get('usuario')?.errors && (form.get('usuario')?.dirty || form.get('usuario')?.touched)">
+        <p *ngIf="form.get('usuario')?.hasError('required')">
+          <ion-text color="danger">Campo obligatorio</ion-text>
+        </p>
+      </div>
+      <ion-label>Contraseña*</ion-label>
+      <ion-input formControlName="contrasenia" type="password" class="generic-input" label-placement="stacked"
+        fill="outline" placeholder="Nueva Contraseña" maxlength="12">
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+      </ion-input>
+      <div
+        *ngIf="form.get('contrasenia')?.errors && (form.get('contrasenia')?.dirty || form.get('contrasenia')?.touched)">
+        <p *ngIf="form.get('contrasenia')?.hasError('required')">
+          <ion-text color="danger">Campo obligatorio</ion-text>
+        </p>
+      </div>
+      <ion-label>Confirmar Contraseña*</ion-label>
+      <ion-input formControlName="confirmContrasenia" type="password" class="generic-input" label-placement="stacked"
+        fill="outline" placeholder="Confirmar Contraseña">
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+      </ion-input>
+      <div *ngIf="form.get('confirmContrasenia')?.errors && (form.get('confirmContrasenia')?.dirty)">
+        <p *ngIf="form.get('confirmContrasenia')?.hasError('required')">
+          <ion-text color="danger">Campo obligatorio</ion-text>
+        </p>
+        <p *ngIf="form.get('confirmContrasenia')?.hasError('passwordMismatch')">
+          <ion-text color="danger">Contraseñas diferentes</ion-text>
+        </p>
+      </div>
+      <div class="button-container">
+        <ion-button class="secondary-button" routerLink="/login/register">Cancelar</ion-button>
+        <ion-button class="main-button" (click)="openModal()" [disabled]="!this.form.valid">Crear</ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>
