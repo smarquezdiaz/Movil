@@ -18,17 +18,14 @@ export class PerfilEmpresaPage implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.idEmpresa = this.activatedRoute.snapshot.paramMap.get('id')!;
-  }
+
 if (!this.idEmpresa) {
       this.router.navigate(['/home']);
     }
-
+}
   ngOnInit() {
     this.loadEmpresa();
-  }
-
-  // Cargar datos de la empresa
-  loadEmpresa() {
+  } {
     this.empresaService.getEmpresa(this.idEmpresa).subscribe((data) => {
       this.empresa = data;
     });
