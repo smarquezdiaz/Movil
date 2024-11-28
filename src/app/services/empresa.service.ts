@@ -14,4 +14,7 @@ export class EmpresaService {
   crearEmpresa ( empresa :Empresa) : Observable<Empresa>{
     return this.http.post<Empresa>(environment.api + environment.backend.empresa, empresa);
   }
+  getEmpresa(id: String): Observable<Empresa>{
+    return this.http.get<Empresa>(
+  }
 }
