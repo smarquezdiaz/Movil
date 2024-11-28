@@ -15,6 +15,12 @@ export class EmpresaService {
     return this.http.post<Empresa>(environment.api + environment.backend.empresa, empresa);
   }
   getEmpresa(id: String): Observable<Empresa>{
-    return this.http.get<Empresa>(
+    return this.http.get<Empresa>(`${environment.api}${environment.backend.empresa}/${id}`);
+  }
+getEmpresa(id: string): Observable<Empresa> {
+    return this.http.get<Empresa>(`${environment.api}${environment.backend.empresa}/${id}`);
+  }
+updateEmpresa(id: string, empresa: Empresa): Observable<Empresa> {
+    return this.http.put<Empresa>(`${environment.api}${environment.backend.empresa}/${id}`, empresa);
   }
 }
