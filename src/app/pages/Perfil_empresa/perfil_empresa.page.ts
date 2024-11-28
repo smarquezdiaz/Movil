@@ -1,8 +1,7 @@
-
 import { Component, OnInit } from '@angular/core';
 import { EmpresaService } from '../../services/empresa.service';
 import { Empresa } from '../../models/empresa.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router'; // Importamos Router
 
 @Component({
   selector: 'app-perfil-empresa',
@@ -15,27 +14,38 @@ export class PerfilEmpresaPage implements OnInit {
 
   constructor(
     private empresaService: EmpresaService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router 
   ) {
-    this.idEmpresa = this.activatedRoute.snapshot.paramMap.get('id')!;
-
-if (!this.idEmpresa) {
+   
+    this.idEmpresa = this.activatedRoute.snapshot.paramMap.get('id');
+    
+   
+    if (!this.idEmpresa) {
       this.router.navigate(['/home']);
     }
-}
-  ngOnInit() {
-    this.loadEmpresa();
-  } {
-    this.empresaService.getEmpresa(this.idEmpresa).subscribe((data) => {
-      this.empresa = data;
-    });
   }
 
- 
-  saveChanges() {
-    if (this.empresa) {
-      this.empresaService.updateEmpresa(this.idEmpresa, this.empresa).subscribe((data) => {
+  ngOnInit() {
+    if (this.idEmpresa) {
+      this.loadEmpresa();
+    }
+  }
+
+  
+  loadEmpresa() {
+    if (this.idEmpresa) {
+      this.empresaService.getEmpresa(this.idEmpresa).subscribe((data) => {
         this.empresa = data;
+      });
+    }
+  }
+
+  
+  saveChanges() {
+    if (this.empresa && this.idEmpresa) {
+      this.empresaService.updateEmpresa(this.idEmpresa, this.empresa).subscribe((data) => {
+        this.empresa = data; 
       });
     }
   }
