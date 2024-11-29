@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmpresaService } from '../../services/empresa.service';
 import { Empresa } from '../../models/empresa';
-import { ActivatedRoute, Router} from '@angular/router'; 
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil-empresa',
@@ -15,34 +15,41 @@ export class PerfilEmpresaPage implements OnInit {
   constructor(
     private empresaService: EmpresaService,
     private activatedRoute: ActivatedRoute,
-    private router: Router 
-  ) { 
-  
-  }
+    private router: Router
+  ) {}
 
   ngOnInit() {
-  this.idEmpresa = this.activatedRoute.snapshot.paramMap.get('id');
+    this.idEmpresa = this.activatedRoute.snapshot.paramMap.get('id');
 
-  if (!this.idEmpresa) {
-    this.router.navigate(['/home']);
-  } else {
+    if (!this.idEmpresa) {
+      this.router.navigate(['/home']);
+      return;
+    }
+
     this.loadEmpresa();
   }
-}
 
-loadEmpresa() {
-    if (this.idEmpresa) {
-      this.empresaService.getEmpresa(this.idEmpresa).subscribe((data) => {
+  loadEmpresa() {
+    this.empresaService.getEmpresa(this.idEmpresa!).subscribe({
+      next: (data) => {
         this.empresa = data;
-      });
-    }
+      },
+      error: (err) => {
+        console.error('Error al cargar la empresa:', err);
+      },
+    });
   }
-  
-  
+
   saveChanges() {
     if (this.empresa && this.idEmpresa) {
-      this.empresaService.updateEmpresa(this.idEmpresa, this.empresa).subscribe((data) => {
-        this.empresa = data; 
+      this.empresaService.updateEmpresa(this.idEmpresa, this.empresa).subscribe({
+        next: (data) => {
+          this.empresa = data;
+          console.log('Cambios guardados exitosamente');
+        },
+        error: (err) => {
+          console.error('Error al guardar los cambios:', err);
+        },
       });
     }
   }
