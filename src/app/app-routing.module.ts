@@ -24,12 +24,6 @@ const routes: Routes = [
     path: 'postulantes',
     loadChildren: () => import('./pages/postulantes/postulantes.module').then(m => m.PostulantesPageModule)
   },
-<<<<<<< HEAD
-{
-    path: 'perfil-empresa/:id',
-    loadChildren: () => import('./pages/perfil-empresa/perfil-empresa.module').then(m => m.PerfilEmpresaPageModule)
-  },
-=======
 
   {
     path: 'perfil-postulante',
@@ -40,8 +34,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/perfil-empresa/perfil-empresa.module').then(m => m.PerfilEmpresaPageModule)
   },
 
-
->>>>>>> 1c6f14432e44c8151597397ffc027e67074531da
 ];
 
 @NgModule({
