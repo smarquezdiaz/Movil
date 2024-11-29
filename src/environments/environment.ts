@@ -10,7 +10,8 @@ export const environment = {
     empresa:  '/empresas',
     convocatoria: '/convocatorias',
     imagen: '/imagen',
-    postulante: '/postulantes'
+    postulante: '/postulantes',
+    email: '/send-email'
   }
 };
 
