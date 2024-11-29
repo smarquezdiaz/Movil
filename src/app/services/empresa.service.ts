@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Empresa } from '../modelos/empresa';
-
+import { User } from '../modelos/user'; 
+import { Convocatoria } from '../modelos/convocatoria';
 @Injectable({
   providedIn: 'root'
 })
