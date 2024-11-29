@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../modelos/user';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Postulante } from '../modelos/postulante';
+import { Postulante, PostulanteConvocatoriaDTO } from '../modelos/postulante';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +38,13 @@ export class PostulanteService {
   
   actualizarPostulante(idPostulante: number, postulante: Partial<Postulante>): Observable<Postulante> {
     return this.http.patch<Postulante>(`${environment.api}/postulantes/${idPostulante}`, postulante);
+  }
+
+  postularse(idPostulante: number, idConvocatoria: number, postulanteConvocatoria: PostulanteConvocatoriaDTO): Observable<boolean> {
+    return this.http.post<boolean>(
+      `${environment.api}${environment.backend.postulante}/${idPostulante}/postularse/${idConvocatoria}`,
+      postulanteConvocatoria
+    );
   }
 
 }

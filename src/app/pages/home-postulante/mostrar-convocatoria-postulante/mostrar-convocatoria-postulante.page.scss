@@ -43,5 +43,49 @@
     --padding-top: 15px;
     --padding-bottom: 15px;               
 }
-
+.block {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .modal-postular {
+    --height: auto;
+  }
+.upload {
+    --background: #060A30;
+    --color: white;
+    margin-bottom: 20px;
+    width: 30%;
+    height: 40px;
+    --border-radius: 10px;
+}  
+.secondary-button {
+    --background: #A90B71;
+    --color: white;
+    margin-bottom: 20px;
+    width: 30%;
+    height: 40px;
+    --border-radius: 10px;
+} 
+.main-button {
+    --background: #060A30;
+    --color: white;
+    margin-bottom: 20px;
+    width: 30%;
+    height: 40px;
+    --border-radius: 10px;
+} 
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 10px;
+    color: var(--ion-color-primary);
+  }
 

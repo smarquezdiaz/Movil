@@ -10,3 +10,6 @@ export interface Postulante {
   contrasenia: string;
   rol?: string;
 }
+export interface PostulanteConvocatoriaDTO {
+  curriculum: string;  
+}
