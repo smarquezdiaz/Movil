@@ -1,0 +1,55 @@
+<app-header backButton="/home-postulante" logged="true"></app-header>
+
+<ion-content>
+  <div class="info-empresa-container">
+    <div class="image-container" *ngIf="imageEmpresa" fxLayoutAlign="center">
+      <img [src]="imageEmpresa" alt="Uploaded Image" />
+    </div>
+    <div>
+      <p>{{convocatoria.empresa.nombre}}</p>
+      <h2>{{convocatoria.titulo}}</h2>
+    </div>
+  </div>
+  <hr class="linea">
+  <div *ngIf="convocatoria" class="container-mostrar-convocatoria">
+    <div class="image-container" *ngIf="imageConvocatoria" fxLayoutAlign="center">
+        <img [src]="imageConvocatoria" alt="Uploaded Image" />
+    </div>
+    <hr class="linea">
+    <div class="info-pasantia">
+      <p><strong>Acerca de la pasantía</strong> <br></p>
+      <p>{{convocatoria.descripcion}}</p>
+      <div fxLayout="row" fxLayoutAlign="center center" style="gap: 20px;">
+          <ion-icon name="calendar-clear-sharp"></ion-icon>
+          <p>{{convocatoria.fechaInicio}} - {{convocatoria.fechaFin}}</p>
+      </div>
+    </div>
+    <hr class="linea">
+    <ion-buttons fxLayoutAlign="center end">
+      <ion-button (click)="setOpen(true)" expand="block">Aplicar</ion-button>
+    </ion-buttons>
+  </div>
+  <ion-modal class="modal-postular" [isOpen]="isModalOpen" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+    <ng-template>
+      <div class="block">
+        <input
+        type="file"
+        accept="application/pdf"
+        id="file-upload"
+        style="display: none;"
+        (change)="onFileSelectedAndUpload($event)"
+      />
+        <ion-button class="upload" (click)="triggerFileInput()">Subir CV</ion-button>
+        <p *ngIf="uploadedFileName">{{ uploadedFileName }}</p>
+      </div>
+      <div *ngIf="isUploading" class="loading-container">
+        <ion-spinner name="crescent"></ion-spinner>
+        <p>Subiendo archivo...</p>
+      </div>
+      <ion-buttons fxLayoutAlign="center end">
+        <ion-button class="secondary-button"  (click)="setOpen(false)">Cancelar</ion-button>
+        <ion-button class="main-button" [disabled]="!uploadedFileName" (click)="postularse()">Enviar</ion-button>
+      </ion-buttons>
+    </ng-template>
+  </ion-modal>
+</ion-content>

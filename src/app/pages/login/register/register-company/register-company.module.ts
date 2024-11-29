@@ -8,6 +8,7 @@ import { RegisterCompanyPageRoutingModule } from './register-company-routing.mod
 
 import { RegisterCompanyPage } from './register-company.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     IonicModule,
     RegisterCompanyPageRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexLayoutModule
   ],
   declarations: [RegisterCompanyPage]
 })

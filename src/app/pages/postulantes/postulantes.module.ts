@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { PostulantesPageRoutingModule } from './postulantes-routing.module';
-import { PostulantesPage } from './postulantes.page';
 
 @NgModule({
   imports: [
@@ -13,6 +12,6 @@ import { PostulantesPage } from './postulantes.page';
     IonicModule,
     PostulantesPageRoutingModule
   ],
-  declarations: [PostulantesPage]
+  declarations: []
 })
 export class PostulantesPageModule {}

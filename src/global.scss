@@ -40,6 +40,7 @@
 
 body {
     font-family: $font;
+    background-color: #F5F5F5;
 }
 .main-button {
     --background: #060A30; 
@@ -50,11 +51,12 @@ body {
     --color: white;                        
 }
 h1 {
-    color: #060A30 ;                     
+    color: #060A30 ;  
+    font-family: $font;                   
 }
 .generic-input {
-    border-radius: 15px;
-    border: 1px solid #666877;
+    // border-radius: 15px;
+    border: 1px solid #666877 !important;
     --padding-bottom: 10px;
     --padding-end: 10px;
     --padding-start: 10px;
@@ -62,13 +64,13 @@ h1 {
     margin-bottom: 15px;
     margin-top: 15px;
 }
-.generic-input ion-input {
-    border-radius: 15px;
-    border: 1px solid #666877;
-}
 
 .divider{
     border-top: 4px solid #060A30;
+    border-radius: 20px;
+}
+.divider-thin{
+    border-top: 2px solid #060A30;
     border-radius: 20px;
 }
 ion-label {
@@ -81,4 +83,12 @@ ion-modal {
     --border-radius: 6px;
     --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
 }
-
+ion-content {
+    --background: #F5F5F5;
+}
+ion-col {
+    font-family: $font;
+}
+p{
+    font-family: $font;
+}

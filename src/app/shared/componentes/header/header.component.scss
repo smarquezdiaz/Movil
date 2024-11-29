@@ -1,4 +1,37 @@
 ion-toolbar {
     --background: #060A30 !important;
+    height: 60px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
 }
 
+.header-buttons {
+    display: flex;
+    justify-content: space-between;
+align-items: center; 
+    gap: 15px;
+}
+.one-header-buttons {
+    display: flex;
+    justify-content: flex-end;
+align-items: center;
+    gap: 10px;
+
+}
+ion-button {
+    --background: #1D133B; 
+    --color: #EE40A1; 
+    border-radius: 15px; 
+    padding: 8px 12px;
+    font-size: 16px; 
+    font-weight: bold; 
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+ion-button:hover {
+    transform: scale(1.05);
+    --background: #A90B71; 
+    --color: white; 
+}

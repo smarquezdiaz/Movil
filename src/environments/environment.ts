@@ -8,7 +8,9 @@ export const environment = {
   backend: {
     user: '/user',
     empresa:  '/empresas',
-    convocatoria: '/convocatorias'
+    convocatoria: '/convocatorias',
+    imagen: '/imagen',
+    postulante: '/postulantes'
   }
 };
 

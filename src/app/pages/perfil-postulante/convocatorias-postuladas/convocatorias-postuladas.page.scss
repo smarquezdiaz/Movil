@@ -1,0 +1,108 @@
+// Variables de colores
+$primary-color: #3880ff;
+$secondary-color: #ff5c8e;
+$neutral-color: #f4f5f8;
+$light-text-color: #777;
+$background-color: #f9f9f9;
+$border-radius: 12px;
+
+.title-container {
+  padding: 20px;
+  background-color: $background-color;
+}
+
+.titles-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+ion-button {
+  font-weight: bold;
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: $border-radius;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.second-button {
+  background-color: $primary-color;
+  color: white;
+}
+
+.small-button {
+  background-color: $secondary-color;
+  color: white;
+}
+
+.small-button:hover,
+.second-button:hover {
+  transform: scale(1.05);
+}
+
+ion-grid {
+  margin-top: 20px;
+}
+
+ion-card {
+  border-radius: $border-radius;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+ion-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+ion-card-header {
+  background-color: $primary-color;
+  color: white;
+  padding: 15px;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+}
+
+ion-card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+ion-card-content {
+  padding: 15px;
+}
+
+ion-img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+p {
+  font-size: 14px;
+  color: $light-text-color;
+  margin: 5px 0;
+}
+
+strong {
+  color: $primary-color;
+}
+
+ion-button {
+  margin-top: 10px;
+  font-size: 14px;
+  padding: 8px 16px;
+  text-transform: uppercase;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+
+ion-button ion-icon {
+  margin-left: 5px;
+}
+
+

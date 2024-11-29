@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PostulantesPage } from './postulantes.page';
+
 
 const routes: Routes = [
   {
-    path: '',
-    component: PostulantesPage
+    path: ':id',
+    loadChildren: () => import('./postulante-list/postulante-list.module').then( m => m.PostulanteListPageModule)
   }
+
 ];
 
 @NgModule({

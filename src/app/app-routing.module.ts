@@ -16,13 +16,32 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/home/home.module').then(m => m.HomePageModule)
   },
   {
+    path: 'home-postulante',
+    loadChildren: () => import('./pages/home-postulante/home-postulante.module').then( m => m.HomePostulantePageModule)
+  },
+ 
+  {
     path: 'postulantes',
     loadChildren: () => import('./pages/postulantes/postulantes.module').then(m => m.PostulantesPageModule)
   },
+<<<<<<< HEAD
 {
     path: 'perfil-empresa/:id',
     loadChildren: () => import('./pages/perfil-empresa/perfil-empresa.module').then(m => m.PerfilEmpresaPageModule)
   },
+=======
+
+  {
+    path: 'perfil-postulante',
+    loadChildren: () => import('./pages/perfil-postulante/perfil-postulante.module').then( m => m.PerfilPostulantePageModule)
+  },
+{
+    path: 'perfil-empresa/:id',  
+    loadChildren: () => import('./pages/perfil-empresa/perfil-empresa.module').then(m => m.PerfilEmpresaPageModule)
+  },
+
+
+>>>>>>> 1c6f14432e44c8151597397ffc027e67074531da
 ];
 
 @NgModule({

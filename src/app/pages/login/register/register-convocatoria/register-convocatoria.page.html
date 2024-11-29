@@ -1,37 +1,52 @@
 <ion-header>
-  <app-header backButton="/home"></app-header>
+  <app-header backButton="/home" logged="true"></app-header>
 </ion-header>
 
-  
 
 <ion-content [formGroup]="form" class="ion-padding">
   <h1>Nueva Convocatoria</h1>
   <div>
-  <ion-label position="stacked" label-placement="stacked">Nueva imagen*</ion-label>
-</div>
-<div>
-  <ion-button fill="clear" (click)="fileInput.click()">
-    <div class="icon-frame" (click)="fileInput.click()" style="display: flex; align-items: center;">
-      <ion-icon name="images-outline" class="custom-icon"></ion-icon>
-    </div>
-  </ion-button>
-  <input type="file" #fileInput (change)="onImageSelected($event)" style="display: none;">
-</div>
+    <ion-label position="stacked" label-placement="stacked">Nueva imagen*</ion-label>
+  </div>
+
+  <ion-label style="margin-bottom: 10px;">Imagen Convocatoria*</ion-label>
+      <div class="image-container" *ngIf="!image">
+        <img src="assets/images/image.png" alt="">
+      </div>
+      <div class="image-container" *ngIf="image">
+        <img [src]="image" alt="Uploaded Image" />
+      </div>
+      <ion-button fxLayoutAlign="end" class="image-button" (click)="changeImage()">Subir Imagen</ion-button>
 
   <ion-label>Título*</ion-label>
   <ion-input formControlName="titulo" class="generic-input" placeholder=" Nuevo título" label-placement="stacked"
-    fill="outline" maxlength="25"></ion-input>
+    fill="outline" maxlength="50"></ion-input>
+  <div *ngIf="form.get('titulo')?.errors && (form.get('titulo')?.dirty || form.get('titulo')?.touched)">
+    <p *ngIf="form.get('titulo')?.hasError('required')">
+      <ion-text color="danger">Campo obligatorio</ion-text>
+    </p>
+  </div>
 
   <ion-label position="stacked">Descripción*</ion-label>
-  <ion-textarea formControlName="descripcion" placeholder="" class="generic-input" fill="outline"
-    maxlength="150"></ion-textarea>
+  <ion-textarea formControlName="descripcion" placeholder="" class="generic-input" fill="outline" maxlength="255"
+    style="height: 150px"></ion-textarea>
+  <div *ngIf="form.get('descripcion')?.errors && (form.get('descripcion')?.dirty || form.get('descripcion')?.touched)">
+    <p *ngIf="form.get('descripcion')?.hasError('required')">
+      <ion-text color="danger">Campo obligatorio</ion-text>
+    </p>
+  </div>
 
+  <ion-modal #dateModal>
+    <ng-template>
+      <ion-datetime [value]="selectedDate" (ionChange)="onDateSelected($event)" displayFormat="YYYY-MM-DD"
+        pickerFormat="YYYY-MM-DD" showDefaultTime="false"></ion-datetime>
+    </ng-template>
+  </ion-modal>
 
   <ion-label position="stacked">Fecha de Inicio*</ion-label>
   <div style="display: flex;">
     <ion-input class="generic-input" fill="outline" formControlName="fechaInicio" placeholder="Fecha de inicio"
-      (ionBlur)="onDateChange()">
-    </ion-input>
+      (click)="openDatetimeModal('fechaInicio')"></ion-input>
     <ion-button fill="clear" (click)="openDatetimeModal('fechaInicio')">
       <ion-icon name="calendar-outline"></ion-icon>
     </ion-button>
@@ -40,14 +55,17 @@
   <ion-label position="stacked">Fecha de Finalización*</ion-label>
   <div style="display: flex;">
     <ion-input class="generic-input" fill="outline" formControlName="fechaFin" placeholder="Fecha de finalización"
-      (ionBlur)="onDateChange()">
+      (click)="openDatetimeModal('fechaFin')">
     </ion-input>
     <ion-button fill="clear" (click)="openDatetimeModal('fechaFin')">
       <ion-icon name="calendar-outline"></ion-icon>
     </ion-button>
   </div>
 
-  
+  <ion-item *ngIf="form.hasError('fechaFinMenorQueInicio') && form.get('fechaFin')?.touched" color="danger">
+    <p>La fecha de finalización no puede ser menor que la fecha de inicio.</p>
+  </ion-item>
+
   <ion-item style="display: flex; justify-content: space-between; align-items: center;">
     <div style="margin-right: 86px;">
       <ion-label style="margin: 0;">Cantidad Máxima de</ion-label>
@@ -58,8 +76,6 @@
         }}</ion-select-option>
     </ion-select>
   </ion-item>
-
-
 
   <div class="button-container">
     <ion-button class="secondary-button" routerLink="/login/register/register-convocatoria">Cancelar</ion-button>
