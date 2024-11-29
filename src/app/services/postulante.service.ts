@@ -31,4 +31,13 @@ export class PostulanteService {
   registrarPostulante(postulante: Postulante): Observable<Postulante> {
     return this.http.post<Postulante>(environment.api + environment.backend.postulante, postulante);
   }
+
+  obtenerPostulantePorId(idPostulante: number): Observable<Postulante> {
+    return this.http.get<Postulante>(`${environment.api}/postulantes/${idPostulante}`);
+  }
+  
+  actualizarPostulante(idPostulante: number, postulante: Partial<Postulante>): Observable<Postulante> {
+    return this.http.patch<Postulante>(`${environment.api}/postulantes/${idPostulante}`, postulante);
+  }
+
 }
