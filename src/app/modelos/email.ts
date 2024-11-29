@@ -1,5 +1,7 @@
 export interface Email {
-  email: string;
-  subject: string;
-  body: string;
+  destinatario: string;
+  idPostulante: number;
+  idConvocatoria: number;
+  tituloConvocatoria: string;
+  aceptado: boolean;
 }

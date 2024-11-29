@@ -6,6 +6,8 @@ import { User, UserConvocatoria } from 'src/app/modelos/user';
 import { PostulanteService } from 'src/app/services/postulante.service';
 import { ModalController } from '@ionic/angular';
 import { FormBuilder } from '@angular/forms';
+import { EmailService } from 'src/app/services/email.service';
+import { ConvocatoriaService } from 'src/app/services/convocatoria.service';
 
 
 @Component({
@@ -24,7 +26,9 @@ export class MostrarPostulantePage implements OnInit {
     private route: ActivatedRoute,
     private postulanteService: PostulanteService,
     private formBuilder: FormBuilder, 
-    private modalController: ModalController  
+    private modalController: ModalController,
+    private emailService: EmailService,
+    private convocatoriaService: ConvocatoriaService,
   ) { }
 
   ngOnInit() {
@@ -62,7 +66,7 @@ export class MostrarPostulantePage implements OnInit {
   }
 
   cambiarEstado() {
-    const nuevoEstado = this.userConvocatoria.aceptado ? 'rechazado' : 'aceptado';
+    /* const nuevoEstado = this.userConvocatoria.aceptado ? 'rechazado' : 'aceptado';
     
     this.postulanteService.cambiarEstadoPostulante(this.idConvocatoria, this.idPostulante, nuevoEstado).subscribe({
       next: (res) => {
@@ -73,7 +77,30 @@ export class MostrarPostulantePage implements OnInit {
       error: (err) => {
         console.error('Error al cambiar estado:', err);
       }
+    }); */
+    this.convocatoriaService.obtenerConvocatoria(this.idConvocatoria).subscribe({
+      next: (res) => {
+        const email = {
+          destinatario: this.postulante.correo,
+          idPostulante: this.postulante.id,
+          idConvocatoria: this.idConvocatoria,
+          tituloConvocatoria: res.titulo,
+          aceptado: true,
+        }
+        this.emailService.sendEmail(email).subscribe({
+          next: (res) => {
+            this.showSuccessModal(); 
+          },
+          error: (err) => {
+            console.error('Error al cambiar estado:', err);
+          }
+        });
+      },
+      error: (err) => {
+        console.error('Error al cambiar estado:', err);
+      }
     });
+
   }
 
   async showSuccessModal() {
