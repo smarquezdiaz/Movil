@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmpresaService } from '../../services/empresa.service';
 import { Empresa } from '../../models/empresa';
-import { ActivatedRoute} from '@angular/router'; 
+import { ActivatedRoute, Route} from '@angular/router'; 
 
 @Component({
   selector: 'app-perfil-empresa',
