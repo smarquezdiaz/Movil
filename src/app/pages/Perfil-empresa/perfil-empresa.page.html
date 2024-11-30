@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-toolbar>
     <ion-title>Perfil Empresa</ion-title>
@@ -12,13 +11,16 @@
         <ion-card-title>{{ empresa.nombre }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <img [src]="empresa.logo" alt="Logo de la empresa" />
+        <!-- Mostrar la imagen de la empresa -->
+        <img [src]="empresa.imagen" alt="Imagen de la empresa" />
+
+        <!-- Mostrar los detalles de la empresa -->
         <p>{{ empresa.descripcion }}</p>
-        <p><strong>Email:</strong> {{ empresa.email }}</p>
-        <p><strong>Teléfono:</strong> {{ empresa.telefono }}</p>
+        <p><strong>Nit:</strong> {{ empresa.nit }}</p>
+        <p><strong>Ubicación:</strong> {{ empresa.ubicacion }}</p>
 
         <!-- Mostrar convocatorias -->
-        <ion-card *ngFor="let convocatoria of empresa.convocatorias">
+        <ion-card *ngFor="let convocatoria of empresa.convocatoriaList">
           <ion-card-header>
             <ion-card-title>{{ convocatoria.titulo }}</ion-card-title>
           </ion-card-header>
