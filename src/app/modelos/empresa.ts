@@ -7,6 +7,14 @@ export interface Empresa {
   usuario: string;
   contrasenia: string;
   rol?: string;
+  convocatoriaList: Convocatoria[];
   confirmContrasenia?: string;
   img?: any;
+}
+export interface Convocatoria {
+  id: string;
+  titulo: string;
+  descripcion: string;
+  fechaInicio: string;
+  fechaFin: string;
 }
