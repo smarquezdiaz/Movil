@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmpresaService } from '../../services/empresa.service';
-import { Empresa } from '../../modelos/empresa.model';
+import { Empresa } from '../../modelos/empresa';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
