@@ -100,5 +100,8 @@ export class LoginPage implements OnInit {
         }
       }
     }
-    }    
+  }
+  ionViewWillEnter() {
+    this.form.reset();
+  }    
 }

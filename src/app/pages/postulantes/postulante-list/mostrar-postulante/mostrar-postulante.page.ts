@@ -39,7 +39,6 @@ export class MostrarPostulantePage implements OnInit {
       this.idPostulante = params['idPostulante'];
       console.log('ID Convocatoria:', this.idConvocatoria);
       console.log('ID Postulante:', this.idPostulante);
-
       this.obtenerPostulante();
     });
   }
