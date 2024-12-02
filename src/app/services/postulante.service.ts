@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../modelos/user';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Postulante, PostulanteConvocatoriaDTO } from '../modelos/postulante';
+import { Postulante, PostulanteConvocatoriaDTO, PostulanteDto } from '../modelos/postulante';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +20,8 @@ export class PostulanteService {
     return this.http.get(environment.api + environment.backend.convocatoria +  `/${idConvocatoria}/postulantes`);
   }
 
-  obtenerPostulantePorConvocatoria(idConvocatoria: number, idPostulante: number): Observable<User> {
-    return this.http.get<User>(`${environment.api}/convocatorias/${idConvocatoria}/postulantes/${idPostulante}`);
+  obtenerPostulantePorConvocatoria(idConvocatoria: number, idPostulante: number): Observable<PostulanteDto> {
+    return this.http.get<PostulanteDto>(`${environment.api}/convocatorias/${idConvocatoria}/postulantes/${idPostulante}`);
   }
 
   cambiarEstadoPostulante(idConvocatoria: number, idPostulante: number, estado: string): Observable<any> {

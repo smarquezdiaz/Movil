@@ -1,6 +1,6 @@
 <app-header backButton="/home-postulante" logged="true"></app-header>
 
-<ion-content>
+<ion-content *ngIf="this.convocatoria">
   <div class="info-empresa-container">
     <div class="image-container" *ngIf="imageEmpresa" fxLayoutAlign="center">
       <img [src]="imageEmpresa" alt="Uploaded Image" />
@@ -26,7 +26,7 @@
     </div>
     <hr class="linea">
     <ion-buttons fxLayoutAlign="center end">
-      <ion-button (click)="setOpen(true)" expand="block">Aplicar</ion-button>
+      <ion-button (click)="setOpen(true)" expand="block" [disabled]="isPostulated">Aplicar</ion-button>
     </ion-buttons>
   </div>
   <ion-modal class="modal-postular" [isOpen]="isModalOpen" [initialBreakpoint]="1" [breakpoints]="[0, 1]">

@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import {  ModalController } from '@ionic/angular';
 import { ConvocatoriaParaPostulantes } from 'src/app/modelos/convocatoria';
+import { PostulanteDto } from 'src/app/modelos/postulante';
 import { ConvocatoriaService } from 'src/app/services/convocatoria.service';
 import { ImagenService } from 'src/app/services/imagen.service';
 import { PostulanteService } from 'src/app/services/postulante.service';
@@ -28,6 +29,8 @@ export class MostrarConvocatoriaPostulantePage implements OnInit {
   isUploading: boolean = false;
   userId!: number;
   isModalOpen = false;
+  postulante!: PostulanteDto;
+  isPostulated: boolean = false;
 
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
@@ -44,6 +47,7 @@ export class MostrarConvocatoriaPostulantePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.userId = this.utilsService.getFromLocalStorage('userId');
     this.route.params.subscribe(params => {
       this.idConvocatoria = params['idConvocatoria'];
       console.log(this.idConvocatoria);
@@ -54,6 +58,14 @@ export class MostrarConvocatoriaPostulantePage implements OnInit {
         this.obtenerImagenEmpresa(this.convocatoria.empresa.imagen);
         this.obtenerImagenConvocatoria(this.convocatoria.imagen);
       }
+    });
+    this.postulanteService.obtenerPostulantePorConvocatoria(this.idConvocatoria, this.userId).subscribe({
+      next: (res) => {
+        this.isPostulated = true;
+      },error: () => {
+        this.isPostulated = false;
+      }
+
     })
   }
 
