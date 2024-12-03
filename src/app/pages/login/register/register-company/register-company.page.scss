@@ -1,29 +1,143 @@
 .form-container {
-    display: flex;
-    flex-direction: column;
-    margin: 15px;
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  gap: 15px;
 }
-.button-container {
-    display: flex;
-    justify-content: end;
+
+h1 {
+  font-size: 1.8rem;
+  color: #060A30;
+  margin-bottom: 10px;
+  text-align: left;
 }
-.image-container{
-    display: flex;
-    justify-self: center;
-    padding: 0;
+
+ion-label {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #1D133B;
+  margin-bottom: 5px;
 }
-.image-container img{
-    border: solid 1px black;
-    height: 250px;
-    width: 250px;
-    padding: 0 !important;
+
+
+.generic-input {
+  --background: #ffffff;
+  --placeholder-color: #A9A9A9;
+  --border-color: #060A30;
+  --highlight-color-focused: #A90B71;
+  --color: #060A30;
+  margin-bottom: 10px;
 }
+
+/* Divisor */
+.divider {
+  border: 0;
+  height: 1px;
+  background: #A90B71;
+  margin: 20px 0;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed #060A30;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.image-container img {
+  height: 150px;
+  width: auto;
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+/* Botón para cambiar imagen */
 .image-button {
-    --background: #FFFF; 
-    --color: #060A30; 
-    border: 1px solid #060A30;   
-    border-radius: 15px;
-    display: flex;
-    justify-self: end;
-    margin-bottom: 10px;
+  --background: #ffffff;
+  --color: #A90B71;
+  border: 1px solid #A90B71;
+  border-radius: 8px;
+  padding: 8px 15px;
+  font-size: 1rem;
+  margin-top: 10px;
+  transition: 0.3s ease;
+}
+
+.image-button:hover {
+  background-color: #A90B71;
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+/* Botones principales */
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Botón principal */
+.main-button {
+  --background: #A90B71;
+  --color: #ffffff;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.main-button:disabled {
+  background: #A9A9A9;
+  color: #ffffff;
+  cursor: not-allowed;
+}
+
+/* Botón secundario */
+.secondary-button {
+  --background: #ffffff;
+  --color: #A90B71;
+  border: 1px solid #A90B71;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 1rem;
+}
+
+.secondary-button:hover {
+  background-color: #A90B71;
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+/* Mensajes de error */
+ion-text[color="danger"] {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #EE40A1;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 600px) {
+  .form-container {
+    margin: 10px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .image-container img {
+    height: 100px;
+  }
+
+  .image-button,
+  .main-button,
+  .secondary-button {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
 }
