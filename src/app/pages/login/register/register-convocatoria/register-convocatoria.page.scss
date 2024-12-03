@@ -1,30 +1,163 @@
-.form-container {
-  display: flex;
-  flex-direction: column;
-  margin: 15px;
+.ion-padding {
+  padding: 20px;
 }
+
+h1 {
+  color: #A90B71;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.image-container img {
+  border: 2px solid #A90B71;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
+
+/* Botón para subir imágenes */
+.image-button {
+  --background: #FFFFFF;
+  --color: #A90B71;
+  border: 2px solid #A90B71;
+  border-radius: 15px;
+  padding: 5px 15px;
+  font-size: 14px;
+  align-self: center;
+  margin-bottom: 20px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.image-button:hover {
+  --background: #A90B71;
+  --color: #FFFFFF;
+}
+
+/* Estilo general para los inputs */
+.generic-input {
+  --background: #FFFFFF;
+  --placeholder-color: #B0B0B0;
+  --border-color: #A90B71;
+  --color: #060A30;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón principal */
+.main-button {
+  --background: #A90B71;
+  --color: #FFFFFF;
+  border-radius: 20px;
+  font-size: 16px;
+  padding: 10px 20px;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.main-button:hover {
+  transform: translateY(-2px);
+  background-color: #900960;
+}
+
+/* Botón secundario */
+.secondary-button {
+  --background: #FFFFFF;
+  --color: #060A30;
+  border: 2px solid #A90B71;
+  border-radius: 20px;
+  font-size: 16px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.secondary-button:hover {
+  --background: #A90B71;
+  --color: #FFFFFF;
+}
+
+/* Contenedor de botones */
 .button-container {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
+  margin-top: 20px;
 }
-  
-  img {
-    max-width: 100%;
-    margin-top: 10px;
-  }
 
-  .custom-icon {
-    font-size: 200px; 
-    margin-right: 8px; 
-  }
+/* Mensajes de error */
+ion-text[color="danger"] {
+  color: #f44336;
+  font-size: 14px;
+  margin-left: 5px;
+}
 
-  ion-item[color="danger"] {
-    background-color: #f8d7da; 
-    border-left: 4px solid #f44336; 
-    margin-top: 10px; 
-  }
-  
-  ion-item[color="danger"] ion-label {
-    color: #ffffff;  
-    font-size: 14px;  
-  }
+/* Ítem de advertencia */
+ion-item[color="danger"] {
+  background-color: #FDECEC;
+  border-left: 4px solid #f44336;
+  border-radius: 8px;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+ion-item[color="danger"] p {
+  color: #f44336;
+  margin: 0;
+}
+
+/* Estilo para los selectores */
+ion-select {
+  --placeholder-color: #B0B0B0;
+  --border-color: #A90B71;
+  --color: #060A30;
+  border-radius: 8px;
+  margin-left: 10px;
+}
+
+ion-select-option {
+  color: #060A30;
+}
+
+/* Botones de fecha (calendario) */
+ion-button[fill="clear"] {
+  --color: #A90B71;
+  font-size: 16px;
+}
+
+ion-icon[name="calendar-outline"] {
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+/* Divider entre secciones */
+.divider {
+  border-top: 1px solid #CCC;
+  margin: 20px 0;
+}
+
+/* Espaciado adicional en las etiquetas */
+ion-label {
+  font-size: 14px;
+  color: #060A30;
+  margin-bottom: 5px;
+}
+
+/* Estilo adicional para textos largos */
+ion-textarea {
+  --background: #FFFFFF;
+  --border-color: #A90B71;
+  --color: #060A30;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
