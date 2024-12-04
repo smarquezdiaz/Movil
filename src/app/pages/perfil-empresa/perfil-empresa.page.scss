@@ -1,5 +1,18 @@
-ion-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
+
+ion-card {
+  margin: 20px;
+  padding: 15px;
+  background-color: #1D133B;
+  color: white;
+}
+
+ion-card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+ion-button {
+  background-color: #EE40A1;
+  color: white;
+  margin-top: 15px;
 }
