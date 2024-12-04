@@ -1,17 +1,24 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
-import {IonicModule} from '@ionic/angular';
-import {RouterModule} from '@angular/router';
-import {PerfilEmpresaPage} from './perfil-empresa.page';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
+
+import { PerfilEmpresaPage } from './perfil-empresa.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild ([{ path: '',  component: PerfilEmpresaPage }]),
-    ],
-  declarations: [PerfilEmpresaPage],
+    RouterModule.forChild([
+      {
+        path: '',
+        component: PerfilEmpresaPage
+      }
+    ])
+  ],
+  declarations: [PerfilEmpresaPage]
 })
-  export class PerfilEmpresaPageModule {}
+export class PerfilEmpresaPageModule {}
+
