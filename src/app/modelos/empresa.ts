@@ -1,20 +1,15 @@
 export interface Empresa {
   id?: number;
   nombre: string;
-  ubicacion: string;
   imagen: string;
-  nit: string;
+  telefono: string;
+  email: string;
   usuario: string;
-  contrasenia: string;
-  rol?: string;
-  convocatoriaList: Convocatoria[];
-  confirmContrasenia?: string;
-  img?: any;
+  convocatorias?: Convocatoria [];
 }
 export interface Convocatoria {
-  id: string;
+  id: number;
   titulo: string;
-  descripcion: string;
-  fechaInicio: string;
-  fechaFin: string;
+  vigente: boolean;
+  fechaCreacion: string;
 }
