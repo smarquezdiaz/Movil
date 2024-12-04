@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Perfil de Empresa</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="empresa">
+    <img [src]="empresa.imagen" alt="Logo de la empresa" />
+    <ion-card-header>
+      <ion-card-title>{{ empresa.nombre }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Teléfono:</strong> {{ empresa.telefono }}</p>
+      <p><strong>Email:</strong> {{ empresa.email }}</p>
+      <p><strong>Usuario:</strong> {{ empresa.usuario }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Convocatorias Pasadas</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let convocatoria of convocatoriasPasadas">
+      <ion-label>
+        <h2>{{ convocatoria.titulo }}</h2>
+        <p>Creada: {{ convocatoria.fechaCreacion | date }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" (click)="actualizarDatos()">Guardar Cambios</ion-button>
+</ion-content>
