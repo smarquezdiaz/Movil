@@ -1,43 +1,56 @@
-import { Component, OnInit} from '@angular/core';
-import { EmpresaService} from ' ../../services/empresa.service';
-import { Empresa, Convocatoria} from '../../modelos/empresa';
+import { Component, OnInit } from '@angular/core';
+import { EmpresaService } from '../../services/empresa.service';
+import { Empresa } from '../../modelos/empresa';
+import { ActivatedRoute, Router } from '@angular/router';
 
-@Component ({
-  selector:'app-perfil-empresa',
+@Component({
+  selector: 'app-perfil-empresa',
   templateUrl: './perfil-empresa.page.html',
-  styleUrls: [' ./perfil-empresa.page.scss'],
+  styleUrls: ['./perfil-empresa.page.scss'],
 })
-  export class PerfilEmpresaPage implements OnInit {
-  empresa:Empresa | null= null;
-  convocatoriasPasadas: Convocatoria [] = [];
-  empresaId = 1;
-  constructor(private empresaService: EmpresaService) {}
+export class PerfilEmpresaPage implements OnInit {
+  empresa: Empresa | null = null;
+  idEmpresa: string | null = null;
+
+  constructor(
+    private empresaService: EmpresaService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {}
+
   ngOnInit() {
-    this.cargarDatosEmpresa();
+    this.idEmpresa = this.activatedRoute.snapshot.paramMap.get('id');
+
+    if (!this.idEmpresa) {
+      this.router.navigate(['/home']);
+      return;
+    }
+
+    this.loadEmpresa();
   }
 
-  cargarDatosEmpresa(){
-    this.empresaService.getEmpresaById(this.empresaId).subscribe((data) => {
-      this.empresa = data;
-      this.cargarConvocatoriasPasadas();
-  });
+  loadEmpresa() {
+    this.empresaService.getEmpresa(this.idEmpresa!).subscribe({
+      next: (data) => {
+        this.empresa = data;
+      },
+      error: (err) => {
+        console.error('Error al cargar la empresa:', err);
+      },
+    });
   }
 
-cargarConvocatoriasPasadas(){
-  this.empresaService.getConvocatorias(this.empresaId).subscribe((convocatorias) => {
-    this.convocatoriasPasadas = convocatorias.filter((c) => !c.vigente);
-  });
-}
-  actualizarDatos() {
-    if (this.empresa) {
-      this.empresaService.updateEmpresa(this.empresa.id, this.empresa).subscribe(
-        (response) => {
-          console.log(' Datos actualizados correctamente:', response);
+  saveChanges() {
+    if (this.empresa && this.idEmpresa) {
+      this.empresaService.updateEmpresa(this.idEmpresa, this.empresa).subscribe({
+        next: (data) => {
+          this.empresa = data;
+          console.log('Cambios guardados exitosamente');
         },
-        (error) => {
-          console.error('Error al actualizar los datos:', error);
-        }
-        );  
-    }
+        error: (err) => {
+          console.error('Error al guardar los cambios:', err);
+        },
+      });
     }
   }
+}
