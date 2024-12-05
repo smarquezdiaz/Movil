@@ -1,39 +1,75 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Perfil Empresa</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div *ngIf="empresa">
+  <!-- Estado de carga de los datos de la empresa -->
+  <ion-spinner *ngIf="loadingEmpresa" color="primary" class="center-spinner"></ion-spinner>
+  <div *ngIf="errorMessageEmpresa" class="error-message">
+    {{ errorMessageEmpresa }}
+  </div>
+
+  <!-- Datos de la empresa -->
+  <form *ngIf="empresa && !loadingEmpresa" (ngSubmit)="saveChanges()">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>{{ empresa.nombre }}</ion-card-title>
+        <ion-card-title>Información de la Empresa</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <!-- Mostrar la imagen de la empresa -->
-        <img [src]="empresa.logo" alt="Imagen de la empresa" />
-
-
-        <!-- Mostrar los detalles de la empresa -->
-        <p>{{ empresa.descripcion }}</p>
-        <p><strong>Nit:</strong> {{ empresa.nit }}</p>
-        <p><strong>Ubicación:</strong> {{ empresa.ubicacion }}</p>
-
-        <!-- Mostrar convocatorias -->
-        <ion-card *ngFor="let convocatoria of empresa.convocatoriaList">
-          <ion-card-header>
-            <ion-card-title>{{ convocatoria.titulo }}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p>{{ convocatoria.descripcion }}</p>
-            <p><strong>Fechas:</strong> {{ convocatoria.fechaInicio }} - {{ convocatoria.fechaFin }}</p>
-          </ion-card-content>
-        </ion-card>
-
-        <!-- Botón para guardar cambios -->
-        <ion-button (click)="saveChanges()">Guardar Cambios</ion-button>
+        <ion-item>
+          <ion-label position="stacked">Nombre</ion-label>
+          <ion-input [(ngModel)]="empresa.nombre" name="nombre"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Ubicación</ion-label>
+          <ion-input [(ngModel)]="empresa.ubicacion" name="ubicacion"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">NIT</ion-label>
+          <ion-input [(ngModel)]="empresa.nit" name="nit"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Usuario</ion-label>
+          <ion-input [(ngModel)]="empresa.usuario" name="usuario"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Contraseña</ion-label>
+          <ion-input [(ngModel)]="empresa.contrasenia" name="contrasenia" type="password"></ion-input>
+        </ion-item>
+        <ion-button expand="block" type="submit" color="primary">
+          Guardar Cambios
+        </ion-button>
       </ion-card-content>
     </ion-card>
+  </form>
+
+  <!-- Estado de carga de las convocatorias -->
+  <ion-spinner *ngIf="loadingConvocatorias" color="secondary" class="center-spinner"></ion-spinner>
+  <div *ngIf="errorMessageConvocatorias" class="error-message">
+    {{ errorMessageConvocatorias }}
   </div>
+
+  <!-- Convocatorias pasadas -->
+  <ion-card *ngIf="convocatoriasPasadas.length && !loadingConvocatorias">
+    <ion-card-header>
+      <ion-card-title>Convocatorias Pasadas</ion-card-title>
+    </ion-card-header>
+    <ion-list>
+      <ion-item *ngFor="let convocatoria of convocatoriasPasadas">
+        <ion-label>
+          <h2>{{ convocatoria.nombre }}</h2>
+          <p>Fecha de Fin: {{ convocatoria.fechaFin | date }}</p>
+          <p>Descripción: {{ convocatoria.descripcion }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>Empresas</ion-title>
+  </ion-toolbar>
+</ion-footer>
