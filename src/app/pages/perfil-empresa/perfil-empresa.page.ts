@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EmpresaService } from '../services/empresa.service';
-import { ConvocatoriaService } from '../services/convocatoria.service';
+import { EmpresaService } from '../services/empresa.service'; // Asegúrate de usar el servicio correcto
 
 @Component({
   selector: 'app-perfil-empresa',
@@ -19,29 +18,28 @@ export class PerfilEmpresaPage implements OnInit {
   convocatorias: any[] = [];
 
   constructor(
-    private empresaService: EmpresaService,
-    private convocatoriaService: ConvocatoriaService,
+    private empresaService: EmpresaService, // Usamos el servicio EmpresaService
     private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
     const idEmpresa = this.route.snapshot.paramMap.get('id');
     if (idEmpresa) {
-      this.getEmpresaDetails(Number(idEmpresa));
-      this.getConvocatoriasPasadas(Number(idEmpresa));
+      this.getEmpresaDetails(Number(idEmpresa));  // Usamos el método adecuado
+      this.getConvocatoriasPasadas(Number(idEmpresa));  // Usamos el método adecuado
     }
   }
 
   // Obtener los detalles de la empresa
   getEmpresaDetails(idEmpresa: number) {
-    this.empresaService.getEmpresa(idEmpresa).subscribe((data) => {
+    this.empresaService.obtenerEmpresa(idEmpresa).subscribe((data) => {  // Corregimos el nombre del método
       this.empresa = data;
     });
   }
 
   // Obtener convocatorias pasadas
   getConvocatoriasPasadas(idEmpresa: number) {
-    this.convocatoriaService.getConvocatoriasVigentes(idEmpresa, false).subscribe((data) => {
+    this.empresaService.obtenerConvocatoriasVigentes(idEmpresa, false).subscribe((data) => {  // Usamos el método de EmpresaService
       this.convocatorias = data;
     });
   }
@@ -49,7 +47,7 @@ export class PerfilEmpresaPage implements OnInit {
   // Actualizar los detalles de la empresa
   onUpdateEmpresa() {
     const idEmpresa = this.empresa.id;
-    this.empresaService.updateEmpresa(idEmpresa, this.empresa).subscribe({
+    this.empresaService.actualizarEmpresa(idEmpresa, this.empresa).subscribe({  // Corregimos el nombre del método
       next: (response) => {
         alert('Datos de la empresa actualizados exitosamente');
       },
