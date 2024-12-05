@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EmpresaService } from '../services/empresa.service'; // Asegúrate de usar el servicio correcto
+import { Empresa } from '../modelos/empresa'; // Cambié la importación de acuerdo a la carpeta "modelos"
+import { ConvocatoriaForTableDTO } from '../modelos/convocatoria'; // Cambié la importación de acuerdo a la carpeta "modelos"
 
 @Component({
   selector: 'app-perfil-empresa',
@@ -8,14 +10,14 @@ import { EmpresaService } from '../services/empresa.service'; // Asegúrate de u
   styleUrls: ['./perfil-empresa.page.scss'],
 })
 export class PerfilEmpresaPage implements OnInit {
-  empresa: any = {
+  empresa: Empresa = {  // Cambié la tipificación para que coincida con el modelo correcto
     nombre: '',
     ubicacion: '',
     imagen: '',
     nit: '',
     contrasenia: '',
   };
-  convocatorias: any[] = [];
+  convocatorias: ConvocatoriaForTableDTO[] = [];  // Cambié la tipificación para que coincida con el modelo correcto
 
   constructor(
     private empresaService: EmpresaService, // Usamos el servicio EmpresaService
