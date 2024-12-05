@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EmpresaService } from '../../services/empresa.service';
-import { Empresa } from '../../modelos/empresa';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { EmpresaService } from '../services/empresa.service';
+import { ConvocatoriaService } from '../services/convocatoria.service';
 
 @Component({
   selector: 'app-perfil-empresa',
@@ -9,76 +9,53 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./perfil-empresa.page.scss'],
 })
 export class PerfilEmpresaPage implements OnInit {
-  empresa: Empresa | null = null;
-  idEmpresa: number | null = null;
-  loadingEmpresa: boolean = false;
-  loadingConvocatorias: boolean = false;
-  errorMessageEmpresa: string = '';
-  errorMessageConvocatorias: string = '';
-  convocatoriasPasadas: any[] = [];
+  empresa: any = {
+    nombre: '',
+    ubicacion: '',
+    imagen: '',
+    nit: '',
+    contrasenia: '',
+  };
+  convocatorias: any[] = [];
 
   constructor(
     private empresaService: EmpresaService,
-    private activatedRoute: ActivatedRoute,
-    private router: Router
+    private convocatoriaService: ConvocatoriaService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    const idParam = this.activatedRoute.snapshot.paramMap.get('id');
-    this.idEmpresa = idParam ? +idParam : null;
-
-    if (!this.idEmpresa) {
-      this.router.navigate(['/home']);
-      return;
+    const idEmpresa = this.route.snapshot.paramMap.get('id');
+    if (idEmpresa) {
+      this.getEmpresaDetails(Number(idEmpresa));
+      this.getConvocatoriasPasadas(Number(idEmpresa));
     }
-
-    this.loadEmpresa();
-    this.loadConvocatoriasPasadas();
   }
 
-  loadEmpresa() {
-    this.loadingEmpresa = true;
-    this.errorMessageEmpresa = '';
-    this.empresaService.getEmpresa(this.idEmpresa!).subscribe({
-      next: (data) => {
-        this.empresa = data;
-        this.loadingEmpresa = false;
-      },
-      error: (err) => {
-        console.error('Error al cargar la empresa:', err);
-        this.errorMessageEmpresa = 'No se pudo cargar la información de la empresa.';
-        this.loadingEmpresa = false;
-      },
+  // Obtener los detalles de la empresa
+  getEmpresaDetails(idEmpresa: number) {
+    this.empresaService.getEmpresa(idEmpresa).subscribe((data) => {
+      this.empresa = data;
     });
   }
 
-  saveChanges() {
-    if (this.empresa && this.idEmpresa) {
-      this.errorMessageEmpresa = '';
-      this.empresaService.updateEmpresa(this.idEmpresa, this.empresa).subscribe({
-        next: () => {
-          console.log('Cambios guardados exitosamente');
-        },
-        error: (err) => {
-          console.error('Error al guardar los cambios:', err);
-          this.errorMessageEmpresa = 'No se pudieron guardar los cambios. Intenta nuevamente.';
-        },
-      });
-    }
+  // Obtener convocatorias pasadas
+  getConvocatoriasPasadas(idEmpresa: number) {
+    this.convocatoriaService.getConvocatoriasVigentes(idEmpresa, false).subscribe((data) => {
+      this.convocatorias = data;
+    });
   }
 
-  loadConvocatoriasPasadas() {
-    this.loadingConvocatorias = true;
-    this.errorMessageConvocatorias = '';
-    this.empresaService.getConvocatorias(this.idEmpresa!).subscribe({
-      next: (data) => {
-        this.convocatoriasPasadas = data.filter((convocatoria) => new Date(convocatoria.fechaFin) < new Date());
-        this.loadingConvocatorias = false;
+  // Actualizar los detalles de la empresa
+  onUpdateEmpresa() {
+    const idEmpresa = this.empresa.id;
+    this.empresaService.updateEmpresa(idEmpresa, this.empresa).subscribe({
+      next: (response) => {
+        alert('Datos de la empresa actualizados exitosamente');
       },
       error: (err) => {
-        console.error('Error al cargar las convocatorias pasadas:', err);
-        this.errorMessageConvocatorias = 'No se pudieron cargar las convocatorias.';
-        this.loadingConvocatorias = false;
+        console.error(err);
+        alert('Error al actualizar los datos');
       },
     });
   }

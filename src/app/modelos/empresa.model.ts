@@ -1,14 +1,3 @@
-
-export interface Empresa {
-  id: string;
-  nombre: string;
-  descripcion: string;
-  email: string;
-  telefono: string;
-  imagen: string;
-  convocatorias: Convocatoria[];
-}
-
 export interface Convocatoria {
   id: string;
   titulo: string;
@@ -16,3 +5,18 @@ export interface Convocatoria {
   fechaInicio: string;
   fechaFin: string;
 }
+
+export interface Empresa {
+  id: number;             
+  nombre: string;
+  ubicacion: string;
+  imagen: string;
+  nit: string;
+  createdAt: Date;
+  updatedAt: Date;
+  usuario: string;
+  contrasenia: string;
+  rol: string;
+  convocatoriaList: Convocatoria[];  
+}
+
