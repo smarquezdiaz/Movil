@@ -10,7 +10,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class PerfilEmpresaPage implements OnInit {
   empresa: Empresa | null = null;
-  idEmpresa: string | null = null;
+  idEmpresa: number | null = null;
+  loading: boolean = false; // Indicador de carga
+  errorMessage: string = ''; 
 
   constructor(
     private empresaService: EmpresaService,
@@ -19,7 +21,8 @@ export class PerfilEmpresaPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.idEmpresa = this.activatedRoute.snapshot.paramMap.get('id');
+    const idEmpresa = this.activatedRoute.snapshot.paramMap.get('id');
+    this.idEmpresa = idEmpresa ? +idEmpresa : null;
 
     if (!this.idEmpresa) {
       this.router.navigate(['/home']);
@@ -30,25 +33,31 @@ export class PerfilEmpresaPage implements OnInit {
   }
 
   loadEmpresa() {
+    this.loading = true; 
+    this.errorMessage = ''; 
     this.empresaService.getEmpresa(this.idEmpresa!).subscribe({
       next: (data) => {
         this.empresa = data;
+        this.loading = false; 
       },
       error: (err) => {
         console.error('Error al cargar la empresa:', err);
+        this.errorMessage = 'No se pudo cargar la información de la empresa. Intenta nuevamente.';
+        this.loading = false; 
       },
     });
   }
 
   saveChanges() {
     if (this.empresa && this.idEmpresa) {
+      this.errorMessage = ''; 
       this.empresaService.updateEmpresa(this.idEmpresa, this.empresa).subscribe({
-        next: (data) => {
-          this.empresa = data;
+        next: () => {
           console.log('Cambios guardados exitosamente');
         },
         error: (err) => {
           console.error('Error al guardar los cambios:', err);
+          this.errorMessage = 'No se pudieron guardar los cambios. Intenta nuevamente.';
         },
       });
     }
