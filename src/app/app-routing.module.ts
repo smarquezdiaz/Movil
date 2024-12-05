@@ -31,8 +31,16 @@ const routes: Routes = [
   },
  /* {
     path: 'perfil-empresa/:id',  
+<<<<<<< HEAD
     loadChildren: () => import('./pages/perfil-empresa/perfil-empresa.module').then(m => m.PerfilEmpresaPageModule)
   },  */
+=======
+    loadChildren: () => 
+      import('./pages/perfil-empresa/perfil-empresa.module').then(
+        (m) => m.PerfilEmpresaPageModule
+      )
+  }
+>>>>>>> Jhosy
 
 ];
 
@@ -42,4 +50,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
