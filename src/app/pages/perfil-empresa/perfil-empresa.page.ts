@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EmpresaService } from '../services/empresa.service'; // Asegúrate de usar el servicio correcto
-import { Empresa } from '../modelos/empresa'; // Cambié la importación de acuerdo a la carpeta "modelos"
-import { ConvocatoriaForTableDTO } from '../modelos/convocatoria'; // Cambié la importación de acuerdo a la carpeta "modelos"
+import { ConvocatoriaForTableDTO } from 'src/app/_DTO/convocatoriaForTableDTO';
+import { EmpresaDTO } from 'src/app/_DTO/empresaDTO';
+import { EmpresaService } from 'src/app/services/empresa.service';
 
 @Component({
   selector: 'app-perfil-empresa',
@@ -10,7 +10,8 @@ import { ConvocatoriaForTableDTO } from '../modelos/convocatoria'; // Cambié la
   styleUrls: ['./perfil-empresa.page.scss'],
 })
 export class PerfilEmpresaPage implements OnInit {
-  empresa: Empresa = {  // Cambié la tipificación para que coincida con el modelo correcto
+  empresa = {  // Cambié la tipificación para que coincida con el modelo correcto
+    id:'',
     nombre: '',
     ubicacion: '',
     imagen: '',
@@ -34,22 +35,25 @@ export class PerfilEmpresaPage implements OnInit {
 
   // Obtener los detalles de la empresa
   getEmpresaDetails(idEmpresa: number) {
-    this.empresaService.obtenerEmpresa(idEmpresa).subscribe((data) => {  // Corregimos el nombre del método
+    this.empresaService.getEmpresa(idEmpresa).subscribe((data) => {  // Corregimos el nombre del método
       this.empresa = data;
     });
   }
 
   // Obtener convocatorias pasadas
   getConvocatoriasPasadas(idEmpresa: number) {
-    this.empresaService.obtenerConvocatoriasVigentes(idEmpresa, false).subscribe((data) => {  // Usamos el método de EmpresaService
+    this.empresaService.getConvocatoriasVigentes(idEmpresa, false).subscribe((data) => {  // Usamos el método de EmpresaService
       this.convocatorias = data;
     });
   }
 
   // Actualizar los detalles de la empresa
   onUpdateEmpresa() {
-    const idEmpresa = this.empresa.id;
-    this.empresaService.actualizarEmpresa(idEmpresa, this.empresa).subscribe({  // Corregimos el nombre del método
+    let nuevoDTO  = new EmpresaDTO();
+    nuevoDTO.id = parseInt(this.empresa.id);
+    nuevoDTO.imagen = this.empresa.imagen;
+
+    this.empresaService.updateEmpresa(parseInt(this.empresa.id), nuevoDTO).subscribe({  // Corregimos el nombre del método
       next: (response) => {
         alert('Datos de la empresa actualizados exitosamente');
       },
