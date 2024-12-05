@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EmpresaService } from '../../services/empresa.service';
-import { ConvocatoriaService } from '../../services/convocatoria.service';
-import { EmpresaDTO } from '../../models/empresa.dto';
-import { ConvocatoriaForTableDTO } from '../../models/convocatoria.dto';
+import { ActivatedRoute } from '@angular/router';
+import { EmpresaService } from '../services/empresa.service';
+import { ConvocatoriaService } from '../services/convocatoria.service';
 
 @Component({
   selector: 'app-perfil-empresa',
@@ -10,29 +9,54 @@ import { ConvocatoriaForTableDTO } from '../../models/convocatoria.dto';
   styleUrls: ['./perfil-empresa.page.scss'],
 })
 export class PerfilEmpresaPage implements OnInit {
-  empresa: EmpresaDTO | null = null;
-  convocatorias: ConvocatoriaForTableDTO[] = [];
+  empresa: any = {
+    nombre: '',
+    ubicacion: '',
+    imagen: '',
+    nit: '',
+    contrasenia: '',
+  };
+  convocatorias: any[] = [];
 
   constructor(
     private empresaService: EmpresaService,
-    private convocatoriaService: ConvocatoriaService
+    private convocatoriaService: ConvocatoriaService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    const empresaId = 1; 
-    this.obtenerPerfilEmpresa(empresaId);
-    this.obtenerConvocatorias(empresaId);
+    const idEmpresa = this.route.snapshot.paramMap.get('id');
+    if (idEmpresa) {
+      this.getEmpresaDetails(Number(idEmpresa));
+      this.getConvocatoriasPasadas(Number(idEmpresa));
+    }
   }
 
-  obtenerPerfilEmpresa(id: number) {
-    this.empresaService.obtenerEmpresa(id).subscribe((empresa) => {
-      this.empresa = empresa;
+  // Obtener los detalles de la empresa
+  getEmpresaDetails(idEmpresa: number) {
+    this.empresaService.getEmpresa(idEmpresa).subscribe((data) => {
+      this.empresa = data;
     });
   }
 
-  obtenerConvocatorias(id: number) {
-    this.convocatoriaService.obtenerConvocatoriasDeEmpresa(id).subscribe((convocatorias) => {
-      this.convocatorias = convocatorias;
+  // Obtener convocatorias pasadas
+  getConvocatoriasPasadas(idEmpresa: number) {
+    this.convocatoriaService.getConvocatoriasVigentes(idEmpresa, false).subscribe((data) => {
+      this.convocatorias = data;
+    });
+  }
+
+  // Actualizar los detalles de la empresa
+  onUpdateEmpresa() {
+    const idEmpresa = this.empresa.id;
+    this.empresaService.updateEmpresa(idEmpresa, this.empresa).subscribe({
+      next: (response) => {
+        alert('Datos de la empresa actualizados exitosamente');
+      },
+      error: (err) => {
+        console.error(err);
+        alert('Error al actualizar los datos');
+      },
     });
   }
 }
