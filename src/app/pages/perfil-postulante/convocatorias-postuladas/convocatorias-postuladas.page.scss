@@ -1,59 +1,49 @@
-// Variables de colores
-$primary-color: #3880ff; 
-$secondary-color: #ff5c8e; 
-$neutral-color: #f4f5f8; 
-$light-text-color: #777; 
-$background-color: #f9f9f9; 
-$border-radius: 16px; 
-$box-shadow: rgba(0, 0, 0, 0.1); 
+$primary-color: #3880ff;
+$secondary-color: #ff5c8e;
+$neutral-color: #f4f5f8;
+$light-text-color: #777;
+$background-color: #f9f9f9;
+$border-radius: 12px;
 
-// Contenedor principal
 .title-container {
-  padding: 25px;
+  padding: 20px;
   background-color: $background-color;
-  border-radius: $border-radius;
-  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
 }
 
 .titles-container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
-// Botones
 ion-button {
   font-weight: bold;
   font-size: 14px;
-  padding: 12px 24px;
+  padding: 10px 20px;
   border-radius: $border-radius;
   text-transform: uppercase;
   transition: all 0.3s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .second-button {
   background-color: $primary-color;
   color: white;
-  border: none;
 }
 
 .small-button {
   background-color: $secondary-color;
   color: white;
-  border: none;
 }
 
-.second-button:hover,
-.small-button:hover {
+.small-button:hover,
+.second-button:hover {
   transform: scale(1.05);
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-// Tarjetas
+ion-grid {
+  margin-top: 20px;
+}
+
 ion-card {
   border-radius: $border-radius;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
@@ -63,32 +53,30 @@ ion-card {
 }
 
 ion-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
+  transform: scale(1.02);
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 ion-card-header {
   background-color: $primary-color;
   color: white;
-  padding: 20px;
+  padding: 15px;
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;
 }
 
 ion-card-title {
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 ion-card-content {
-  padding: 20px;
-  font-size: 14px;
-  color: $light-text-color;
+  padding: 15px;
 }
 
 ion-img {
   max-width: 100%;
-  border-radius: $border-radius;
+  border-radius: 10px;
   margin-bottom: 15px;
 }
 
@@ -102,28 +90,18 @@ strong {
   color: $primary-color;
 }
 
-// Formularios
-ion-input,
-ion-textarea {
-  margin-bottom: 20px;
-  padding: 12px;
-  border-radius: $border-radius;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  transition: border-color 0.3s ease;
+ion-button {
+  margin-top: 10px;
+  font-size: 14px;
+  padding: 8px 16px;
+  text-transform: uppercase;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
 }
 
-ion-input:focus,
-ion-textarea:focus {
-  border-color: $primary-color;
-}
-
-// Estilos adicionales para el ícono del botón
 ion-button ion-icon {
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
-// Espaciado y diseño de la cuadrícula
-ion-grid {
-  margin-top: 20px;
-}
+
