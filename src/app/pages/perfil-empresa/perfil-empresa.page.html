@@ -4,23 +4,64 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div *ngIf="empresa">
-    <h2>{{ empresa.nombre }}</h2>
-    <img [src]="empresa.imagen" alt="Imagen de la empresa" />
-    <p><strong>Ubicación:</strong> {{ empresa.ubicacion }}</p>
-    <p><strong>NIT:</strong> {{ empresa.nit }}</p>
-    <p><strong>Usuario:</strong> {{ empresa.usuario }}</p>
+<ion-content class="ion-padding">
+  <form (ngSubmit)="onUpdateEmpresa()" #empresaForm="ngForm">
 
-    <ion-button routerLink="/editar-empresa/{{ empresa.id }}">Editar Empresa</ion-button>
-  </div>
+    <!-- Datos de la Empresa -->
+    <ion-card>
+      <ion-img [src]="empresa.imagen" alt="Imagen de la Empresa"></ion-img>
+      <ion-card-header>
+        <ion-card-title>{{ empresa.nombre }}</ion-card-title>
+        <ion-card-subtitle>{{ empresa.ubicacion }}</ion-card-subtitle>
+      </ion-card-header>
 
-  <div *ngIf="convocatorias.length > 0">
-    <h3>Convocatorias</h3>
-    <ion-list>
-      <ion-item *ngFor="let convocatoria of convocatorias">
-        <ion-label>{{ convocatoria.titulo }}</ion-label>
-      </ion-item>
-    </ion-list>
-  </div>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input [(ngModel)]="empresa.nombre" name="nombre" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Ubicación</ion-label>
+          <ion-input [(ngModel)]="empresa.ubicacion" name="ubicacion" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Imagen</ion-label>
+          <ion-input [(ngModel)]="empresa.imagen" name="imagen"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">NIT</ion-label>
+          <ion-input [(ngModel)]="empresa.nit" name="nit" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" [(ngModel)]="empresa.contrasenia" name="contrasenia"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-button expand="full" type="submit" [disabled]="!empresaForm.form.valid">Actualizar</ion-button>
+  </form>
+
+  <!-- Convocatorias Pasadas -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Convocatorias Pasadas</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let convocatoria of convocatorias">
+          <ion-label>
+            <h2>{{ convocatoria.titulo }}</h2>
+            <p>{{ convocatoria.descripcion }}</p>
+            <p><strong>Fecha de cierre:</strong> {{ convocatoria.fechaCierre | date }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
