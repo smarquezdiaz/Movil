@@ -16,7 +16,10 @@ export class PerfilEmpresaPage implements OnInit {
     ubicacion: '',
     imagen: '',
     nit: '',
+    usuario: '',
     contrasenia: '',
+    rol: '',
+
   };
   convocatorias: ConvocatoriaForTableDTO[] = [];  // Cambié la tipificación para que coincida con el modelo correcto
 
@@ -36,7 +39,7 @@ export class PerfilEmpresaPage implements OnInit {
   // Obtener los detalles de la empresa
   getEmpresaDetails(idEmpresa: number) {
     this.empresaService.getEmpresa(idEmpresa).subscribe((data) => {  // Corregimos el nombre del método
-      this.empresa = data;
+    this.empresa = data;
     });
   }
 
@@ -50,8 +53,14 @@ export class PerfilEmpresaPage implements OnInit {
   // Actualizar los detalles de la empresa
   onUpdateEmpresa() {
     let nuevoDTO  = new EmpresaDTO();
-    nuevoDTO.id = parseInt(this.empresa.id);
+    nuevoDTO.id = this.empresa.id;
     nuevoDTO.imagen = this.empresa.imagen;
+    nuevoDTO.ubicacion = this.empresa.ubicacion;
+    nuevoDTO.contrasenia = this.empresa.contrasenia;
+    nuevoDTO.nit = this.empresa.nit;
+    nuevoDTO.rol = this.empresa.rol;
+    nuevoDTO.usuario = this.empresa.usuario;
+    nuevoDTO.nombre = this.empresa.nombre;
 
     this.empresaService.updateEmpresa(parseInt(this.empresa.id), nuevoDTO).subscribe({  // Corregimos el nombre del método
       next: (response) => {
