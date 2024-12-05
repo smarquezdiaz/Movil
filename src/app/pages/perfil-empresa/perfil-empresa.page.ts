@@ -11,8 +11,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class PerfilEmpresaPage implements OnInit {
   empresa: Empresa | null = null;
   idEmpresa: number | null = null;
-  loading: boolean = false;
-  errorMessage: string = '';
+  loadingEmpresa: boolean = false;
+  loadingConvocatorias: boolean = false;
+  errorMessageEmpresa: string = '';
+  errorMessageConvocatorias: string = '';
   convocatoriasPasadas: any[] = [];
 
   constructor(
@@ -22,8 +24,8 @@ export class PerfilEmpresaPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    const idEmpresa = +this.activatedRoute.snapshot.paramMap.get('id');
-    this.idEmpresa = idEmpresa ? +idEmpresa : null;
+    const idParam = this.activatedRoute.snapshot.paramMap.get('id');
+    this.idEmpresa = idParam ? +idParam : null;
 
     if (!this.idEmpresa) {
       this.router.navigate(['/home']);
@@ -35,47 +37,48 @@ export class PerfilEmpresaPage implements OnInit {
   }
 
   loadEmpresa() {
-    this.loading = true;
-    this.errorMessage = '';
+    this.loadingEmpresa = true;
+    this.errorMessageEmpresa = '';
     this.empresaService.getEmpresa(this.idEmpresa!).subscribe({
       next: (data) => {
         this.empresa = data;
-        this.loading = false;
+        this.loadingEmpresa = false;
       },
       error: (err) => {
         console.error('Error al cargar la empresa:', err);
-        this.errorMessage = 'No se pudo cargar la información de la empresa.';
-        this.loading = false;
+        this.errorMessageEmpresa = 'No se pudo cargar la información de la empresa.';
+        this.loadingEmpresa = false;
       },
     });
   }
 
   saveChanges() {
     if (this.empresa && this.idEmpresa) {
-      this.errorMessage = '';
+      this.errorMessageEmpresa = '';
       this.empresaService.updateEmpresa(this.idEmpresa, this.empresa).subscribe({
         next: () => {
           console.log('Cambios guardados exitosamente');
         },
         error: (err) => {
           console.error('Error al guardar los cambios:', err);
-          this.errorMessage = 'No se pudieron guardar los cambios. Intenta nuevamente.';
+          this.errorMessageEmpresa = 'No se pudieron guardar los cambios. Intenta nuevamente.';
         },
       });
     }
   }
 
   loadConvocatoriasPasadas() {
-    this.loading = true;
+    this.loadingConvocatorias = true;
+    this.errorMessageConvocatorias = '';
     this.empresaService.getConvocatorias(this.idEmpresa!).subscribe({
       next: (data) => {
         this.convocatoriasPasadas = data.filter((convocatoria) => new Date(convocatoria.fechaFin) < new Date());
-        this.loading = false;
+        this.loadingConvocatorias = false;
       },
       error: (err) => {
         console.error('Error al cargar las convocatorias pasadas:', err);
-        this.errorMessage = 'No se pudieron cargar las convocatorias.';
-        this.loading = false;
+        this.errorMessageConvocatorias = 'No se pudieron cargar las convocatorias.';
+        this.loadingConvocatorias = false;
       },
     });
   }
