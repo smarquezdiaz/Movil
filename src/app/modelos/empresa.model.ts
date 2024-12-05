@@ -5,7 +5,7 @@ export interface Empresa {
   descripcion: string;
   email: string;
   telefono: string;
-  logo: string;
+  imagen: string;
   convocatorias: Convocatoria[];
 }
 
