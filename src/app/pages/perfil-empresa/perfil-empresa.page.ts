@@ -11,8 +11,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class PerfilEmpresaPage implements OnInit {
   empresa: Empresa | null = null;
   idEmpresa: number | null = null;
-  loading: boolean = false; // Indicador de carga
-  errorMessage: string = ''; 
+  loading: boolean = false;
+  errorMessage: string = '';
+  convocatoriasPasadas: any[] = [];
 
   constructor(
     private empresaService: EmpresaService,
@@ -21,7 +22,7 @@ export class PerfilEmpresaPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    const idEmpresa = this.activatedRoute.snapshot.paramMap.get('id');
+    const idEmpresa = +this.activatedRoute.snapshot.paramMap.get('id');
     this.idEmpresa = idEmpresa ? +idEmpresa : null;
 
     if (!this.idEmpresa) {
@@ -30,27 +31,28 @@ export class PerfilEmpresaPage implements OnInit {
     }
 
     this.loadEmpresa();
+    this.loadConvocatoriasPasadas();
   }
 
   loadEmpresa() {
-    this.loading = true; 
-    this.errorMessage = ''; 
+    this.loading = true;
+    this.errorMessage = '';
     this.empresaService.getEmpresa(this.idEmpresa!).subscribe({
       next: (data) => {
         this.empresa = data;
-        this.loading = false; 
+        this.loading = false;
       },
       error: (err) => {
         console.error('Error al cargar la empresa:', err);
-        this.errorMessage = 'No se pudo cargar la información de la empresa. Intenta nuevamente.';
-        this.loading = false; 
+        this.errorMessage = 'No se pudo cargar la información de la empresa.';
+        this.loading = false;
       },
     });
   }
 
   saveChanges() {
     if (this.empresa && this.idEmpresa) {
-      this.errorMessage = ''; 
+      this.errorMessage = '';
       this.empresaService.updateEmpresa(this.idEmpresa, this.empresa).subscribe({
         next: () => {
           console.log('Cambios guardados exitosamente');
@@ -61,5 +63,20 @@ export class PerfilEmpresaPage implements OnInit {
         },
       });
     }
+  }
+
+  loadConvocatoriasPasadas() {
+    this.loading = true;
+    this.empresaService.getConvocatorias(this.idEmpresa!).subscribe({
+      next: (data) => {
+        this.convocatoriasPasadas = data.filter((convocatoria) => new Date(convocatoria.fechaFin) < new Date());
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Error al cargar las convocatorias pasadas:', err);
+        this.errorMessage = 'No se pudieron cargar las convocatorias.';
+        this.loading = false;
+      },
+    });
   }
 }
