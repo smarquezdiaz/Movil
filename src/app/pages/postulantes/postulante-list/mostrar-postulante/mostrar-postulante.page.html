@@ -1,6 +1,12 @@
 <app-header backButton="/home" logged="true"></app-header>
 
 <ion-content>
+  <div *ngIf="isPostulating" class="loading-overlay">
+    <div class="spinner-container">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Enviando correo...</p>
+    </div>
+  </div>
   <div *ngIf="postulante" class="mostrar-postulante">
     <div class="title-container">
       <h1 class="titulo">{{ postulante.nombre }} {{ postulante.apellido }}</h1>
@@ -48,8 +54,8 @@
     </div>
   </div>
 
-  <div class="button-container">
-    <ion-button class="main-button" routerLink="/home">Cancelar</ion-button>
-    <ion-button class="secondary-button" (click)="cambiarEstado()" >Cambiar Estado</ion-button>
+  <div class="button-container" *ngIf="!userConvocatoria?.aceptado">
+    <ion-button class="main-button" [disabled]="isPostulating" (click)="cambiarEstado(false)">Rechazar</ion-button>
+    <ion-button class="secondary-button" [disabled]="isPostulating" (click)="cambiarEstado(true)" >Aceptar</ion-button>
   </div>
 </ion-content>

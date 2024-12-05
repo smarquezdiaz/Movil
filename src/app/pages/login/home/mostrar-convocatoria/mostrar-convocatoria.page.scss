@@ -1,31 +1,110 @@
 .container-mostrar-convocatoria {
-    padding: 20px;
-    height: 100%;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 850px;
+  margin: 20px auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
-.container-mostrar-convocatoria h1{
-    font-size: 20px !important;
+
+.container-mostrar-convocatoria h1 {
+  font-size: 1.8rem;
+  color: #060A30;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
 }
-.container-mostrar-convocatoria p{
-    font-size: 20px;
+
+.container-mostrar-convocatoria .image-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
-.container-mostrar-convocatoria img{
-    width: 70%;
-    height: 70%;
+
+.container-mostrar-convocatoria .image-container img {
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.container-mostrar-convocatoria hr.divider-thin {
+  border: 1px solid #ddd;
+  margin: 20px 0;
+}
+
+.container-mostrar-convocatoria p {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.container-mostrar-convocatoria .ion-icon {
+  font-size: 1.2rem;
+  color: #060A30;
+  margin-right: 10px;
+}
+
+.container-mostrar-convocatoria div[fxLayout="row"] p {
+  font-size: 1rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Estilo del botón de "Ver Postulantes" */
+.container-mostrar-convocatoria ion-button {
+  --background: #A90B71;
+  --color: white;
+  --border-radius: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 12px 25px;
+  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.container-mostrar-convocatoria ion-button:hover {
+  background-color: #8c085e;
+  transform: translateY(-4px);
+}
+
+.container-mostrar-convocatoria ion-button:active {
+  background-color: #A90B71;
+  transform: translateY(1px);
+}
+
+/* Estilo responsive para pantallas pequeñas */
+@media (max-width: 600px) {
+
+  .container-mostrar-convocatoria {
+    padding: 15px;
     margin: 10px;
-}
-.container-mostrar-convocatoria ion-icon{
-    font-size: 20px;
-    color: #060A30;
-}
-.container-mostrar-convocatoria ion-buttons{
-    height: 15%;                 
-}
-.container-mostrar-convocatoria ion-button{
-    --background: #060A30; 
-    --color: white;  
-    --border-radius: 15px;
-    --padding-top: 15px;
-    --padding-bottom: 15px;               
+  }
+
+  .container-mostrar-convocatoria h1 {
+    font-size: 1.6rem;
+  }
+
+  .container-mostrar-convocatoria .image-container img {
+    max-width: 90%;
+    max-height: 250px;
+  }
+
+  .container-mostrar-convocatoria p {
+    font-size: 0.9rem;
+  }
+
+  .container-mostrar-convocatoria div[fxLayout="row"] p {
+    font-size: 0.9rem;
+  }
 }
 
 

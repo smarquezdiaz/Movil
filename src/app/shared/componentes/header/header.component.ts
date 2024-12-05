@@ -21,6 +21,7 @@ export class HeaderComponent  implements OnInit {
 
   signUp () {
     this.utilsService.deleteLocalStorage('userId');
+    this.utilsService.deleteLocalStorage('rol');
     this.router.navigate(['/login']);
   }
 

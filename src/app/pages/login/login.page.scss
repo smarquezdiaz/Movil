@@ -1,9 +1,157 @@
+/* Fondo estático con degradado de tonos azules */
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #0e1239, #060A30); 
+  padding: 20px; 
+}
+
+/* Estilo para el contenedor del formulario */
 .login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px; 
+  background-color: #ffffff; 
+  border-radius: 12px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
-.login-container p {
-    margin-top: 5%;
+
+/* Cabecera del card */
+ion-card-header {
+  text-align: center;
+  margin-bottom: 20px;
 }
+
+ion-card-title {
+  color: #060A30;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Inputs */
+ion-input {
+  width: 100%;
+  margin-bottom: 1rem; 
+}
+
+ion-input::part(native) {
+  border-radius: 10px;
+  background-color: #f7f7f7; 
+}
+
+ion-select {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+ion-select::part(native) {
+  border-radius: 10px;
+  background-color: #f7f7f7; 
+}
+
+/* Estilo para el botón INGRESAR */
+.main-button {
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #A90B71;
+  color: white;
+  border-radius: 10px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.main-button ion-label {
+  text-align: center; 
+}
+
+.main-button:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); 
+}
+
+.main-button:active {
+  transform: translateY(2px); 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Botones de tipo de usuario (EMPRESA y POSTULANTE) */
+ion-button {
+  width: 48%;
+  height: 50px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0 1%; 
+  border-radius: 10px;
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+}
+
+ion-button:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); 
+  background-color: #A90B71; 
+}
+
+ion-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+ion-button.empresa {
+  background-color: #A90B71; 
+  color: white;
+}
+
+ion-button.postulante {
+  background-color: #060A30; 
+  color: white;
+}
+
+
+p {
+  text-align: center;
+  margin-top: 15px;
+}
+
+a {
+  color: #A90B71;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+
+@media (max-width: 600px) {
+  .login-container {
+    padding: 1.5rem;
+    margin: 1rem;
+    width: 90%; 
+  }
+
+  ion-card-title {
+    font-size: 1.2rem;
+  }
+
+  .main-button {
+    width: 100%;
+    font-size: 1rem; 
+  }
+
+  ion-button {
+    width: 100%;
+    margin: 0;
+  }
+}
+
