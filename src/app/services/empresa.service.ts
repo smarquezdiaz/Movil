@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { EmpresaDTO } from '../_DTO/empresaDTO';
 import { ConvocatoriaForTableDTO } from '../_DTO/convocatoriaForTableDTO';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -52,13 +53,21 @@ export class EmpresaService {
     return this.http.get<ConvocatoriaForTableDTO[]>(`${this.baseUrl}/${id}/convocatoriasVigentes?esVigente=${esVigente}`);
   }
 
+  // Obtener las convocatorias por empresa (Método adicional)
+  obtenerConvocatoriasPorEmpresa(idEmpresa: number): Observable<ConvocatoriaForTableDTO[]> {
+    return this.http.get<ConvocatoriaForTableDTO[]>(`${this.baseUrl}/${idEmpresa}/convocatorias`);
+  }
+
+  // Obtener convocatorias filtradas de la empresa (Método adicional)
+  obtenerConvocatoriasFiltradas(idEmpresa: number, activo: boolean): Observable<ConvocatoriaForTableDTO[]> {
+    return this.http.get<ConvocatoriaForTableDTO[]>(`${this.baseUrl}/${idEmpresa}/convocatoriasFiltradas?activo=${activo}`);
+  }
+
   // Realizar login de la empresa
   loginEmpresa(empresa: EmpresaDTO): Observable<number> {
     return this.http.post<number>(`${this.baseUrl}/login`, empresa);
  
   }
-
- */ 
-
+*/
 
 }
