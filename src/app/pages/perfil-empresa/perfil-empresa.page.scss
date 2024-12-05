@@ -1,74 +1,22 @@
-:root {
-  --primary-color: #060A30;
-  --secondary-color: #1D133B;
-  --accent-color: #A90B71;
-  --background-color: #0E1239;
-  --error-color: #EE40A1;
+ion-content {
+  padding: 16px;
 }
 
-ion-header,
-ion-footer {
-  background-color: var(--primary-color);
-  color: white;
-}
-
-ion-title {
-  color: white;
-}
-
-.center-spinner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.error-message {
-  color: var(--error-color);
-  text-align: center;
-  margin: 10px 0;
-  font-weight: bold;
-}
-
-ion-card {
-  background-color: var(--background-color);
-  color: white;
-  border: 1px solid var(--secondary-color);
-}
-
-ion-card-header {
-  background-color: var(--secondary-color);
-  color: white;
-}
-
-ion-button {
-  --background: var(--accent-color);
-  --background-hover: var(--error-color);
-  color: white;
-}
-
-ion-item {
-  --background: transparent;
-  color: white;
-  border: 1px solid var(--secondary-color);
-  border-radius: 5px;
+h2 {
+  font-size: 24px;
   margin-bottom: 10px;
 }
 
-ion-input {
-  color: white;
+img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
 }
 
-ion-list ion-item {
-  --background: transparent;
-  color: white;
-  margin-bottom: 5px;
+p {
+  font-size: 16px;
 }
 
-ion-label h2 {
-  color: var(--accent-color);
-}
-
-ion-label p {
-  color: white;
+ion-button {
+  margin-top: 20px;
 }
