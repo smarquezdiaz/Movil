@@ -21,7 +21,7 @@
       </div>
       <ion-label>Carrera*</ion-label>
       <ion-input formControlName="carrera" class="generic-input" label-placement="stacked" fill="outline"
-        placeholder="ingrese su carrera" maxlength="12"></ion-input>
+        placeholder="ingrese su carrera" maxlength="100"></ion-input>
       <div *ngIf="form.get('carrera')?.errors && (form.get('carrera')?.dirty || form.get('carrera')?.touched)">
         <p *ngIf="form.get('carrera')?.hasError('required')">
           <ion-text color="danger">Campo obligatorio</ion-text>
