@@ -3,23 +3,20 @@
 
   <div class="title-container">
 
-    <ion-grid>
+    <ion-grid *ngIf="convocatorias.length > 0">
       <ion-row>
         <ion-col size="12" size-md="6" size-lg="4" *ngFor="let convocatoria of convocatorias">
           <ion-card class="convocatoria-card">
             <ion-card-header>
-              <ion-card-title>{{ convocatoria.titulo }}</ion-card-title>
+              <ion-card-title>{{ convocatoria.convocatoria.titulo }}</ion-card-title>
             </ion-card-header>
 
             <ion-card-content>
-              <ion-img [src]="convocatoria.miniatura" alt="miniatura convocatoria"></ion-img>
-              <p>{{ convocatoria.descripcion }}</p>
-              <p><strong>Fecha Inicio:</strong> {{ convocatoria.fechaInicio }}</p>
-              <p><strong>Fecha Fin:</strong> {{ convocatoria.fechaFin }}</p>
-              <ion-button color="primary">
-                Ver Detalles
-                <ion-icon name="chevron-forward-outline"></ion-icon>
-              </ion-button>
+              <!-- <ion-img *ngIf="convocatoria.convocatoria.imagenUrl" [src]="convocatoria.convocatoria.imagenUrl" alt="miniatura convocatoria"></ion-img> -->
+              <p>{{ convocatoria.convocatoria.descripcion }}</p>
+              <p><strong>Fecha Inicio:</strong> {{ convocatoria.convocatoria.fechaInicio | date: 'dd/MM/yyyy' }}</p>
+              <p><strong>Fecha Fin:</strong> {{ convocatoria.convocatoria.fechaFin | date: 'dd/MM/yyyy' }}</p>
+              <p><strong>Estado de postulacion: </strong>{{ convocatoria.aceptado ? 'Aceptado' : 'No aceptado' }}</p>
             </ion-card-content>
           </ion-card>
         </ion-col>
