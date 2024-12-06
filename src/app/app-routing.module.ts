@@ -29,9 +29,8 @@ const routes: Routes = [
     path: 'perfil-postulante',
     loadChildren: () => import('./pages/perfil-postulante/perfil-postulante.module').then( m => m.PerfilPostulantePageModule)
   },
-  
-  {
-    path: 'perfil-empresa/:id',  
+{
+    path: 'perfil-empresa',  
     loadChildren: () => 
       import('./pages/perfil-empresa/perfil-empresa.module').then(
         (m) => m.PerfilEmpresaPageModule
