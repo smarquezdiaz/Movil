@@ -10,16 +10,13 @@ import { EmpresaService } from 'src/app/services/empresa.service';
   styleUrls: ['./perfil-empresa.page.scss'],
 })
 export class PerfilEmpresaPage implements OnInit {
-  empresa = {  // Cambié la tipificación para que coincida con el modelo correcto
-    id:'',
+  empresa: any = {
+    id:'',  // Cambié la tipificación para que coincida con el modelo correcto
     nombre: '',
     ubicacion: '',
     imagen: '',
     nit: '',
-    usuario: '',
     contrasenia: '',
-    rol: '',
-
   };
   convocatorias: ConvocatoriaForTableDTO[] = [];  // Cambié la tipificación para que coincida con el modelo correcto
 
@@ -29,7 +26,7 @@ export class PerfilEmpresaPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    const idEmpresa = this.route.snapshot.paramMap.get('id');
+    const idEmpresa = localStorage.getItem('userId');
     if (idEmpresa) {
       this.getEmpresaDetails(Number(idEmpresa));  // Usamos el método adecuado
       this.getConvocatoriasPasadas(Number(idEmpresa));  // Usamos el método adecuado
@@ -38,8 +35,8 @@ export class PerfilEmpresaPage implements OnInit {
 
   // Obtener los detalles de la empresa
   getEmpresaDetails(idEmpresa: number) {
-    this.empresaService.getEmpresa(idEmpresa).subscribe((data) => {  // Corregimos el nombre del método
-    this.empresa = data;
+    this.empresaService.getEmpresa(idEmpresa).subscribe((data:any) => {  // Corregimos el nombre del método
+      this.empresa = data;
     });
   }
 
@@ -53,17 +50,12 @@ export class PerfilEmpresaPage implements OnInit {
   // Actualizar los detalles de la empresa
   onUpdateEmpresa() {
     let nuevoDTO  = new EmpresaDTO();
-    nuevoDTO.id = this.empresa.id;
-    nuevoDTO.imagen = this.empresa.imagen;
-    nuevoDTO.ubicacion = this.empresa.ubicacion;
-    nuevoDTO.contrasenia = this.empresa.contrasenia;
-    nuevoDTO.nit = this.empresa.nit;
-    nuevoDTO.rol = this.empresa.rol;
-    nuevoDTO.usuario = this.empresa.usuario;
-    nuevoDTO.nombre = this.empresa.nombre;
+    nuevoDTO = {
+      ...this.empresa
+    }
 
     this.empresaService.updateEmpresa(parseInt(this.empresa.id), nuevoDTO).subscribe({  // Corregimos el nombre del método
-      next: (response) => {
+      next: (response:any) => {
         alert('Datos de la empresa actualizados exitosamente');
       },
       error: (err) => {
@@ -73,3 +65,4 @@ export class PerfilEmpresaPage implements OnInit {
     });
   }
 }
+

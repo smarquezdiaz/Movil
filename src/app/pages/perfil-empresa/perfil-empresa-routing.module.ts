@@ -1,9 +1,7 @@
 // perfil-empresa-routing.module.ts
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { PerfilEmpresaPage } from './perfil-empresa.page'; 
-
+import { PerfilEmpresaPage } from './perfil-empresa.page'; // Asegúrate de importar correctamente tu página
 
 const routes: Routes = [
   {
@@ -17,3 +15,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class PerfilEmpresaRoutingModule {}
+
