@@ -37,7 +37,7 @@ export class EmpresaService {
 
   // Actualizar los datos de la empresa
   updateEmpresa(idEmpresa: number, empresaDTO: EmpresaDTO): Observable<any> {
-    return this.http.patch(`${this.baseUrl}/${idEmpresa}`, empresaDTO);
+    return this.http.put(`${this.baseUrl}/${idEmpresa}`, empresaDTO);
   }
   
   /*
