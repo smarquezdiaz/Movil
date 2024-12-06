@@ -10,8 +10,8 @@ import { EmpresaService } from 'src/app/services/empresa.service';
   styleUrls: ['./perfil-empresa.page.scss'],
 })
 export class PerfilEmpresaPage implements OnInit {
-  empresa = {  // Cambié la tipificación para que coincida con el modelo correcto
-    id:'',
+  empresa: any = {
+    id:'',  // Cambié la tipificación para que coincida con el modelo correcto
     nombre: '',
     ubicacion: '',
     imagen: '',
@@ -26,7 +26,7 @@ export class PerfilEmpresaPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    const idEmpresa = this.route.snapshot.paramMap.get('id');
+    const idEmpresa = localStorage.getItem('userId');
     if (idEmpresa) {
       this.getEmpresaDetails(Number(idEmpresa));  // Usamos el método adecuado
       this.getConvocatoriasPasadas(Number(idEmpresa));  // Usamos el método adecuado
@@ -35,7 +35,7 @@ export class PerfilEmpresaPage implements OnInit {
 
   // Obtener los detalles de la empresa
   getEmpresaDetails(idEmpresa: number) {
-    this.empresaService.getEmpresa(idEmpresa).subscribe((data) => {  // Corregimos el nombre del método
+    this.empresaService.getEmpresa(idEmpresa).subscribe((data:any) => {  // Corregimos el nombre del método
       this.empresa = data;
     });
   }
@@ -50,11 +50,12 @@ export class PerfilEmpresaPage implements OnInit {
   // Actualizar los detalles de la empresa
   onUpdateEmpresa() {
     let nuevoDTO  = new EmpresaDTO();
-    nuevoDTO.id = parseInt(this.empresa.id);
-    nuevoDTO.imagen = this.empresa.imagen;
+    nuevoDTO = {
+      ...this.empresa
+    }
 
     this.empresaService.updateEmpresa(parseInt(this.empresa.id), nuevoDTO).subscribe({  // Corregimos el nombre del método
-      next: (response) => {
+      next: (response:any) => {
         alert('Datos de la empresa actualizados exitosamente');
       },
       error: (err) => {
