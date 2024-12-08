@@ -48,7 +48,9 @@ export class MostrarPostulantePage implements OnInit {
       this.obtenerPostulante();
     });
 
-    this.imagenService.obtenerPdf('curriculum%20xample.pdf').subscribe({
+    this.pdfSrc = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
+
+    /* this.imagenService.obtenerPdf('curriculum%20xample.pdf').subscribe({
       next: (res) => {
         console.log(res); 
         let objectURL = URL.createObjectURL(res);
@@ -58,7 +60,7 @@ export class MostrarPostulantePage implements OnInit {
       error: (err) => {
         console.error('Error al obtener el PDF', err);
       }
-    });
+    }); */
   }
 
 
