@@ -23,4 +23,11 @@ export class ImagenService {
     {responseType: 'blob'}
     );
   }
+
+  obtenerPdf(namePdf: string): Observable<any> {
+    return this.http.get(environment.api + environment.backend.imagen + `/obtener-pdf/${namePdf}`, 
+      { responseType: 'blob' }
+    );
+  }
+  
 }

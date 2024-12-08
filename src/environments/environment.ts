@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  api: 'http://5.78.70.226:8081',
-  // api: 'http://localhost:8080', En caso de querer usar local 
+  //api: 'http://5.78.70.226:8081',
+  api: 'http://localhost:8080', //En caso de querer usar local 
   backend: {
     user: '/user',
     empresa:  '/empresas',

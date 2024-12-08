@@ -9,6 +9,8 @@ import { FormBuilder } from '@angular/forms';
 import { EmailService } from 'src/app/services/email.service';
 import { ConvocatoriaService } from 'src/app/services/convocatoria.service';
 import { PostulanteDto } from 'src/app/modelos/postulante';
+import { ImagenService } from 'src/app/services/imagen.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -23,6 +25,7 @@ export class MostrarPostulantePage implements OnInit {
   postulante!: PostulanteDto;
   userConvocatoria: any = {};
   isPostulating: boolean = false;
+  pdfSrc!: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,7 +34,10 @@ export class MostrarPostulantePage implements OnInit {
     private modalController: ModalController,
     private emailService: EmailService,
     private convocatoriaService: ConvocatoriaService,
-  ) { }
+    private imagenService: ImagenService,
+    private sanitizer: DomSanitizer
+  ) { 
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -39,8 +45,19 @@ export class MostrarPostulantePage implements OnInit {
       this.idPostulante = params['idPostulante'];
       console.log('ID Convocatoria:', this.idConvocatoria);
       console.log('ID Postulante:', this.idPostulante);
-
       this.obtenerPostulante();
+    });
+
+    this.imagenService.obtenerPdf('curriculum%20xample.pdf').subscribe({
+      next: (res) => {
+        console.log(res); 
+        let objectURL = URL.createObjectURL(res);
+        console.log(objectURL); 
+        this.pdfSrc = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      },
+      error: (err) => {
+        console.error('Error al obtener el PDF', err);
+      }
     });
   }
 
@@ -51,6 +68,16 @@ export class MostrarPostulantePage implements OnInit {
         this.postulante = res;
         this.userConvocatoria.aceptado = res.datosAdicionales.aceptado;
         console.log('Postulante encontrado:', this.postulante);
+        /* this.imagenService.obtenerPdf(this.postulante.datosAdicionales.curriculum).subscribe({
+          next: (res) => {
+            let objectURL = URL.createObjectURL(res);
+            this.pdfSrc = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+            console.log(this.pdfSrc);
+          },
+          error: (err) => {
+            console.error('Error al obtener el PDF', err);
+          }
+        }); */
       },
       error: (err) => {
         console.error('Error al obtener postulante:', err);
@@ -98,6 +125,5 @@ export class MostrarPostulantePage implements OnInit {
     });
     await modal.present();
   }
-
 
 }
