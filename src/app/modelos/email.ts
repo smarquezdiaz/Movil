@@ -3,5 +3,5 @@ export interface Email {
   idPostulante: number;
   idConvocatoria: number;
   tituloConvocatoria: string;
-  aceptado: boolean;
+  estadoPostulante: string;
 }

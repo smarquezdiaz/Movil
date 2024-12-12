@@ -35,7 +35,8 @@ export class MostrarConvocatoriaPage implements OnInit {
         this.convocatoria = res;
         this.convocatoria.fechaInicioReclutamiento = this.formatearFecha( this.convocatoria.fechaInicioReclutamiento);
         this.convocatoria.fechaFinReclutamiento = this.formatearFecha( this.convocatoria.fechaFinReclutamiento);
-        console.log(this.convocatoria);
+        this.convocatoria.fechaInicioSeleccion = this.formatearFecha( this.convocatoria.fechaInicioSeleccion);
+        this.convocatoria.fechaFinSeleccion = this.formatearFecha( this.convocatoria.fechaFinSeleccion);
         this.obtenerImagen(this.convocatoria.imagen);
       },
       error: (error) => {
@@ -66,6 +67,6 @@ export class MostrarConvocatoriaPage implements OnInit {
 
   verPostulantes(){
     console.log(this.convocatoria.id);
-    this.router.navigate(['/postulantes', this.convocatoria.id]);
+    this.router.navigate(['/postulantes', this.convocatoria.id, this.estado]);
   }
 }
