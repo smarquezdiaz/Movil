@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { async, from, Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { EmpresaService } from 'src/app/services/empresa.service';
 import { ConvocatoriaService } from 'src/app/services/convocatoria.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -51,10 +51,9 @@ export class LoginPage implements OnInit {
     } else {
       if (this.rol) {
         if(this.rol === 'empresa') {
-          this.empresaService.login(this.form.value).subscribe({
+          this.empresaService.loginEmpresa(this.form.value).subscribe({
             next: (res) => {
               this.utilsService.saveInLocalStorage('userId', res);
-              this.utilsService.saveInLocalStorage('rol', this.form.get('rol')?.value);
               this.route.navigate(['/home']);
               this.form.reset();
             }, 
@@ -73,19 +72,11 @@ export class LoginPage implements OnInit {
           this.postulanteService.login(this.form.value).subscribe({
             next: (res) => {
               this.utilsService.saveInLocalStorage('userId', res);
-              this.utilsService.saveInLocalStorage('rol', this.form.get('rol')?.value);
               this.route.navigate(['/home-postulante']);
               this.form.reset();
             }, 
-            error: async(error) => {
-             //console.log(error);
-              const alert = await this.alertController.create({
-                header: 'Error',
-                subHeader: 'No existe el usuario seleccionado',
-                message: 'Introduzca un usuario válido.',
-                buttons: ['ok'],
-              });
-              await alert.present();
+            error: (error) => {
+              console.log(error);
             }
           })
         } else {

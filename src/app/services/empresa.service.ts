@@ -1,42 +1,57 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { EmpresaDTO } from '../_DTO/empresaDTO';
+import { ConvocatoriaForTableDTO } from '../_DTO/convocatoriaForTableDTO';
+import { Convocatoria } from '../modelos/convocatoria';
 import { environment } from 'src/environments/environment';
-import { Empresa } from '../modelos/empresa';
-import { User } from '../modelos/user';
-import { Convocatoria, ConvocatoriaForTableDTO } from '../modelos/convocatoria';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmpresaService {
+  private baseUrl = environment.api + environment.backend.empresa;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  crearEmpresa ( empresa : Empresa) : Observable<Empresa>{
-    return this.http.post<Empresa>(environment.api + environment.backend.empresa, empresa);
+  // Métodos relacionados con la empresa
+  createEmpresa(empresaDTO: EmpresaDTO): Observable<EmpresaDTO> {
+    return this.http.post<EmpresaDTO>(`${this.baseUrl}`, empresaDTO);
   }
 
-  login( user : User) : Observable<number>{
-    return this.http.post<number>(environment.api + environment.backend.empresa + `/login`, user);
+  loginEmpresa(empresa: EmpresaDTO): Observable<number> {
+    return this.http.post<number>(`${this.baseUrl}/login`, empresa);
   }
 
-  obtenerConvocatoriasPorEmpresa( userId : number) : Observable<Array<Convocatoria>>{
-    return this.http.get<Array<Convocatoria>>(environment.api + environment.backend.empresa + `/${userId}/convocatorias`,);
+  getEmpresa(idEmpresa: number): Observable<EmpresaDTO> {
+    return this.http.get<EmpresaDTO>(`${this.baseUrl}/${idEmpresa}`);
   }
 
-  obtenerConvocatoriasFiltradas( userId : number, esVigente: boolean) : Observable<Array<Convocatoria>>{
-    const params = new HttpParams().set('esVigente', esVigente);
-    return this.http.get<Array<Convocatoria>>(environment.api + environment.backend.empresa + `/${userId}/convocatoriasVigentes`, { params });
+  updateEmpresa(idEmpresa: number, empresaDTO: EmpresaDTO): Observable<any> {
+    return this.http.put(`${this.baseUrl}/${idEmpresa}`, empresaDTO);
   }
 
-  obtenerConvocatorias( userId : number, estado: string) : Observable<Array<ConvocatoriaForTableDTO>>{
-    //const params = new HttpParams().set('estado', estado);
-    return this.http.get<Array<ConvocatoriaForTableDTO>>(environment.api + environment.backend.empresa + `/${userId}/convocatorias`);
+  // Métodos relacionados con las convocatorias
+  getConvocatorias(idEmpresa: number): Observable<ConvocatoriaForTableDTO[]> {
+    return this.http.get<ConvocatoriaForTableDTO[]>(`${this.baseUrl}/${idEmpresa}/convocatorias`);
   }
 
-  obtenerConvocatoriasPorEstado( userId : number, estado: string) : Observable<Array<ConvocatoriaForTableDTO>>{
+  getConvocatoriasVigentes(idEmpresa: number, esVigente: boolean): Observable<ConvocatoriaForTableDTO[]> {
+    const params = new HttpParams().set('esVigente', esVigente.toString());
+    return this.http.get<ConvocatoriaForTableDTO[]>(`${this.baseUrl}/${idEmpresa}/convocatoriasVigentes`, { params });
+  }
+
+  obtenerConvocatoriasPorEstado(idEmpresa: number, estado: string): Observable<ConvocatoriaForTableDTO[]> {
     const params = new HttpParams().set('estado', estado);
-    return this.http.get<Array<ConvocatoriaForTableDTO>>(environment.api + environment.backend.empresa + `/${userId}/convocatorias`, { params });
+    return this.http.get<ConvocatoriaForTableDTO[]>(`${this.baseUrl}/${idEmpresa}/convocatorias`, { params });
+  }
+
+  obtenerConvocatoriasPorEmpresa(idEmpresa: number): Observable<Convocatoria[]> {
+    return this.http.get<Convocatoria[]>(`${this.baseUrl}/${idEmpresa}/convocatorias`);
+  }
+
+  obtenerConvocatoriasFiltradas(idEmpresa: number, esVigente: boolean): Observable<Convocatoria[]> {
+    const params = new HttpParams().set('esVigente', esVigente.toString());
+    return this.http.get<Convocatoria[]>(`${this.baseUrl}/${idEmpresa}/convocatoriasVigentes`, { params });
   }
 }

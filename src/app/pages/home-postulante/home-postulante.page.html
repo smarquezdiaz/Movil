@@ -3,7 +3,7 @@
   <div class="container-postulant-img" *ngIf="showTable">
     <ion-item *ngFor="let convocatoria of convocatoriaList" [routerLink]="['./mostrar-convocatoria-postulante', convocatoria.id]">
       <ion-label *ngIf="convocatoria" class="label-home">
-        <img [src]="convocatoria.empresa.img" alt="Uploaded Image" />
+        <img [src]="convocatoria.empresa.imagen" alt="Uploaded Image" />
         <div>
           <p>{{convocatoria.empresa.nombre}}</p>
           <h2>{{convocatoria.titulo}}</h2>
