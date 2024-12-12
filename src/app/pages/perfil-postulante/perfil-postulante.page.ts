@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostulanteService } from 'src/app/services/postulante.service';
-import { UtilsService } from 'src/app/services/utils.service';  // Asegúrate de importar el servicio
+import { UtilsService } from 'src/app/services/utils.service';  
 import { Postulante } from 'src/app/modelos/postulante';
 import { ActivatedRoute, Router } from '@angular/router';
 @Component({
@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class PerfilPostulantePage implements OnInit {
 
   postulante!: Postulante; 
-  idPostulante!: number; 
+  idPostulante!: number;
 
   constructor(
     private postulanteService: PostulanteService,
@@ -58,4 +58,5 @@ export class PerfilPostulantePage implements OnInit {
       }
     );
   }
+
 }

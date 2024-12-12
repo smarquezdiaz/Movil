@@ -4,10 +4,10 @@
   <div class="title-container">
     <div class="titles-container">
       <!-- <h1>Mis Convocatorias</h1> -->
-      <ion-button class="second-button" (click)="cargarConvocatoriasVigentes()">
+      <ion-button [ngClass]="isVigente ? 'isVigente' : 'second-button' " (click)="cargarConvocatoriasVigentes()">
         Vigentes
       </ion-button>
-      <ion-button class="small-button" (click)="cargarConvocatoriasNoVigentes()">
+      <ion-button class="small-button" [ngClass]="isVigente ? 'small-button' : 'isNotVigente' "  (click)="cargarConvocatoriasNoVigentes()">
         No Vigentes
       </ion-button>
       <ion-button class="small-button" routerLink="/login/register/register-convocatoria">

@@ -6,6 +6,9 @@ import { User, UserConvocatoria } from 'src/app/modelos/user';
 import { PostulanteService } from 'src/app/services/postulante.service';
 import { ModalController } from '@ionic/angular';
 import { FormBuilder } from '@angular/forms';
+import { EmailService } from 'src/app/services/email.service';
+import { ConvocatoriaService } from 'src/app/services/convocatoria.service';
+import { PostulanteDto } from 'src/app/modelos/postulante';
 
 
 @Component({
@@ -17,14 +20,17 @@ export class MostrarPostulantePage implements OnInit {
 
   idConvocatoria!: number;  
   idPostulante!: number;  
-  postulante!: User;
+  postulante!: PostulanteDto;
   userConvocatoria: any = {};
+  isPostulating: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private postulanteService: PostulanteService,
     private formBuilder: FormBuilder, 
-    private modalController: ModalController  
+    private modalController: ModalController,
+    private emailService: EmailService,
+    private convocatoriaService: ConvocatoriaService,
   ) { }
 
   ngOnInit() {
@@ -33,7 +39,6 @@ export class MostrarPostulantePage implements OnInit {
       this.idPostulante = params['idPostulante'];
       console.log('ID Convocatoria:', this.idConvocatoria);
       console.log('ID Postulante:', this.idPostulante);
-
       this.obtenerPostulante();
     });
   }
@@ -43,6 +48,7 @@ export class MostrarPostulantePage implements OnInit {
     this.postulanteService.obtenerPostulantePorConvocatoria(this.idConvocatoria, this.idPostulante).subscribe({
       next: (res) => {
         this.postulante = res;
+        this.userConvocatoria.aceptado = res.datosAdicionales.aceptado;
         console.log('Postulante encontrado:', this.postulante);
       },
       error: (err) => {
@@ -51,29 +57,35 @@ export class MostrarPostulantePage implements OnInit {
     });
   }
 
-  async confirmarCambioEstado() {
-    const modal = await this.modalController.create({
-      component: ModalConfirmacionComponent,
-      componentProps: {
-        function: () => this.cambiarEstado() 
-      }
-    });
-    await modal.present();
-  }
 
-  cambiarEstado() {
-    const nuevoEstado = this.userConvocatoria.aceptado ? 'rechazado' : 'aceptado';
-    
-    this.postulanteService.cambiarEstadoPostulante(this.idConvocatoria, this.idPostulante, nuevoEstado).subscribe({
+
+  cambiarEstado(isAccepted: boolean) {
+    this.isPostulating = true;
+    this.convocatoriaService.obtenerConvocatoria(this.idConvocatoria).subscribe({
       next: (res) => {
-        this.userConvocatoria.estado = nuevoEstado;  
-        console.log('Estado actualizado:', res);
-        this.showSuccessModal(); 
+        const email = {
+          destinatario: this.postulante.correo,
+          idPostulante: this.postulante.id,
+          idConvocatoria: this.idConvocatoria,
+          tituloConvocatoria: res.titulo,
+          aceptado: isAccepted,
+        }
+        this.emailService.sendEmail(email).subscribe({
+          next: (res) => {
+            this.showSuccessModal(); 
+            this.isPostulating = false;
+          },
+          error: (err) => {
+            this.isPostulating = false;
+            console.error('Error al cambiar estado:', err);
+          }
+        });
       },
       error: (err) => {
         console.error('Error al cambiar estado:', err);
       }
     });
+
   }
 
   async showSuccessModal() {

@@ -19,4 +19,8 @@ export class BottomMenuComponent implements OnInit {
   recibir del backend datos que indiquen en formato json el id del registro y el tipo postulante/empresa
   al momento de utilizar el tab de perfil validar si el tipo es postulante y/o empresa y enviar al segmento de pagina 
   que se correponda con el perfil.
+<<<<<<< HEAD
 */
+=======
+*/
+>>>>>>> master

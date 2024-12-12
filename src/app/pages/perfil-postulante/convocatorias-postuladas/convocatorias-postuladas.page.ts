@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConvocatoriaParaPostulantes } from 'src/app/modelos/convocatoria'; // Ajusta la ruta del modelo
-import { PostulanteService } from 'src/app/services/postulante.service';
-import { ConvocatoriaService } from  'src/app/services/convocatoria.service';// Asegúrate de importar el servicio
+import { ImagenService } from 'src/app/services/imagen.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ConvocatoriaService } from  'src/app/services/convocatoria.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -14,11 +14,14 @@ export class ConvocatoriasPostuladasPage implements OnInit {
 
   userId: number | null = null;
   convocatorias: any[] = [];
+  showTable: boolean = false;
 
   constructor(
     private utilsService: UtilsService,
     private convocatoriaService: ConvocatoriaService,
-    private router: Router
+    private router: Router,
+    private imagenService: ImagenService,
+    private sanitizer: DomSanitizer,
   ) { }
 
   ngOnInit() {
@@ -37,16 +40,22 @@ export class ConvocatoriasPostuladasPage implements OnInit {
       this.convocatoriaService.obtenerConvocatoriasPorPostulante(this.userId).subscribe({
         next: (convocatorias) => {
           this.convocatorias = convocatorias;
-          console.log("Convocatorias obtenidas:", this.convocatorias);
+          this.convocatorias.forEach((convocatoria) => {
+            const imagenName = convocatoria.convocatoria.imagen;
+            this.imagenService.obtenerImagen(imagenName).subscribe({
+              next: (res) => {
+                let objectURL = URL.createObjectURL(res);
+                convocatoria.convocatoria.imagenUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+              },
+              error: (error) => {
+                console.error("Error al cargar la imagen", error);
+              }
+            });
+          });
+          this.showTable = true;
         },
-        error: (error) => {
-          console.error("Error al obtener convocatorias:", error);
-        }
       });
-    } else {
-      console.error("El ID del postulante no está definido.");
     }
   }
-
 
 }

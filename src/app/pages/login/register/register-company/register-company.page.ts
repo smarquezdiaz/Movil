@@ -8,6 +8,7 @@ import { ModalExitoComponent } from 'src/app/shared/componentes/modal-exito/moda
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ImagenService } from 'src/app/services/imagen.service';
 import { Imagen } from 'src/app/modelos/imagen';
+import { EmpresaDTO } from 'src/app/_DTO/empresaDTO';
 
 @Component({
   selector: 'app-register-company',
@@ -50,12 +51,12 @@ export class RegisterCompanyPage implements OnInit {
     modal.present();
   }
 
-  async registrarEmpresa(empresa : Empresa) {
+  async registrarEmpresa(empresa : EmpresaDTO) {
     const imageUrl = await this.uploadImage();
     if (imageUrl) {
       empresa.imagen = imageUrl;
     }
-    this.empresaService.crearEmpresa(empresa).subscribe({
+    this.empresaService.createEmpresa(empresa).subscribe({
       next: (response) => 
         {
           this.success();

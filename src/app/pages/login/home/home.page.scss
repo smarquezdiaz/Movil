@@ -67,3 +67,30 @@ ion-button.second-button {
   text-transform: none; 
   color: #060A30;
 }
+.isVigente {
+  --background: #fe5d9f;
+  --border-radius: 10px;
+  font-size: 12px; 
+  margin-top: 8px;
+  margin-left: 6px;
+  padding: 0 12px;
+  height: 30px; 
+  width: 125px;
+  display: inline-block; 
+  text-align: center; 
+  text-transform: none; 
+  color: #060A30;
+}
+.isNotVigente {
+  --background: #12239D !important;
+  --border-radius: 10px;
+  font-size: 12px; 
+  margin-top: 8px;
+  margin-left: 6px;
+  padding: 0 12px;
+  height: 30px; 
+  width: 125px;
+  display: inline-block; 
+  text-align: center; 
+  text-transform: none; 
+}

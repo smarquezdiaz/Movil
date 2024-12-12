@@ -1,15 +1,20 @@
-$primary-color: #060A30; 
+$primary-color: #060A30;
 $accent-color: #A90B71;
-$background-color: #f5f5f5; 
-$input-bg-color: #ffffff; 
-$card-bg-color: #ffffff; 
-$border-radius: 6px;    
-$shadow-color: rgba(0, 0, 0, 0.1); 
+$background-color: #f5f5f5;
+$input-bg-color: #ffffff;
+$card-bg-color: #ffffff;
+$border-radius: 6px;
+$shadow-color: rgba(0, 0, 0, 0.1);
 
 ion-content {
   background-color: $background-color;
   padding: 20px;
   font-family: 'Arial', sans-serif;
+  min-height: 100vh; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  overflow-y: auto; 
 }
 
 app-header {
@@ -32,7 +37,6 @@ app-header {
 
 .second-button:hover {
   background-color: darken($accent-color, 10%);
-  transform: scale(1.05);
 }
 
 .info-card-header {
@@ -60,7 +64,12 @@ ion-textarea:focus {
 
 ion-input,
 ion-textarea {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+}
+
+ion-item {
+  margin-bottom: 10px;
+  position: relative;
 }
 
 ion-icon {
@@ -69,7 +78,32 @@ ion-icon {
   margin-left: 10px;
 }
 
-ion-item {
-  margin-bottom: 20px; 
-  position: relative; 
+ion-card {
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex-grow: 1; 
+}
+
+ion-button[type="submit"] {
+  margin-top: 20px;
+  width: 60%;
+  padding: 15px 0;
+  font-size: 16px;
+  align-self: center; 
+}
+
+@media (max-width: 360px) {
+  ion-content {
+    padding: 10px;
+  }
+
+  ion-button[type="submit"] {
+    width: 80%;
+  }
 }

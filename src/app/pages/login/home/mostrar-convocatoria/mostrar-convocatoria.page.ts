@@ -2,6 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { Convocatoria, ConvocatoriaParaMostrar } from 'src/app/modelos/convocatoria';
 import { ConvocatoriaService } from 'src/app/services/convocatoria.service';
 import { ImagenService } from 'src/app/services/imagen.service';
@@ -21,7 +22,8 @@ export class MostrarConvocatoriaPage implements OnInit {
     private convocatoriaService: ConvocatoriaService,
     private imagenService: ImagenService,
     private sanitizer: DomSanitizer,
-    private router: Router
+    private router: Router,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -50,7 +52,14 @@ export class MostrarConvocatoriaPage implements OnInit {
         let objectURL = URL.createObjectURL(res);
         this.image = this.sanitizer.bypassSecurityTrustUrl(objectURL);
       },
-      error: (error) => {
+      error: async (error) => {
+        const alert = await this.alertController.create({
+          header: 'Error',
+          subHeader: 'Error al subir imagen',
+          message: 'Debe subir un archivo menos pesado.',
+          buttons: ['ok'],
+        });
+        await alert.present();
         console.log(error);
       }
     })

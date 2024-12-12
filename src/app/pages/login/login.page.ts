@@ -51,7 +51,7 @@ export class LoginPage implements OnInit {
     } else {
       if (this.rol) {
         if(this.rol === 'empresa') {
-          this.empresaService.login(this.form.value).subscribe({
+          this.empresaService.loginEmpresa(this.form.value).subscribe({
             next: (res) => {
               this.utilsService.saveInLocalStorage('userId', res);
               this.route.navigate(['/home']);

@@ -18,6 +18,7 @@ export class HomePage implements OnInit {
   titles = ['Título', 'Nro.postulantes','']
   list!: ConvocatoriaInfo[];
   userId!: number;
+  isVigente: boolean = true;
 
   constructor(private empresaService: EmpresaService,
     private utilsService: UtilsService,
@@ -36,7 +37,7 @@ export class HomePage implements OnInit {
   cargarConvocatorias () {
     this.userId = this.utilsService.getFromLocalStorage('userId');
     console.log(this.userId);
-    const convocatorias$ = this.empresaService.obtenerConvocatoriasPorEmpresa(this.userId);
+    const convocatorias$ = this.empresaService.getConvocatorias(this.userId);
     forkJoin([convocatorias$]).subscribe({
       next: ([convocatoriasBody]) => {
         this.list = convocatoriasBody.map((convocatoria: any) => ({
@@ -50,8 +51,9 @@ export class HomePage implements OnInit {
   }
 
   cargarConvocatoriasVigentes () {
+    this.isVigente = true;
     this.userId = this.utilsService.getFromLocalStorage('userId');
-    const convocatorias$ = this.empresaService.obtenerConvocatoriasFiltradas(this.userId, true);
+    const convocatorias$ = this.empresaService.getConvocatoriasVigentes(this.userId, true);
     forkJoin([convocatorias$]).subscribe({
       next: ([convocatoriasBody]) => {
         this.list = convocatoriasBody.map((convocatoria: any) => ({
@@ -65,8 +67,9 @@ export class HomePage implements OnInit {
   }
 
   cargarConvocatoriasNoVigentes () {
+    this.isVigente = false;
     this.userId = this.utilsService.getFromLocalStorage('userId');
-    const convocatorias$ = this.empresaService.obtenerConvocatoriasFiltradas(this.userId, false);
+    const convocatorias$ = this.empresaService.getConvocatoriasVigentes(this.userId, false);
     forkJoin([convocatorias$]).subscribe({
       next: ([convocatoriasBody]) => {
         this.list = convocatoriasBody.map((convocatoria: any) => ({

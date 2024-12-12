@@ -12,7 +12,7 @@ export class EmailService {
   constructor(private http: HttpClient) { }
 
   sendEmail(email: Email): Observable<string> {
-    const url = `${environment.api}${environment.backend.email}/updateEmail`;
-    return this.http.patch<string>(url, email);
+    const url = `${environment.api}${environment.backend.email}`;
+    return this.http.patch<string>(url, email, { responseType: 'text' as 'json' });
   }
 }
