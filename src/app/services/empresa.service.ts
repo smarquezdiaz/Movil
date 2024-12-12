@@ -55,3 +55,4 @@ export class EmpresaService {
     return this.http.get<Convocatoria[]>(`${this.baseUrl}/${idEmpresa}/convocatoriasVigentes`, { params });
   }
 }
+

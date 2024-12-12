@@ -107,4 +107,23 @@
   }
 }
 
+.fechas-container p{
+    margin: 0 !important;
+}
+.fechas-container-title {
+    font-weight: bold;
+    font-size: 12px !important;
+}
+.fechas-container-dates {
+    color: #2C3E50CC;
+    font-size: 11px !important;
+}
+.button-container {
+    margin-top: 20px;
+}
+.content-container .button-container {
+    display: flex;
+    align-self: flex-end;
+}
+
 

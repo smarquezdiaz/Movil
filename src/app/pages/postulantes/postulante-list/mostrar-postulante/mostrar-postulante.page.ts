@@ -21,8 +21,8 @@ export class MostrarPostulantePage implements OnInit {
   idConvocatoria!: number;  
   idPostulante!: number;  
   postulante!: PostulanteDto;
-  userConvocatoria: any = {};
   isPostulating: boolean = false;
+  estado!: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,8 +37,13 @@ export class MostrarPostulantePage implements OnInit {
     this.route.params.subscribe(params => {
       this.idConvocatoria = params['idConvocatoria'];
       this.idPostulante = params['idPostulante'];
+<<<<<<< HEAD
       console.log('ID Convocatoria:', this.idConvocatoria);
       console.log('ID Postulante:', this.idPostulante);
+=======
+      this.estado = params['estado'];
+
+>>>>>>> be44476e610861de539e18cc1caefcf5e7a0ea76
       this.obtenerPostulante();
     });
   }
@@ -48,7 +53,6 @@ export class MostrarPostulantePage implements OnInit {
     this.postulanteService.obtenerPostulantePorConvocatoria(this.idConvocatoria, this.idPostulante).subscribe({
       next: (res) => {
         this.postulante = res;
-        this.userConvocatoria.aceptado = res.datosAdicionales.aceptado;
         console.log('Postulante encontrado:', this.postulante);
       },
       error: (err) => {
@@ -59,7 +63,7 @@ export class MostrarPostulantePage implements OnInit {
 
 
 
-  cambiarEstado(isAccepted: boolean) {
+  cambiarEstado(estado: string) {
     this.isPostulating = true;
     this.convocatoriaService.obtenerConvocatoria(this.idConvocatoria).subscribe({
       next: (res) => {
@@ -68,7 +72,7 @@ export class MostrarPostulantePage implements OnInit {
           idPostulante: this.postulante.id,
           idConvocatoria: this.idConvocatoria,
           tituloConvocatoria: res.titulo,
-          aceptado: isAccepted,
+          estadoPostulante: estado,
         }
         this.emailService.sendEmail(email).subscribe({
           next: (res) => {

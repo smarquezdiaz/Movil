@@ -1,6 +1,6 @@
 <app-header backButton="/home" logged="true"></app-header>
 
-<ion-content >
+<ion-content class="content-container">
   <div *ngIf="convocatoria" class="container-mostrar-convocatoria">
     <h1 fxLayoutAlign="center">{{convocatoria.titulo}}</h1>
     <div class="image-container" *ngIf="image" fxLayoutAlign="center">
@@ -9,13 +9,37 @@
     <hr class="divider-thin">
     <p><strong>Descripción:</strong> <br></p>
     <p>{{convocatoria.descripcion}}</p>
-    <div fxLayout="row" fxLayoutAlign="center center" style="gap: 20px;">
+    <hr class="divider-thin">
+    <div fxLayout="row" style="gap: 10px;">
+      <div fxLayout="row" fxLayoutAlign="center center" style="gap: 5px;">
+        <div>
+          <ion-icon name="calendar-clear-sharp"></ion-icon>
+        </div>
+        <div class="fechas-container">
+          <p class="fechas-container-title">Fecha Reclutamiento</p>
+          <p class="fechas-container-dates">{{convocatoria.fechaInicioReclutamiento}} - {{convocatoria.fechaFinReclutamiento}}</p>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center" style="gap: 5px;">
+      <div>
         <ion-icon name="calendar-clear-sharp"></ion-icon>
-        <p>{{convocatoria.fechaInicioReclutamiento}} - {{convocatoria.fechaFinReclutamiento}}</p>
+      </div>
+      <div class="fechas-container">
+        <p class="fechas-container-title">Fecha Selección</p>
+        <p class="fechas-container-dates">{{convocatoria.fechaInicioSeleccion}} - {{convocatoria.fechaFinSeleccion}}</p>
+      </div>
+      </div >
     </div>
     <hr class="divider-thin">
-    <ion-buttons fxLayoutAlign="center end">
-        <ion-button *ngIf="this.estado === 'En curso'" (click)="verPostulantes()">Ver Postulantes</ion-button>
-    </ion-buttons>
+    <div class="button-container" fxLayoutAlign="center end" *ngIf="this.estado === 'En curso'">
+      <ion-buttons fxLayoutAlign="center end">
+        <ion-button (click)="verPostulantes()">Ver Postulantes</ion-button>
+      </ion-buttons>
+    </div>
+    <div class="button-container" fxLayoutAlign="center end" *ngIf="this.estado === 'En selección'">
+      <ion-buttons fxLayoutAlign="center end">
+        <ion-button (click)="verPostulantes()">Preseleccionar Postulantes</ion-button>
+      </ion-buttons>
+    </div>
   </div>
 </ion-content>

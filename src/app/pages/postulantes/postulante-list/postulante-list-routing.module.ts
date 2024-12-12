@@ -9,7 +9,7 @@ const routes: Routes = [
     component: PostulanteListPage
   },
   {
-    path: 'mostrar-postulante/:idConvocatoria/:idPostulante',
+    path: 'mostrar-postulante/:idConvocatoria/:idPostulante/:estado',
     loadChildren: () => import('../../postulantes/postulante-list/mostrar-postulante/mostrar-postulante.module').then( m => m.MostrarPostulantePageModule)
   }
 ];
