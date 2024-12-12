@@ -35,16 +35,12 @@ export class HomePage implements OnInit {
   }
   cargarConvocatorias() {
     this.userId = this.utilsService.getFromLocalStorage('userId');
-    const convocatorias$ = this.empresaService.obtenerConvocatorias(this.userId, "");
-    forkJoin([convocatorias$]).subscribe({
-      next: ([convocatoriasBody]) => {
-        this.list = convocatoriasBody.map((convocatoria: any) => ({
-          id: convocatoria.id,
-          titulo: convocatoria.titulo,
-          cantidadMaxPost: convocatoria.cantidadMaxPost,
-          postulantes: convocatoria.postulantes,
-          estado: convocatoria.estado,
-        }));
+    this.empresaService.obtenerConvocatorias(this.userId, "").subscribe({
+      next: (res) => {
+        this.list = res;
+      },
+      error: (error) => {
+        console.log(error);
       }
     })
   }
@@ -54,16 +50,12 @@ export class HomePage implements OnInit {
     if( e.detail.value) {
       console.log('esto: ' + e.detail.value);
       this.userId = this.utilsService.getFromLocalStorage('userId');
-      const convocatorias$ = this.empresaService.obtenerConvocatoriasPorEstado(this.userId, e.detail.value);
-      forkJoin([convocatorias$]).subscribe({
-        next: ([convocatoriasBody]) => {
-          this.list = convocatoriasBody.map((convocatoria: any) => ({
-            id: convocatoria.id,
-            titulo: convocatoria.titulo,
-            cantidadMaxPost: convocatoria.cantidadMaxPost,
-            postulantes: convocatoria.postulantes,
-            estado: convocatoria.estado,
-          }));
+      this.empresaService.obtenerConvocatoriasPorEstado(this.userId, e.detail.value).subscribe({
+        next: (res) => {
+          this.list = res;
+        },
+        error: (error) => {
+          console.log(error);
         }
       })
     } else {

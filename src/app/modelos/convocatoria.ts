@@ -45,12 +45,12 @@ export interface ConvocatoriaForTableDTO {
   id: string;
   titulo: string;
   descripcion?: string;
-  imagen?: string;
+  imagen: string;
   cantidadMaxPost: number;
-  fechaInicioReclutamiento?: Date;
-  fechaFinReclutamiento?: Date;
-  fechaInicioSeleccion?: Date;
-  fechaFinSeleccion?: Date;
+  fechaInicioReclutamiento: string;
+  fechaFinReclutamiento: string;
+  fechaInicioSeleccion: string;
+  fechaFinSeleccion: string;
   estado: string;
   empresa?: number;
   postulantes?: number;

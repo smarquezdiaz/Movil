@@ -11,11 +11,11 @@
     <p>{{convocatoria.descripcion}}</p>
     <div fxLayout="row" fxLayoutAlign="center center" style="gap: 20px;">
         <ion-icon name="calendar-clear-sharp"></ion-icon>
-        <p>{{convocatoria.fechaInicio}} - {{convocatoria.fechaFin}}</p>
+        <p>{{convocatoria.fechaInicioReclutamiento}} - {{convocatoria.fechaFinReclutamiento}}</p>
     </div>
     <hr class="divider-thin">
     <ion-buttons fxLayoutAlign="center end">
-        <ion-button (click)="verPostulantes()">Ver Postulantes</ion-button>
+        <ion-button *ngIf="this.estado === 'En curso'" (click)="verPostulantes()">Ver Postulantes</ion-button>
     </ion-buttons>
   </div>
 </ion-content>
