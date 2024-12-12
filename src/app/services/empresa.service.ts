@@ -1,32 +1,42 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { EmpresaDTO } from '../_DTO/empresaDTO';
+import { ConvocatoriaForTableDTO } from '../_DTO/convocatoriaForTableDTO';
 import { environment } from 'src/environments/environment';
-import { Empresa } from '../modelos/empresa';
-import { User } from '../modelos/user';
-import { Convocatoria } from '../modelos/convocatoria';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmpresaService {
+  private baseUrl = environment.api + environment.backend.empresa; 
+  
+  constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) { }
-
-  crearEmpresa ( empresa : Empresa) : Observable<Empresa>{
-    return this.http.post<Empresa>(environment.api + environment.backend.empresa, empresa);
+  createEmpresa(empresaDTO: EmpresaDTO): Observable<EmpresaDTO> {
+    return this.http.post<EmpresaDTO>(`${this.baseUrl}`, empresaDTO);
   }
 
-  login( user : User) : Observable<number>{
-    return this.http.post<number>(environment.api + environment.backend.empresa + `/login`, user);
+  getConvocatorias(idEmpresa: number): Observable<ConvocatoriaForTableDTO[]> {
+    return this.http.get<ConvocatoriaForTableDTO[]>(`${this.baseUrl}/${idEmpresa}/convocatorias`);
   }
 
-  obtenerConvocatoriasPorEmpresa( userId : number) : Observable<Array<Convocatoria>>{
-    return this.http.get<Array<Convocatoria>>(environment.api + environment.backend.empresa + `/${userId}/convocatorias`,);
+  getConvocatoriasVigentes(idEmpresa: number, esVigente: boolean): Observable<ConvocatoriaForTableDTO[]> {
+    return this.http.get<ConvocatoriaForTableDTO[]>(`${this.baseUrl}/${idEmpresa}/convocatoriasVigentes?esVigente=${esVigente}`);
   }
 
-  obtenerConvocatoriasFiltradas( userId : number, esVigente: boolean) : Observable<Array<Convocatoria>>{
-    const params = new HttpParams().set('esVigente', esVigente);
-    return this.http.get<Array<Convocatoria>>(environment.api + environment.backend.empresa + `/${userId}/convocatoriasVigentes`, { params });
+  // Realizar login de la empresa
+  loginEmpresa(empresa: EmpresaDTO): Observable<number> {
+    return this.http.post<number>(`${this.baseUrl}/login`, empresa);
+  }
+
+  // Obtener datos de una empresa
+  getEmpresa(idEmpresa: number): Observable<EmpresaDTO> {
+    return this.http.get<EmpresaDTO>(`${this.baseUrl}/${idEmpresa}`);
+  }
+
+  // Actualizar los datos de la empresa
+  updateEmpresa(idEmpresa: number, empresaDTO: EmpresaDTO): Observable<any> {
+    return this.http.put(`${this.baseUrl}/${idEmpresa}`, empresaDTO);
   }
 }

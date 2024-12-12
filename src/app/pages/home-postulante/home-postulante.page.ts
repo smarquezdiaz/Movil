@@ -36,7 +36,7 @@ export class HomePostulantePage implements OnInit {
         this.imagenService.obtenerImagen(element.empresa.imagen).subscribe({
           next: (res) => {
             let objectURL = URL.createObjectURL(res);
-            element.empresa.img = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+            element.empresa.img = this.sanitizer.bypassSecurityTrustUrl(objectURL).toString();
           },
           error: (error) => {
             console.log(error);
