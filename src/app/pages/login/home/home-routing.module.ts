@@ -13,7 +13,7 @@ const routes: Routes = [
     loadChildren: () => import('./mostrar-convocatoria/mostrar-convocatoria.module').then( m => m.MostrarConvocatoriaPageModule)
   },
   {
-    path: 'mostrar-convocatoria/:id',
+    path: 'mostrar-convocatoria/:id/:estado',
     loadChildren: () => import('./mostrar-convocatoria/mostrar-convocatoria.module').then( m => m.MostrarConvocatoriaPageModule)
   },
 

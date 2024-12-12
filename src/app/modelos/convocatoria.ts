@@ -40,3 +40,18 @@ export interface ConvocatoriaParaPostulantes {
   fechaFin: string;
   empresa: Empresa;
   }
+
+export interface ConvocatoriaForTableDTO {
+  id: string;
+  titulo: string;
+  descripcion?: string;
+  imagen?: string;
+  cantidadMaxPost: number;
+  fechaInicioReclutamiento?: Date;
+  fechaFinReclutamiento?: Date;
+  fechaInicioSeleccion?: Date;
+  fechaFinSeleccion?: Date;
+  estado: string;
+  empresa?: number;
+  postulantes?: number;
+}  

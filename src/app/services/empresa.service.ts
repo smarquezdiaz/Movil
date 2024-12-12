@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Empresa } from '../modelos/empresa';
 import { User } from '../modelos/user';
-import { Convocatoria } from '../modelos/convocatoria';
+import { Convocatoria, ConvocatoriaForTableDTO } from '../modelos/convocatoria';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +28,15 @@ export class EmpresaService {
   obtenerConvocatoriasFiltradas( userId : number, esVigente: boolean) : Observable<Array<Convocatoria>>{
     const params = new HttpParams().set('esVigente', esVigente);
     return this.http.get<Array<Convocatoria>>(environment.api + environment.backend.empresa + `/${userId}/convocatoriasVigentes`, { params });
+  }
+
+  obtenerConvocatorias( userId : number, estado: string) : Observable<Array<ConvocatoriaForTableDTO>>{
+    //const params = new HttpParams().set('estado', estado);
+    return this.http.get<Array<ConvocatoriaForTableDTO>>(environment.api + environment.backend.empresa + `/${userId}/convocatorias`);
+  }
+
+  obtenerConvocatoriasPorEstado( userId : number, estado: string) : Observable<Array<ConvocatoriaForTableDTO>>{
+    const params = new HttpParams().set('estado', estado);
+    return this.http.get<Array<ConvocatoriaForTableDTO>>(environment.api + environment.backend.empresa + `/${userId}/convocatorias`, { params });
   }
 }
