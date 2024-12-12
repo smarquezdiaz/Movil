@@ -37,13 +37,11 @@ export class MostrarPostulantePage implements OnInit {
     this.route.params.subscribe(params => {
       this.idConvocatoria = params['idConvocatoria'];
       this.idPostulante = params['idPostulante'];
-<<<<<<< HEAD
       console.log('ID Convocatoria:', this.idConvocatoria);
       console.log('ID Postulante:', this.idPostulante);
-=======
+
       this.estado = params['estado'];
 
->>>>>>> be44476e610861de539e18cc1caefcf5e7a0ea76
       this.obtenerPostulante();
     });
   }
