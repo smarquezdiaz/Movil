@@ -10,36 +10,27 @@
     <p><strong>Descripción:</strong> <br></p>
     <p>{{convocatoria.descripcion}}</p>
     <hr class="divider-thin">
-    <div fxLayout="row" style="gap: 10px;">
-      <div fxLayout="row" fxLayoutAlign="center center" style="gap: 5px;">
-        <div>
+    <div fxLayout="row" style="gap: 5px;">
+      <div fxLayout="row" fxLayoutAlign="center center" style="gap: 5px;" class="fecha-container">
           <ion-icon name="calendar-clear-sharp"></ion-icon>
+        <div>
+          <p class="fecha-container-title">Fecha Reclutamiento</p>
+          <p class="fecha-container-info">{{convocatoria.fechaInicioReclutamiento}} - {{convocatoria.fechaFinReclutamiento}}</p>
         </div>
-        <div class="fechas-container">
-          <p class="fechas-container-title">Fecha Reclutamiento</p>
-          <p class="fechas-container-dates">{{convocatoria.fechaInicioReclutamiento}} - {{convocatoria.fechaFinReclutamiento}}</p>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center" style="gap: 5px;" class="fecha-container">
+          <ion-icon name="calendar-clear-sharp"></ion-icon>
+        <div>
+          <p class="fecha-container-title">Fecha Selección</p>
+          <p class="fecha-container-info">{{convocatoria.fechaInicioSeleccion}} - {{convocatoria.fechaFinSeleccion}}</p>
         </div>
       </div>
-      <div fxLayout="row" fxLayoutAlign="center center" style="gap: 5px;">
-      <div>
-        <ion-icon name="calendar-clear-sharp"></ion-icon>
-      </div>
-      <div class="fechas-container">
-        <p class="fechas-container-title">Fecha Selección</p>
-        <p class="fechas-container-dates">{{convocatoria.fechaInicioSeleccion}} - {{convocatoria.fechaFinSeleccion}}</p>
-      </div>
-      </div >
     </div>
     <hr class="divider-thin">
-    <div class="button-container" fxLayoutAlign="center end" *ngIf="this.estado === 'En curso'">
-      <ion-buttons fxLayoutAlign="center end">
-        <ion-button (click)="verPostulantes()">Ver Postulantes</ion-button>
-      </ion-buttons>
-    </div>
-    <div class="button-container" fxLayoutAlign="center end" *ngIf="this.estado === 'En selección'">
-      <ion-buttons fxLayoutAlign="center end">
-        <ion-button (click)="verPostulantes()">Preseleccionar Postulantes</ion-button>
-      </ion-buttons>
-    </div>
+    <ion-buttons fxLayoutAlign="center end">
+        <ion-button *ngIf="this.estado === 'En curso' || this.estado === 'Finalizado'" (click)="verPostulantes('empty')">Ver Postulantes</ion-button>
+        <ion-button *ngIf="this.estado === 'En selección'" (click)="verPostulantes('preseleccionar')">Preseleccionar Postulantes</ion-button>
+        <ion-button *ngIf="this.estado === 'En selección'" (click)="verPostulantes('seleccionar')">Seleccionar Postulantes</ion-button>
+    </ion-buttons>
   </div>
 </ion-content>

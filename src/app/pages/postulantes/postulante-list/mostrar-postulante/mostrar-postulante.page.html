@@ -52,8 +52,13 @@
         <p>{{ postulante.celular }}</p>
       </ion-col>
     </div>
+    <pdf-viewer *ngIf="pdfSrc" [src]="pdfSrc"
+    [render-text]="true" 
+    [original-size]="false" 
+    style="width: 100%; height: 500px"></pdf-viewer>
   </div>
 
+<<<<<<< HEAD
   <div class="button-container" *ngIf="this.estado ==='En selección' && (this.postulante.datosAdicionales.estado!=='Preseleccionado' && this.postulante.datosAdicionales.estado!=='Rechazado')">
     <ion-button class="main-button" [disabled]="isPostulating" (click)="cambiarEstado('Rechazado')">Rechazar</ion-button>
     <ion-button class="secondary-button" [disabled]="isPostulating" (click)="cambiarEstado('Preseleccionado')">Seleccionar</ion-button>
@@ -61,5 +66,19 @@
   <div class="button-container" *ngIf="this.estado ==='Finalizado'">
     <ion-button class="main-button" [disabled]="isPostulating" (click)="cambiarEstado('Rechazado')">Rechazar</ion-button>
     <ion-button class="secondary-button" [disabled]="isPostulating" (click)="cambiarEstado('Aceptado')">Aceptar</ion-button>
+=======
+  <!-- <div class="button-container" *ngIf="(postulante.datosAdicionales.estado === 'Pendiente') && (estado!='En curso' && estado!='Finalizado') ">
+    <ion-button class="main-button" [disabled]="isPostulating" (click)="cambiarEstado('Rechazado')">Rechazar</ion-button>
+    <ion-button class="secondary-button" *ngIf="this.etapa==='preseleccionar'" [disabled]="isPostulating" (click)="cambiarEstado('Preseleccionado')" >Preseleccionar</ion-button>
+    <ion-button class="secondary-button" *ngIf="this.etapa==='seleccionar'" [disabled]="isPostulating" (click)="cambiarEstado('Aceptado')" >Aceptar</ion-button>
+  </div> -->
+  <div class="button-container" *ngIf="(postulante.datosAdicionales.estado === 'Pendiente') && etapa==='preseleccionar'">
+    <ion-button class="main-button" [disabled]="isPostulating" (click)="cambiarEstado('Rechazado')">Rechazar</ion-button>
+    <ion-button class="secondary-button" [disabled]="isPostulating" (click)="cambiarEstado('Preseleccionado')" >Preseleccionar</ion-button>
+  </div>
+  <div class="button-container" *ngIf="(postulante.datosAdicionales.estado === 'Preseleccionado') && etapa==='seleccionar'">
+    <ion-button class="main-button" [disabled]="isPostulating" (click)="cambiarEstado('Rechazado')">Rechazar</ion-button>
+    <ion-button class="secondary-button" [disabled]="isPostulating" (click)="cambiarEstado('Aceptado')" >Aceptar</ion-button>
+>>>>>>> 19f958e0aa95efba11aeddb214ca0fe909043589
   </div>
 </ion-content>

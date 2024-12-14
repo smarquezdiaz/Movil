@@ -9,6 +9,7 @@ import { MostrarPostulantePageRoutingModule } from './mostrar-postulante-routing
 import { MostrarPostulantePage } from './mostrar-postulante.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     IonicModule,
     MostrarPostulantePageRoutingModule,
     SharedModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    PdfViewerModule
   ],
   declarations: [MostrarPostulantePage]
 })

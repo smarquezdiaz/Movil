@@ -9,7 +9,11 @@ const routes: Routes = [
     component: PostulanteListPage
   },
   {
+<<<<<<< HEAD
     path: 'mostrar-postulante/:idConvocatoria/:idPostulante/:estado',
+=======
+    path: 'mostrar-postulante/:idConvocatoria/:idPostulante/:estado/:etapa',
+>>>>>>> 19f958e0aa95efba11aeddb214ca0fe909043589
     loadChildren: () => import('../../postulantes/postulante-list/mostrar-postulante/mostrar-postulante.module').then( m => m.MostrarPostulantePageModule)
   }
 ];

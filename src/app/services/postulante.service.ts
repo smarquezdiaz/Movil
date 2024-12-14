@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../modelos/user';
 import { Observable } from 'rxjs';
@@ -18,6 +18,11 @@ export class PostulanteService {
 
   getPostulantes(idConvocatoria: number): Observable<PostulanteDto> {
     return this.http.get<PostulanteDto>(environment.api + environment.backend.convocatoria +  `/${idConvocatoria}/postulantes`);
+  }
+
+  getPostulantesConEstado(idConvocatoria: number, estadoPostulantes: string): Observable<any> {
+    const params = new HttpParams().set('estadoPostulantes', estadoPostulantes);
+    return this.http.get(environment.api + environment.backend.convocatoria +  `/${idConvocatoria}/postulantes`, { params });
   }
 
   obtenerPostulantePorConvocatoria(idConvocatoria: number, idPostulante: number): Observable<PostulanteDto> {

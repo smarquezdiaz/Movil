@@ -9,6 +9,8 @@ import { FormBuilder } from '@angular/forms';
 import { EmailService } from 'src/app/services/email.service';
 import { ConvocatoriaService } from 'src/app/services/convocatoria.service';
 import { PostulanteDto } from 'src/app/modelos/postulante';
+import { ImagenService } from 'src/app/services/imagen.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -23,6 +25,11 @@ export class MostrarPostulantePage implements OnInit {
   postulante!: PostulanteDto;
   isPostulating: boolean = false;
   estado!: string;
+<<<<<<< HEAD
+=======
+  etapa!: string;
+  pdfSrc!: any;
+>>>>>>> 19f958e0aa95efba11aeddb214ca0fe909043589
 
   constructor(
     private route: ActivatedRoute,
@@ -31,7 +38,10 @@ export class MostrarPostulantePage implements OnInit {
     private modalController: ModalController,
     private emailService: EmailService,
     private convocatoriaService: ConvocatoriaService,
-  ) { }
+    private imagenService: ImagenService,
+    private sanitizer: DomSanitizer
+  ) { 
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -39,9 +49,15 @@ export class MostrarPostulantePage implements OnInit {
       this.idPostulante = params['idPostulante'];
       console.log('ID Convocatoria:', this.idConvocatoria);
       console.log('ID Postulante:', this.idPostulante);
+<<<<<<< HEAD
 
       this.estado = params['estado'];
 
+=======
+      this.estado = params['estado'];
+      this.etapa = params['etapa'];
+      console.log('estado:', this.estado);
+>>>>>>> 19f958e0aa95efba11aeddb214ca0fe909043589
       this.obtenerPostulante();
     });
   }
@@ -52,6 +68,16 @@ export class MostrarPostulantePage implements OnInit {
       next: (res) => {
         this.postulante = res;
         console.log('Postulante encontrado:', this.postulante);
+        this.imagenService.obtenerPdf(this.postulante.datosAdicionales.curriculum).subscribe({
+          next: (res) => {
+            let objectURL = URL.createObjectURL(res);
+            this.pdfSrc = objectURL;
+            console.log(this.pdfSrc);
+          },
+          error: (err) => {
+            console.error('Error al obtener el PDF', err);
+          }
+        });
       },
       error: (err) => {
         console.error('Error al obtener postulante:', err);
@@ -61,7 +87,11 @@ export class MostrarPostulantePage implements OnInit {
 
 
 
+<<<<<<< HEAD
   cambiarEstado(estado: string) {
+=======
+  cambiarEstado(status: string) {
+>>>>>>> 19f958e0aa95efba11aeddb214ca0fe909043589
     this.isPostulating = true;
     this.convocatoriaService.obtenerConvocatoria(this.idConvocatoria).subscribe({
       next: (res) => {
@@ -70,7 +100,11 @@ export class MostrarPostulantePage implements OnInit {
           idPostulante: this.postulante.id,
           idConvocatoria: this.idConvocatoria,
           tituloConvocatoria: res.titulo,
+<<<<<<< HEAD
           estadoPostulante: estado,
+=======
+          estadoPostulante: status,
+>>>>>>> 19f958e0aa95efba11aeddb214ca0fe909043589
         }
         this.emailService.sendEmail(email).subscribe({
           next: (res) => {
@@ -99,6 +133,5 @@ export class MostrarPostulantePage implements OnInit {
     });
     await modal.present();
   }
-
 
 }

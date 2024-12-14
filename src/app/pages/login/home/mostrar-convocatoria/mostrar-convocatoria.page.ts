@@ -18,6 +18,7 @@ export class MostrarConvocatoriaPage implements OnInit {
   estado!: string;
   convocatoria!: ConvocatoriaForTableDTO;
   image!: any;
+  etapa!:string;
 
   constructor(private route: ActivatedRoute,
     private convocatoriaService: ConvocatoriaService,
@@ -39,6 +40,7 @@ export class MostrarConvocatoriaPage implements OnInit {
         this.convocatoria.fechaFinReclutamiento = this.formatearFecha( this.convocatoria.fechaFinReclutamiento);
         this.convocatoria.fechaInicioSeleccion = this.formatearFecha( this.convocatoria.fechaInicioSeleccion);
         this.convocatoria.fechaFinSeleccion = this.formatearFecha( this.convocatoria.fechaFinSeleccion);
+        console.log(this.convocatoria);
         this.obtenerImagen(this.convocatoria.imagen);
       },
       error: (error) => {
@@ -74,8 +76,9 @@ export class MostrarConvocatoriaPage implements OnInit {
     return formattedDate;
   }
 
-  verPostulantes(){
+  verPostulantes(etapa: string){
     console.log(this.convocatoria.id);
-    this.router.navigate(['/postulantes', this.convocatoria.id, this.estado]);
+    this.etapa = etapa;
+    this.router.navigate(['/postulantes', this.convocatoria.id, this.estado, this.etapa]);
   }
 }
