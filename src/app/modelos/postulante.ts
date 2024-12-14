@@ -13,6 +13,7 @@ export interface Postulante {
 export interface PostulanteConvocatoriaDTO {
   curriculum: string;  
   aceptado?: boolean;
+  estado?: string;
 }
 export interface PostulanteDto {
   id: number;

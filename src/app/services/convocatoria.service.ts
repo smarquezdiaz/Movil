@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Convocatoria, ConvocatoriaForTableDTO, ConvocatoriaParaMostrar, ConvocatoriaParaPostulantes } from '../modelos/convocatoria';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { PostulanteDto } from '../modelos/postulante';
 
 @Injectable({
   providedIn: 'root'

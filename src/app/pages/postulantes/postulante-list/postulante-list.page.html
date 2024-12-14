@@ -7,13 +7,13 @@
   </div>
   
   <ion-list>
-    <ion-item *ngFor="let postulante of postulantes" [routerLink]="['./mostrar-postulante', convocatoriaId, postulante.id]"
+    <ion-item *ngFor="let postulante of postulantes" [routerLink]="['./mostrar-postulante', convocatoriaId, postulante.id, estado, etapa]"
     >
       <ion-label>
         <h2>{{ postulante.nombre }} {{ postulante.apellido }}</h2>
         <p>{{ postulante.correo }}</p>
       </ion-label>
-      <ion-note slot="end" *ngIf="postulante.estado">{{ postulante.estado }}</ion-note>
+      <ion-note slot="end" *ngIf="postulante.datosAdicionales.estado ">{{ postulante.datosAdicionales.estado }}</ion-note>
     </ion-item>
   </ion-list>
 </ion-content>

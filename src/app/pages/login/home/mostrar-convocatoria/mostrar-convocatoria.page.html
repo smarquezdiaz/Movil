@@ -9,13 +9,28 @@
     <hr class="divider-thin">
     <p><strong>Descripción:</strong> <br></p>
     <p>{{convocatoria.descripcion}}</p>
-    <div fxLayout="row" fxLayoutAlign="center center" style="gap: 20px;">
-        <ion-icon name="calendar-clear-sharp"></ion-icon>
-        <p>{{convocatoria.fechaInicioReclutamiento}} - {{convocatoria.fechaFinReclutamiento}}</p>
+    <hr class="divider-thin">
+    <div fxLayout="row" style="gap: 5px;">
+      <div fxLayout="row" fxLayoutAlign="center center" style="gap: 5px;" class="fecha-container">
+          <ion-icon name="calendar-clear-sharp"></ion-icon>
+        <div>
+          <p class="fecha-container-title">Fecha Reclutamiento</p>
+          <p class="fecha-container-info">{{convocatoria.fechaInicioReclutamiento}} - {{convocatoria.fechaFinReclutamiento}}</p>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center" style="gap: 5px;" class="fecha-container">
+          <ion-icon name="calendar-clear-sharp"></ion-icon>
+        <div>
+          <p class="fecha-container-title">Fecha Selección</p>
+          <p class="fecha-container-info">{{convocatoria.fechaInicioSeleccion}} - {{convocatoria.fechaFinSeleccion}}</p>
+        </div>
+      </div>
     </div>
     <hr class="divider-thin">
     <ion-buttons fxLayoutAlign="center end">
-        <ion-button *ngIf="this.estado === 'En curso'" (click)="verPostulantes()">Ver Postulantes</ion-button>
+        <ion-button *ngIf="this.estado === 'En curso' || this.estado === 'Finalizado'" (click)="verPostulantes('empty')">Ver Postulantes</ion-button>
+        <ion-button *ngIf="this.estado === 'En selección'" (click)="verPostulantes('preseleccionar')">Preseleccionar Postulantes</ion-button>
+        <ion-button *ngIf="this.estado === 'En selección'" (click)="verPostulantes('seleccionar')">Seleccionar Postulantes</ion-button>
     </ion-buttons>
   </div>
 </ion-content>
