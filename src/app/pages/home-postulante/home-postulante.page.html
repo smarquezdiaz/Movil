@@ -9,7 +9,13 @@
           <h2>{{convocatoria.titulo}}</h2>
           <div fxLayout="row" fxLayoutAlign="center center" style="gap: 20px;" class="mini-menu">
             <ion-icon name="calendar-clear-sharp"></ion-icon>
-            <p>{{convocatoria.fechaInicio}} - {{convocatoria.fechaFin}}</p>
+            <!-- Mostrar fechas de reclutamiento -->
+            <p>{{convocatoria.fechaInicioReclutamiento}} - {{convocatoria.fechaFinReclutamiento}}</p>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center center" style="gap: 20px;" class="mini-menu">
+            <ion-icon name="calendar-clear-sharp"></ion-icon>
+            <!-- Mostrar fechas de selección -->
+            <p>{{convocatoria.fechaInicioSeleccion}} - {{convocatoria.fechaFinSeleccion}}</p>
           </div>
         </div>
       </ion-label>

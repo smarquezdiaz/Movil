@@ -1,21 +1,28 @@
-<app-header backButton="/home" logged="true"></app-header>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalles de la Convocatoria</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-<ion-content >
-  <div *ngIf="convocatoria" class="container-mostrar-convocatoria">
-    <h1 fxLayoutAlign="center">{{convocatoria.titulo}}</h1>
-    <div class="image-container" *ngIf="image" fxLayoutAlign="center">
-        <img [src]="image" alt="Uploaded Image" />
-    </div>
-    <hr class="divider-thin">
-    <p><strong>Descripción:</strong> <br></p>
-    <p>{{convocatoria.descripcion}}</p>
-    <div fxLayout="row" fxLayoutAlign="center center" style="gap: 20px;">
-        <ion-icon name="calendar-clear-sharp"></ion-icon>
-        <p>{{convocatoria.fechaInicio}} - {{convocatoria.fechaFin}}</p>
-    </div>
-    <hr class="divider-thin">
-    <ion-buttons fxLayoutAlign="center end">
-        <ion-button (click)="verPostulantes()">Ver Postulantes</ion-button>
-    </ion-buttons>
-  </div>
+<ion-content>
+  <ion-card>
+    <ion-img [src]="image"></ion-img>
+
+    <ion-card-header>
+      <ion-card-title>{{ convocatoria.titulo }}</ion-card-title>
+      <ion-card-subtitle>{{ convocatoria.descripcion }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="fecha-container">
+        <p><strong>Inicio del reclutamiento:</strong> {{ convocatoria.fechaInicioReclutamiento }}</p>
+        <p><strong>Fin del reclutamiento:</strong> {{ convocatoria.fechaFinReclutamiento }}</p>
+        <p><strong>Inicio de la selección:</strong> {{ convocatoria.fechaInicioSeleccion }}</p>
+        <p><strong>Fin de la selección:</strong> {{ convocatoria.fechaFinSeleccion }}</p>
+      </div>
+
+      <ion-button expand="full" (click)="verPostulantes()">Ver Postulantes</ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+

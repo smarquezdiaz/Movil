@@ -34,8 +34,11 @@ export class MostrarConvocatoriaPage implements OnInit {
     this.convocatoriaService.obtenerConvocatoria(this.id).subscribe({
       next: (res) => {
         this.convocatoria = res;
-        this.convocatoria.fechaFin = this.formatearFecha( this.convocatoria.fechaFin);
-        this.convocatoria.fechaInicio = this.formatearFecha( this.convocatoria.fechaInicio);
+        this.convocatoria.fechaInicioReclutamiento = this.formatearFecha(this.convocatoria.fechaInicioReclutamiento);
+        this.convocatoria.fechaFinReclutamiento = this.formatearFecha(this.convocatoria.fechaFinReclutamiento);
+        this.convocatoria.fechaInicioSeleccion = this.formatearFecha(this.convocatoria.fechaInicioSeleccion);
+        this.convocatoria.fechaFinSeleccion = this.formatearFecha(this.convocatoria.fechaFinSeleccion);
+
         console.log(this.convocatoria);
         this.obtenerImagen(this.convocatoria.imagen);
       },

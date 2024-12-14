@@ -21,7 +21,7 @@ export class RegisterConvocatoriaPage implements OnInit {
   form!: FormGroup;
   image: string | undefined;
   selectedDate: string = '';
-  currentField!: 'fechaInicio' | 'fechaFin';
+  currentField!: 'fechaInicioReclutamiento' | 'fechaFinReclutamiento' | 'fechaInicioSeleccion' | 'fechaFinSeleccion';  // Aseguramos que el tipo sea correcto
   userId!: number;
 
   constructor(
@@ -37,14 +37,14 @@ export class RegisterConvocatoriaPage implements OnInit {
     this.form = this.formBuilder.group({
       titulo: ['', Validators.required],
       descripcion: ['', Validators.required],
-      fechaInicio: ['', Validators.required],
-      fechaFin: ['', Validators.required],
+      fechaInicioReclutamiento: ['', Validators.required],
+      fechaFinReclutamiento: ['', Validators.required],
+      fechaInicioSeleccion: ['', Validators.required],
+      fechaFinSeleccion: ['', Validators.required],
       cantidadMaxPost: ['', Validators.required],
       imagen: [''],
       empresa: [this.userId = this.utilsService.getFromLocalStorage('userId')]
-
-    }, { validators: [this.fechaFinNoMenorQueInicio] }
-    );
+    }, { validators: [this.fechaFinNoMenorQueInicio] });
     this.form.patchValue({empresa: this.userId});
   }
 
@@ -84,8 +84,8 @@ export class RegisterConvocatoriaPage implements OnInit {
     return null;  
   }
   
-  openDatetimeModal(field: 'fechaInicio' | 'fechaFin') {
-    this.currentField = field;
+  openDatetimeModal(field: 'fechaInicioReclutamiento' | 'fechaFinReclutamiento' | 'fechaInicioSeleccion' | 'fechaFinSeleccion') {
+    this.currentField = field;  
     let initialDate: Date;
     if (this.form.get(field)?.value) {
       initialDate = new Date(this.form.get(field)?.value);
@@ -96,12 +96,19 @@ export class RegisterConvocatoriaPage implements OnInit {
   }
 
   fechaFinNoMenorQueInicio(form: FormGroup) {
-    const fechaInicio = form.get('fechaInicio')?.value;
-    const fechaFin = form.get('fechaFin')?.value;
+    const fechaInicioReclutamiento = form.get('fechaInicioReclutamiento')?.value;
+    const fechaFinReclutamiento = form.get('fechaFinReclutamiento')?.value;
+    const fechaInicioSeleccion = form.get('fechaInicioSeleccion')?.value;
+    const fechaFinSeleccion = form.get('fechaFinSeleccion')?.value;
 
+    // Validación para fechas de reclutamiento
+    if (fechaInicioReclutamiento && fechaFinReclutamiento && new Date(fechaFinReclutamiento) < new Date(fechaInicioReclutamiento)) {
+      return { fechaFinReclutamientoMenorQueInicio: true };
+    }
 
-    if (fechaInicio && fechaFin && new Date(fechaFin) < new Date(fechaInicio)) {
-      return { fechaFinMenorQueInicio: true };
+    // Validación para fechas de selección
+    if (fechaInicioSeleccion && fechaFinSeleccion && new Date(fechaFinSeleccion) < new Date(fechaInicioSeleccion)) {
+      return { fechaFinSeleccionMenorQueInicio: true };
     }
 
     return null;
@@ -112,8 +119,6 @@ export class RegisterConvocatoriaPage implements OnInit {
     this.form.get(this.currentField)?.setValue(selectedDate.toISOString().split('T')[0]);
     this.modal.dismiss();
   }
-
-
 
   async openModal() {
     const modal = await this.modalCtrl.create({
@@ -135,7 +140,7 @@ export class RegisterConvocatoriaPage implements OnInit {
     if (imageUrl) {
       convocatoria.imagen = imageUrl;
      }
-    console.log('Datos de la convocatoria que se enviarÃ¡n:', convocatoria);
+    console.log('Datos de la convocatoria que se enviarán:', convocatoria);
     this.convocatoriaService.crearConvocatoria(convocatoria).subscribe(
       async (response: Convocatoria) => {
         console.log('Convocatoria creada:', response);
@@ -147,7 +152,6 @@ export class RegisterConvocatoriaPage implements OnInit {
     );
   }
 
-
   async success() {
     const modal1 = await this.modalCtrl.create({
       component: ModalExitoComponent,
@@ -157,5 +161,4 @@ export class RegisterConvocatoriaPage implements OnInit {
     });
     await modal1.present();
   }
-
 }

@@ -47,4 +47,7 @@ export class PostulanteService {
     );
   }
 
+  getConvocatoriaPorId(idConvocatoria: number): Observable<any> {
+    return this.http.get(`${environment.api}/convocatorias/${idConvocatoria}`);
+  }
 }

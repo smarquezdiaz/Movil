@@ -2,78 +2,90 @@
   <app-header backButton="/home" logged="true"></app-header>
 </ion-header>
 
-
 <ion-content [formGroup]="form" class="ion-padding">
   <h1>Nueva Convocatoria</h1>
-  <div>
-    <ion-label position="stacked" label-placement="stacked">Nueva imagen*</ion-label>
-  </div>
 
+  <!-- Imagen -->
   <ion-label style="margin-bottom: 10px;">Imagen Convocatoria*</ion-label>
-      <div class="image-container" *ngIf="!image">
-        <img src="assets/images/image.png" alt="">
-      </div>
-      <div class="image-container" *ngIf="image">
-        <img [src]="image" alt="Uploaded Image" />
-      </div>
-      <ion-button fxLayoutAlign="end" class="image-button" (click)="changeImage()">Subir Imagen</ion-button>
+  <div class="image-container" *ngIf="!image">
+    <img src="assets/images/image.png" alt="Imagen predeterminada">
+  </div>
+  <div class="image-container" *ngIf="image">
+    <img [src]="image" alt="Imagen seleccionada">
+  </div>
+  <ion-button fxLayoutAlign="end" class="image-button" (click)="changeImage()">Subir Imagen</ion-button>
 
+  <!-- Título -->
   <ion-label>Título*</ion-label>
-  <ion-input formControlName="titulo" class="generic-input" placeholder=" Nuevo título" label-placement="stacked"
-    fill="outline" maxlength="50"></ion-input>
+  <ion-input formControlName="titulo" class="generic-input" placeholder="Nuevo título" label-placement="stacked" fill="outline" maxlength="50"></ion-input>
   <div *ngIf="form.get('titulo')?.errors && (form.get('titulo')?.dirty || form.get('titulo')?.touched)">
     <p *ngIf="form.get('titulo')?.hasError('required')">
       <ion-text color="danger">Campo obligatorio</ion-text>
     </p>
   </div>
 
+  <!-- Descripción -->
   <ion-label position="stacked">Descripción*</ion-label>
-  <ion-textarea formControlName="descripcion" placeholder="" class="generic-input" fill="outline" maxlength="255"
-    style="height: 150px"></ion-textarea>
+  <ion-textarea formControlName="descripcion" placeholder="" class="generic-input" fill="outline" maxlength="255" style="height: 150px"></ion-textarea>
   <div *ngIf="form.get('descripcion')?.errors && (form.get('descripcion')?.dirty || form.get('descripcion')?.touched)">
     <p *ngIf="form.get('descripcion')?.hasError('required')">
       <ion-text color="danger">Campo obligatorio</ion-text>
     </p>
   </div>
 
-  <ion-modal #dateModal>
-    <ng-template>
-      <ion-datetime [value]="selectedDate" (ionChange)="onDateSelected($event)" displayFormat="YYYY-MM-DD"
-        pickerFormat="YYYY-MM-DD" showDefaultTime="false"></ion-datetime>
-    </ng-template>
-  </ion-modal>
-
-  <ion-label position="stacked">Fecha de Inicio*</ion-label>
+  <!-- Fechas -->
+  <ion-label position="stacked">Fecha de Inicio del Reclutamiento*</ion-label>
   <div style="display: flex;">
-    <ion-input class="generic-input" fill="outline" formControlName="fechaInicio" placeholder="Fecha de inicio"
-      (click)="openDatetimeModal('fechaInicio')"></ion-input>
-    <ion-button fill="clear" (click)="openDatetimeModal('fechaInicio')">
+    <ion-input class="generic-input" fill="outline" formControlName="fechaInicioReclutamiento" placeholder="Fecha de inicio"
+      (click)="openDatetimeModal('fechaInicioReclutamiento')"></ion-input>
+    <ion-button fill="clear" (click)="openDatetimeModal('fechaInicioReclutamiento')">
       <ion-icon name="calendar-outline"></ion-icon>
     </ion-button>
   </div>
 
-  <ion-label position="stacked">Fecha de Finalización*</ion-label>
+  <ion-label position="stacked">Fecha de Finalización del Reclutamiento*</ion-label>
   <div style="display: flex;">
-    <ion-input class="generic-input" fill="outline" formControlName="fechaFin" placeholder="Fecha de finalización"
-      (click)="openDatetimeModal('fechaFin')">
-    </ion-input>
-    <ion-button fill="clear" (click)="openDatetimeModal('fechaFin')">
+    <ion-input class="generic-input" fill="outline" formControlName="fechaFinReclutamiento" placeholder="Fecha de finalización"
+      (click)="openDatetimeModal('fechaFinReclutamiento')"></ion-input>
+    <ion-button fill="clear" (click)="openDatetimeModal('fechaFinReclutamiento')">
       <ion-icon name="calendar-outline"></ion-icon>
     </ion-button>
   </div>
 
-  <ion-item *ngIf="form.hasError('fechaFinMenorQueInicio') && form.get('fechaFin')?.touched" color="danger">
-    <p>La fecha de finalización no puede ser menor que la fecha de inicio.</p>
+  <ion-item *ngIf="form.hasError('fechaFinReclutamientoMenorQueInicio') && form.get('fechaFinReclutamiento')?.touched" color="danger">
+    <p>La fecha de finalización del reclutamiento no puede ser menor que la de inicio.</p>
   </ion-item>
 
+  <ion-label position="stacked">Fecha de Inicio de Selección*</ion-label>
+  <div style="display: flex;">
+    <ion-input class="generic-input" fill="outline" formControlName="fechaInicioSeleccion" placeholder="Fecha de inicio"
+      (click)="openDatetimeModal('fechaInicioSeleccion')"></ion-input>
+    <ion-button fill="clear" (click)="openDatetimeModal('fechaInicioSeleccion')">
+      <ion-icon name="calendar-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+  <ion-label position="stacked">Fecha de Finalización de Selección*</ion-label>
+  <div style="display: flex;">
+    <ion-input class="generic-input" fill="outline" formControlName="fechaFinSeleccion" placeholder="Fecha de finalización"
+      (click)="openDatetimeModal('fechaFinSeleccion')"></ion-input>
+    <ion-button fill="clear" (click)="openDatetimeModal('fechaFinSeleccion')">
+      <ion-icon name="calendar-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+  <ion-item *ngIf="form.hasError('fechaFinSeleccionMenorQueInicio') && form.get('fechaFinSeleccion')?.touched" color="danger">
+    <p>La fecha de finalización de selección no puede ser menor que la de inicio.</p>
+  </ion-item>
+
+  <!-- Cantidad máxima de postulantes -->
   <ion-item style="display: flex; justify-content: space-between; align-items: center;">
     <div style="margin-right: 86px;">
       <ion-label style="margin: 0;">Cantidad Máxima de</ion-label>
       <ion-label style="margin: 0;">Postulantes*</ion-label>
     </div>
     <ion-select formControlName="cantidadMaxPost" interface="popover" placeholder="0" style="width: 100px;">
-      <ion-select-option *ngFor="let i of [].constructor(501); let index = index" [value]="index">{{ index
-        }}</ion-select-option>
+      <ion-select-option *ngFor="let i of [].constructor(501); let index = index" [value]="index">{{ index }}</ion-select-option>
     </ion-select>
   </ion-item>
 
@@ -82,4 +94,13 @@
     <ion-button class="main-button" (click)="openModal()" [disabled]="!this.form.valid">Crear</ion-button>
   </div>
 
+  <!-- Modal para seleccionar fechas -->
+  <ion-modal #dateModal>
+    <ng-template>
+      <ion-datetime [value]="selectedDate" (ionChange)="onDateSelected($event)" displayFormat="YYYY-MM-DD"
+        pickerFormat="YYYY-MM-DD" showDefaultTime="false"></ion-datetime>
+    </ng-template>
+  </ion-modal>
+
 </ion-content>
+

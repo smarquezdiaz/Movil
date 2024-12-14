@@ -1,14 +1,47 @@
 <app-header backButton="/home" logged="true"></app-header>
 
 <ion-content>
+  <!-- Encabezado para mostrar la convocatoria -->
   <div class="header">
-    <h2>Convocatoria {{ convocatoriaId }}</h2>
-    <span>Nro. postulantes {{ postulantes.length }}</span>
+    <h2>Convocatoria: {{ convocatoria?.titulo || 'Cargando...' }}</h2>
+    <span>Nro. postulantes: {{ postulantes.length }}</span>
   </div>
   
+  <!-- Mostrar detalles de la convocatoria -->
+  <ion-card *ngIf="convocatoria">
+    <ion-card-header>
+      <ion-card-title>Detalles de la Convocatoria</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Descripción:</strong> {{ convocatoria.descripcion }}</p>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <p><strong>Inicio Reclutamiento:</strong></p>
+            <p>{{ convocatoria.fechaInicioReclutamiento | date: 'dd/MM/yyyy' }}</p>
+          </ion-col>
+          <ion-col size="6">
+            <p><strong>Fin Reclutamiento:</strong></p>
+            <p>{{ convocatoria.fechaFinReclutamiento | date: 'dd/MM/yyyy' }}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <p><strong>Inicio Selección:</strong></p>
+            <p>{{ convocatoria.fechaInicioSeleccion | date: 'dd/MM/yyyy' }}</p>
+          </ion-col>
+          <ion-col size="6">
+            <p><strong>Fin Selección:</strong></p>
+            <p>{{ convocatoria.fechaFinSeleccion | date: 'dd/MM/yyyy' }}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Mostrar la lista de postulantes -->
   <ion-list>
-    <ion-item *ngFor="let postulante of postulantes" [routerLink]="['./mostrar-postulante', convocatoriaId, postulante.id]"
-    >
+    <ion-item *ngFor="let postulante of postulantes" [routerLink]="['./mostrar-postulante', convocatoriaId, postulante.id]">
       <ion-label>
         <h2>{{ postulante.nombre }} {{ postulante.apellido }}</h2>
         <p>{{ postulante.correo }}</p>
@@ -16,4 +49,5 @@
       <ion-note slot="end" *ngIf="postulante.estado">{{ postulante.estado }}</ion-note>
     </ion-item>
   </ion-list>
+
 </ion-content>

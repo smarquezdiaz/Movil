@@ -45,6 +45,10 @@ export class HomePage implements OnInit {
           titulo: convocatoria.titulo,
           cantidadMaxPost: convocatoria.cantidadMaxPost,
           postulantes: convocatoria.postulantes,
+          fechaInicioReclutamiento: convocatoria.fechaInicioReclutamiento,
+        fechaFinReclutamiento: convocatoria.fechaFinReclutamiento,
+        fechaInicioSeleccion: convocatoria.fechaInicioSeleccion,
+        fechaFinSeleccion: convocatoria.fechaFinSeleccion
         }));
       }
     })
@@ -61,6 +65,10 @@ export class HomePage implements OnInit {
           titulo: convocatoria.titulo,
           cantidadMaxPost: convocatoria.cantidadMaxPost,
           postulantes: convocatoria.postulantes,
+          fechaInicioReclutamiento: convocatoria.fechaInicioReclutamiento,
+        fechaFinReclutamiento: convocatoria.fechaFinReclutamiento,
+        fechaInicioSeleccion: convocatoria.fechaInicioSeleccion,
+        fechaFinSeleccion: convocatoria.fechaFinSeleccion
         }));
       }
     })
@@ -77,6 +85,10 @@ export class HomePage implements OnInit {
           titulo: convocatoria.titulo,
           cantidadMaxPost: convocatoria.cantidadMaxPost,
           postulantes: convocatoria.postulantes,
+          fechaInicioReclutamiento: convocatoria.fechaInicioReclutamiento,
+        fechaFinReclutamiento: convocatoria.fechaFinReclutamiento,
+        fechaInicioSeleccion: convocatoria.fechaInicioSeleccion,
+        fechaFinSeleccion: convocatoria.fechaFinSeleccion
         }));
       }
     })
