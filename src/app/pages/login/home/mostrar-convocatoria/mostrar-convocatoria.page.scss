@@ -46,5 +46,17 @@ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transform: scale(1.05); 
     --background: #046B20;  
 }
-
-
+.fecha-container {
+    display: flex;
+}
+.fecha-container p{
+    margin: 0 !important;
+}
+.fecha-container-title {
+    font-size: 12px !important;
+    font-weight: bold;
+}
+.fecha-container-info {
+    font-size: 11px !important;
+    color: #2C3E50CC;
+}

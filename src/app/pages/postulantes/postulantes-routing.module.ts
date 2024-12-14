@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: ':id',
+    path: ':id/:estado/:etapa',
     loadChildren: () => import('./postulante-list/postulante-list.module').then( m => m.PostulanteListPageModule)
   }
 

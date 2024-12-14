@@ -23,8 +23,9 @@ export class MostrarPostulantePage implements OnInit {
   idConvocatoria!: number;  
   idPostulante!: number;  
   postulante!: PostulanteDto;
-  userConvocatoria: any = {};
   isPostulating: boolean = false;
+  estado!: string;
+  etapa!: string;
   pdfSrc!: any;
 
   constructor(
@@ -45,22 +46,11 @@ export class MostrarPostulantePage implements OnInit {
       this.idPostulante = params['idPostulante'];
       console.log('ID Convocatoria:', this.idConvocatoria);
       console.log('ID Postulante:', this.idPostulante);
+      this.estado = params['estado'];
+      this.etapa = params['etapa'];
+      console.log('estado:', this.estado);
       this.obtenerPostulante();
     });
-
-    this.pdfSrc = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
-
-    /* this.imagenService.obtenerPdf('curriculum%20xample.pdf').subscribe({
-      next: (res) => {
-        console.log(res); 
-        let objectURL = URL.createObjectURL(res);
-        console.log(objectURL); 
-        this.pdfSrc = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-      },
-      error: (err) => {
-        console.error('Error al obtener el PDF', err);
-      }
-    }); */
   }
 
 
@@ -68,18 +58,17 @@ export class MostrarPostulantePage implements OnInit {
     this.postulanteService.obtenerPostulantePorConvocatoria(this.idConvocatoria, this.idPostulante).subscribe({
       next: (res) => {
         this.postulante = res;
-        this.userConvocatoria.aceptado = res.datosAdicionales.aceptado;
         console.log('Postulante encontrado:', this.postulante);
-        /* this.imagenService.obtenerPdf(this.postulante.datosAdicionales.curriculum).subscribe({
+        this.imagenService.obtenerPdf(this.postulante.datosAdicionales.curriculum).subscribe({
           next: (res) => {
             let objectURL = URL.createObjectURL(res);
-            this.pdfSrc = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+            this.pdfSrc = objectURL;
             console.log(this.pdfSrc);
           },
           error: (err) => {
             console.error('Error al obtener el PDF', err);
           }
-        }); */
+        });
       },
       error: (err) => {
         console.error('Error al obtener postulante:', err);
@@ -89,7 +78,7 @@ export class MostrarPostulantePage implements OnInit {
 
 
 
-  cambiarEstado(isAccepted: boolean) {
+  cambiarEstado(status: string) {
     this.isPostulating = true;
     this.convocatoriaService.obtenerConvocatoria(this.idConvocatoria).subscribe({
       next: (res) => {
@@ -98,7 +87,7 @@ export class MostrarPostulantePage implements OnInit {
           idPostulante: this.postulante.id,
           idConvocatoria: this.idConvocatoria,
           tituloConvocatoria: res.titulo,
-          aceptado: isAccepted,
+          estadoPostulante: status,
         }
         this.emailService.sendEmail(email).subscribe({
           next: (res) => {

@@ -4,12 +4,13 @@
   <div class="title-container">
     <div class="titles-container">
       <!-- <h1>Mis Convocatorias</h1> -->
-      <ion-button [ngClass]="isVigente ? 'isVigente' : 'second-button' " (click)="cargarConvocatoriasVigentes()">
-        Vigentes
-      </ion-button>
-      <ion-button class="small-button" [ngClass]="isVigente ? 'small-button' : 'isNotVigente' "  (click)="cargarConvocatoriasNoVigentes()">
-        No Vigentes
-      </ion-button>
+      <ion-select aria-label="Fruit" interface="popover" placeholder="Selecciona un estado" (ionChange)="handleChange($event)">
+        <ion-select-option value="">Todos</ion-select-option>
+        <ion-select-option value="Por comenzar">Por comenzar</ion-select-option>
+        <ion-select-option value="En curso">En curso</ion-select-option>
+        <ion-select-option value="En selección">En selección</ion-select-option>
+        <ion-select-option value="Finalizado">Finalizado</ion-select-option>
+      </ion-select>
       <ion-button class="small-button" routerLink="/login/register/register-convocatoria">
         Nueva <ion-icon name="add-outline" style="font-size: 25px;"></ion-icon>
       </ion-button>
@@ -19,13 +20,21 @@
         <ion-col *ngFor="let title of titles">{{title}}</ion-col>
       </ion-row>
     </ion-grid>
-    <ion-grid [fixed]="true">
-      <ion-row class="data" *ngFor="let item of list">
-        <ion-col >{{item.titulo}}</ion-col>
-        <ion-col >{{item.postulantes}}</ion-col>
-        <ion-col><ion-icon name="chevron-forward-outline" (click)="mostrarConvocatoria(item.id)"></ion-icon></ion-col>
-      </ion-row>
-    </ion-grid>
+    <div class="container-postulant-img">
+      <ion-item *ngFor="let item of list" [routerLink]="['./mostrar-convocatoria', item.id, item.estado]">
+        <ion-label *ngIf="item" class="label-home">
+          <div class="content-row">
+            <div>
+              <p>{{item.titulo}}</p>
+              <h2 [ngClass]="changeColor(item.estado)">{{item.estado}}</h2>
+            </div>
+            <div class="postulantes">
+              <p>{{item.postulantes}}</p>
+            </div>
+          </div>
+        </ion-label>
+      </ion-item>      
+    </div>
   </div>
 </ion-content>
 

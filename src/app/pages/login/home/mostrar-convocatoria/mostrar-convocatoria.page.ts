@@ -2,7 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Convocatoria, ConvocatoriaParaMostrar } from 'src/app/modelos/convocatoria';
+import { Convocatoria, ConvocatoriaForTableDTO, ConvocatoriaParaMostrar } from 'src/app/modelos/convocatoria';
 import { ConvocatoriaService } from 'src/app/services/convocatoria.service';
 import { ImagenService } from 'src/app/services/imagen.service';
 
@@ -14,8 +14,10 @@ import { ImagenService } from 'src/app/services/imagen.service';
 export class MostrarConvocatoriaPage implements OnInit {
 
   id!: number;
-  convocatoria!: ConvocatoriaParaMostrar;
+  estado!: string;
+  convocatoria!: ConvocatoriaForTableDTO;
   image!: any;
+  etapa!:string;
 
   constructor(private route: ActivatedRoute,
     private convocatoriaService: ConvocatoriaService,
@@ -27,13 +29,15 @@ export class MostrarConvocatoriaPage implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.id = params['id'];
-      console.log(this.id);
+      this.estado = params['estado'];
     })
     this.convocatoriaService.obtenerConvocatoria(this.id).subscribe({
       next: (res) => {
         this.convocatoria = res;
-        this.convocatoria.fechaFin = this.formatearFecha( this.convocatoria.fechaFin);
-        this.convocatoria.fechaInicio = this.formatearFecha( this.convocatoria.fechaInicio);
+        this.convocatoria.fechaInicioReclutamiento = this.formatearFecha( this.convocatoria.fechaInicioReclutamiento);
+        this.convocatoria.fechaFinReclutamiento = this.formatearFecha( this.convocatoria.fechaFinReclutamiento);
+        this.convocatoria.fechaInicioSeleccion = this.formatearFecha( this.convocatoria.fechaInicioSeleccion);
+        this.convocatoria.fechaFinSeleccion = this.formatearFecha( this.convocatoria.fechaFinSeleccion);
         console.log(this.convocatoria);
         this.obtenerImagen(this.convocatoria.imagen);
       },
@@ -63,8 +67,9 @@ export class MostrarConvocatoriaPage implements OnInit {
     return formattedDate;
   }
 
-  verPostulantes(){
+  verPostulantes(etapa: string){
     console.log(this.convocatoria.id);
-    this.router.navigate(['/postulantes', this.convocatoria.id]);
+    this.etapa = etapa;
+    this.router.navigate(['/postulantes', this.convocatoria.id, this.estado, this.etapa]);
   }
 }
