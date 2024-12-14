@@ -1,26 +1,19 @@
 <app-header backButton="/home" logged="true"></app-header>
 
 <ion-content>
-  <div class="header" *ngIf="convocatoria">
-    <h2>{{ convocatoria.titulo }}</h2>
+  <div class="header">
+    <h2>Convocatoria {{ convocatoriaId }}</h2>
     <span>Nro. postulantes {{ postulantes.length }}</span>
-  </div> 
+  </div>
+  
   <ion-list>
-<<<<<<< HEAD
-    <ion-item *ngFor="let postulante of postulantes" [routerLink]="['./mostrar-postulante', convocatoriaId, postulante.id, estado]"
-=======
     <ion-item *ngFor="let postulante of postulantes" [routerLink]="['./mostrar-postulante', convocatoriaId, postulante.id, estado, etapa]"
->>>>>>> 19f958e0aa95efba11aeddb214ca0fe909043589
     >
       <ion-label>
         <h2>{{ postulante.nombre }} {{ postulante.apellido }}</h2>
         <p>{{ postulante.correo }}</p>
       </ion-label>
-<<<<<<< HEAD
-      <ion-note slot="end" *ngIf="postulante.datosAdicionales.estado">{{ postulante.datosAdicionales.estado }}</ion-note>
-=======
       <ion-note slot="end" *ngIf="postulante.datosAdicionales.estado ">{{ postulante.datosAdicionales.estado }}</ion-note>
->>>>>>> 19f958e0aa95efba11aeddb214ca0fe909043589
     </ion-item>
   </ion-list>
 </ion-content>

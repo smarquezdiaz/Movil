@@ -25,11 +25,8 @@ export class MostrarPostulantePage implements OnInit {
   postulante!: PostulanteDto;
   isPostulating: boolean = false;
   estado!: string;
-<<<<<<< HEAD
-=======
   etapa!: string;
   pdfSrc!: any;
->>>>>>> 19f958e0aa95efba11aeddb214ca0fe909043589
 
   constructor(
     private route: ActivatedRoute,
@@ -49,15 +46,9 @@ export class MostrarPostulantePage implements OnInit {
       this.idPostulante = params['idPostulante'];
       console.log('ID Convocatoria:', this.idConvocatoria);
       console.log('ID Postulante:', this.idPostulante);
-<<<<<<< HEAD
-
-      this.estado = params['estado'];
-
-=======
       this.estado = params['estado'];
       this.etapa = params['etapa'];
       console.log('estado:', this.estado);
->>>>>>> 19f958e0aa95efba11aeddb214ca0fe909043589
       this.obtenerPostulante();
     });
   }
@@ -87,11 +78,7 @@ export class MostrarPostulantePage implements OnInit {
 
 
 
-<<<<<<< HEAD
-  cambiarEstado(estado: string) {
-=======
   cambiarEstado(status: string) {
->>>>>>> 19f958e0aa95efba11aeddb214ca0fe909043589
     this.isPostulating = true;
     this.convocatoriaService.obtenerConvocatoria(this.idConvocatoria).subscribe({
       next: (res) => {
@@ -100,11 +87,7 @@ export class MostrarPostulantePage implements OnInit {
           idPostulante: this.postulante.id,
           idConvocatoria: this.idConvocatoria,
           tituloConvocatoria: res.titulo,
-<<<<<<< HEAD
-          estadoPostulante: estado,
-=======
           estadoPostulante: status,
->>>>>>> 19f958e0aa95efba11aeddb214ca0fe909043589
         }
         this.emailService.sendEmail(email).subscribe({
           next: (res) => {
