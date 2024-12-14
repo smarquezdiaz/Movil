@@ -14,9 +14,11 @@
             <ion-card-content>
               <!-- <ion-img *ngIf="convocatoria.convocatoria.imagenUrl" [src]="convocatoria.convocatoria.imagenUrl" alt="miniatura convocatoria"></ion-img> -->
               <p>{{ convocatoria.convocatoria.descripcion }}</p>
-              <p><strong>Fecha Inicio:</strong> {{ convocatoria.convocatoria.fechaInicio | date: 'dd/MM/yyyy' }}</p>
-              <p><strong>Fecha Fin:</strong> {{ convocatoria.convocatoria.fechaFin | date: 'dd/MM/yyyy' }}</p>
-              <p><strong>Estado de postulacion: </strong>{{ convocatoria.aceptado ? 'Aceptado' : 'No aceptado' }}</p>
+              <p><strong>Fecha Inicio Reclutamiento:</strong> {{ convocatoria.convocatoria.fechaInicioReclutamiento | date: 'dd/MM/yyyy' }}</p>
+              <p><strong>Fecha Fin Reclutamiento:</strong> {{ convocatoria.convocatoria.fechaFinReclutamiento | date: 'dd/MM/yyyy' }}</p>
+              <p><strong>Fecha Inicio Selección:</strong> {{ convocatoria.convocatoria.fechaInicioSeleccion | date: 'dd/MM/yyyy' }}</p>
+              <p><strong>Fecha Fin Selección:</strong> {{ convocatoria.convocatoria.fechaFinSeleccion | date: 'dd/MM/yyyy' }}</p>
+              <p><strong>Estado de postulacion: </strong>{{ convocatoria.estado }}</p>
             </ion-card-content>
           </ion-card>
         </ion-col>

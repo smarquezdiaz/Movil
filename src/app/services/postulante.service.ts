@@ -16,8 +16,8 @@ export class PostulanteService {
     return this.http.post<number>(environment.api + environment.backend.postulante + `/login`, user);
   }
 
-  getPostulantes(idConvocatoria: number): Observable<any> {
-    return this.http.get(environment.api + environment.backend.convocatoria +  `/${idConvocatoria}/postulantes`);
+  getPostulantes(idConvocatoria: number): Observable<PostulanteDto> {
+    return this.http.get<PostulanteDto>(environment.api + environment.backend.convocatoria +  `/${idConvocatoria}/postulantes`);
   }
 
   getPostulantesConEstado(idConvocatoria: number, estadoPostulantes: string): Observable<any> {

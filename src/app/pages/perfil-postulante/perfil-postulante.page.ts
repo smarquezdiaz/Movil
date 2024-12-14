@@ -10,7 +10,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class PerfilPostulantePage implements OnInit {
 
-  postulante!: Postulante; 
+  postulante: Postulante = {
+    nombre: '',
+    apellido: '',
+    carrera: '',
+    descripcion: '',
+    celular: '',
+    correo: '',
+    usuario: '',
+    contrasenia: ''
+  }; 
   idPostulante!: number;
 
   constructor(
@@ -41,6 +50,10 @@ export class PerfilPostulantePage implements OnInit {
         console.error('Error al obtener datos del postulante', error);
       }
     );
+  }
+
+  navigateToConvocatorias() {
+    this.router.navigate(['/perfil-postulante/convocatorias-postuladas']);
   }
 
   actualizarPostulante(): void {

@@ -31,4 +31,13 @@ export class ConvocatoriaService {
   obtenerConvocatoriasPorPostulante(idPostulante: number): Observable<ConvocatoriaParaPostulantes[]> {
     return this.http.get<ConvocatoriaParaPostulantes[]>(`${environment.api}/postulantes/${idPostulante}/all-convocatorias`);
   }
+  // Obtener convocatorias de una empresa específica
+  obtenerConvocatoriasPorEmpresa(idEmpresa: number): Observable<ConvocatoriaParaPostulantes[]> {
+    return this.http.get<ConvocatoriaParaPostulantes[]>(`${environment.api}/empresas/${idEmpresa}/convocatorias`);
+  }
+
+  // Obtener convocatorias vigentes de una empresa
+  obtenerConvocatoriasVigentesPorEmpresa(idEmpresa: number, esVigente: boolean): Observable<ConvocatoriaParaPostulantes[]> {
+    return this.http.get<ConvocatoriaParaPostulantes[]>(`${environment.api}/empresas/${idEmpresa}/convocatoriasVigentes?esVigente=${esVigente}`);
+  }
 }

@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { forkJoin } from 'rxjs';
-import { ConvocatoriaForTableDTO, ConvocatoriaInfo } from 'src/app/modelos/convocatoria';
+import { ConvocatoriaForTableDTO} from 'src/app/_DTO/convocatoriaForTableDTO';
+import { ConvocatoriaInfo } from 'src/app/modelos/convocatoria';
 import { AuthService } from 'src/app/services/auth.service';
 import { EmpresaService } from 'src/app/services/empresa.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -15,8 +16,8 @@ import { UtilsService } from 'src/app/services/utils.service';
 })
 export class HomePage implements OnInit {
 
-  titles = ['Título', 'Nro.postulantes','']
-  list!: ConvocatoriaForTableDTO[];
+  titles = ['Título', 'Nro.postulantes', '']
+  list!: ConvocatoriaForTableDTO [] ; 
   userId!: number;
   isVigente: boolean = true;
 
@@ -27,28 +28,92 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cargarConvocatorias();
+    this.cargarConvocatoriasVigentes(); 
   }
 
   ionViewWillEnter() {
-    this.cargarConvocatorias();
-  }
-  cargarConvocatorias() {
-    this.userId = this.utilsService.getFromLocalStorage('userId');
-    this.empresaService.obtenerConvocatorias(this.userId, "").subscribe({
-      next: (res) => {
-        this.list = res;
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    })
+    this.cargarConvocatoriasVigentes(); // Re-cargar convocatorias vigentes al entrar en la vista
   }
 
-  handleChange(e:any) {
-    // llamar convocatoria con estado
-    if( e.detail.value) {
-      console.log('esto: ' + e.detail.value);
+  cargarConvocatorias() {
+    this.userId = this.utilsService.getFromLocalStorage('userId');
+    console.log(this.userId);
+    const convocatorias$ = this.empresaService.getConvocatorias(this.userId);
+    forkJoin([convocatorias$]).subscribe({
+      next: ([convocatoriasBody]) => {
+        this.list = convocatoriasBody.map((convocatoria: any) => ({
+            id: convocatoria.id || 0, 
+            titulo: convocatoria.titulo || '',
+            descripcion: convocatoria.descripcion || '',
+            imagen: convocatoria.imagen || '',
+            cantidadMaxPost: convocatoria.cantidadMaxPost || 0,
+            vigente: convocatoria.vigente ?? false, 
+            fechaInicioReclutamiento: convocatoria.fechaInicioReclutamiento || '',
+            fechaFinReclutamiento: convocatoria.fechaFinReclutamiento || '',
+            fechaInicioSeleccion: convocatoria.fechaInicioSeleccion || '',
+            fechaFinSeleccion: convocatoria.fechaFinSeleccion || '',
+            estado: convocatoria.estado || '',
+            empresa: convocatoria.empresa || 0,
+            postulantes: convocatoria.postulantes || 0,
+          }));
+          
+      }
+    });
+  }
+
+  cargarConvocatoriasVigentes() {
+    this.isVigente = true;
+    this.userId = this.utilsService.getFromLocalStorage('userId');
+    const convocatorias$ = this.empresaService.getConvocatoriasVigentes(this.userId, true);
+    forkJoin([convocatorias$]).subscribe({
+      next: ([convocatoriasBody]) => {
+        this.list = convocatoriasBody.map((convocatoria: any) => ({
+          id: convocatoria.id || 0, 
+            titulo: convocatoria.titulo || '',
+            descripcion: convocatoria.descripcion || '',
+            imagen: convocatoria.imagen || '',
+            cantidadMaxPost: convocatoria.cantidadMaxPost || 0,
+            vigente: convocatoria.vigente ?? false, 
+            fechaInicioReclutamiento: convocatoria.fechaInicioReclutamiento || '',
+            fechaFinReclutamiento: convocatoria.fechaFinReclutamiento || '',
+            fechaInicioSeleccion: convocatoria.fechaInicioSeleccion || '',
+            fechaFinSeleccion: convocatoria.fechaFinSeleccion || '',
+            estado: convocatoria.estado || '',
+            empresa: convocatoria.empresa || 0,
+            postulantes: convocatoria.postulantes || 0,
+        }));
+      }
+    });
+  }
+
+  cargarConvocatoriasNoVigentes() {
+    this.isVigente = false;
+    this.userId = this.utilsService.getFromLocalStorage('userId');
+    const convocatorias$ = this.empresaService.getConvocatoriasVigentes(this.userId, false);
+    forkJoin([convocatorias$]).subscribe({
+      next: ([convocatoriasBody]) => {
+        this.list = convocatoriasBody.map((convocatoria: any) => ({
+          id: convocatoria.id || 0, 
+            titulo: convocatoria.titulo || '',
+            descripcion: convocatoria.descripcion || '',
+            imagen: convocatoria.imagen || '',
+            cantidadMaxPost: convocatoria.cantidadMaxPost || 0,
+            vigente: convocatoria.vigente ?? false, 
+            fechaInicioReclutamiento: convocatoria.fechaInicioReclutamiento || '',
+            fechaFinReclutamiento: convocatoria.fechaFinReclutamiento || '',
+            fechaInicioSeleccion: convocatoria.fechaInicioSeleccion || '',
+            fechaFinSeleccion: convocatoria.fechaFinSeleccion || '',
+            estado: convocatoria.estado || '',
+            empresa: convocatoria.empresa || 0,
+            postulantes: convocatoria.postulantes || 0,
+        }));
+      }
+    });
+  }
+
+  handleChange(e: any) {
+    if (e.detail.value) {
+      console.log('Estado seleccionado: ' + e.detail.value);
       this.userId = this.utilsService.getFromLocalStorage('userId');
       this.empresaService.obtenerConvocatoriasPorEstado(this.userId, e.detail.value).subscribe({
         next: (res) => {
@@ -57,36 +122,36 @@ export class HomePage implements OnInit {
         error: (error) => {
           console.log(error);
         }
-      })
+      });
     } else {
-      console.log('sin estado: ' + e.detail.value);
+      console.log('Sin estado seleccionado.');
       this.cargarConvocatorias();
     }
   }
 
-  mostrarConvocatoria(id: string) {
-    this.router.navigate(['/home/mostrar-convocatoria',id]);
+  mostrarConvocatoria(id: number) {
+    this.router.navigate(['/home/mostrar-convocatoria', id]);
   }
 
-  changeColor(estado: string){
-    switch(estado) {
+  changeColor(estado: string) {
+    switch (estado) {
       case 'Por comenzar':
         return {
           'label-home_state1': true,
         };
-      case 'En curso': 
+      case 'En curso':
         return {
           'label-home_state2': true,
         };
-      case 'En selección': 
+      case 'En selección':
         return {
           'label-home_state3': true,
-        }; 
-      case 'Finalizado': 
+        };
+      case 'Finalizado':
         return {
           'label-home_state4': true,
-        }; 
-      default: 
+        };
+      default:
         return {
           'label-home_default': true,
         };

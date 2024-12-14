@@ -42,15 +42,16 @@ export class ConvocatoriasPostuladasPage implements OnInit {
           this.convocatorias = convocatorias;
           this.convocatorias.forEach((convocatoria) => {
             const imagenName = convocatoria.convocatoria.imagen;
-            this.imagenService.obtenerImagen(imagenName).subscribe({
-              next: (res) => {
-                let objectURL = URL.createObjectURL(res);
-                convocatoria.convocatoria.imagenUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-              },
-              error: (error) => {
-                console.error("Error al cargar la imagen", error);
-              }
-            });
+            console.log(this.convocatorias)
+            // this.imagenService.obtenerImagen(imagenName).subscribe({
+            //   next: (res) => {
+            //     let objectURL = URL.createObjectURL(res);
+            //     convocatoria.convocatoria.imagenUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+            //   },
+            //   error: (error) => {
+            //     console.error("Error al cargar la imagen", error);
+            //   }
+            // });
           });
           this.showTable = true;
         },
