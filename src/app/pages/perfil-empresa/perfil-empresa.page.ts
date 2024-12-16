@@ -20,6 +20,7 @@ export class PerfilEmpresaPage implements OnInit {
   };
   convocatorias: ConvocatoriaForTableDTO[] = [];  
 
+  private apiUrl: string = environment.api; 
   constructor(
     private empresaService: EmpresaService, 
     private route: ActivatedRoute
