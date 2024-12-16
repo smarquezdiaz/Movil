@@ -11,6 +11,8 @@ export class ImagenService {
 
   constructor(private http:HttpClient) {}
 
+  //   NO MODIFICAR ESTOS SERVICIOS
+
   subirImagen (Image: any): Observable<string> { 
     return this.http.post<string>(environment.api + environment.backend.imagen, Image, {
       responseType: 'text' as 'json' 
