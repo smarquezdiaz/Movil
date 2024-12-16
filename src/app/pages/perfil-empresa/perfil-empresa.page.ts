@@ -3,9 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ConvocatoriaForTableDTO } from 'src/app/_DTO/convocatoriaForTableDTO';
 import { EmpresaDTO } from 'src/app/_DTO/empresaDTO';
 import { EmpresaService } from 'src/app/services/empresa.service';
-import { ImagenService } from 'src/app/services/imagen.service'; 
 import { environment } from 'src/environments/environment';
-import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-perfil-empresa',
@@ -17,20 +15,17 @@ export class PerfilEmpresaPage implements OnInit {
     id: '',  
     nombre: '',
     ubicacion: '',
-    imagen: '',
+    imagen: '',  // Ya no es necesario, pero puedes dejarlo si en tu modelo es requerido
     nit: '',
     contrasenia: '',
   };
   convocatorias: ConvocatoriaForTableDTO[] = [];  
-  imageEmpresa!: SafeUrl;  
 
   private apiUrl: string = environment.api; 
 
   constructor(
     private empresaService: EmpresaService, 
-    private route: ActivatedRoute,
-    private imagenService: ImagenService,  
-    private sanitizer: DomSanitizer  
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -44,26 +39,6 @@ export class PerfilEmpresaPage implements OnInit {
   getEmpresaDetails(idEmpresa: number) {
     this.empresaService.getEmpresa(idEmpresa).subscribe((data: any) => {  
       this.empresa = data;
-
-      // Obtener y mostrar la imagen de la empresa si está disponible
-      if (data.imagen) {
-        this.getImagenEmpresa(data.imagen);  
-      }
-    });
-  }
-
-  // Obtener la imagen de la empresa
-  getImagenEmpresa(nameImage: string) {
-    const imageUrl = `${this.apiUrl}/uploads/${nameImage}`;  
-    
-    this.imagenService.obtenerImagen(imageUrl).subscribe({
-      next: (res: Blob) => {
-        let objectURL = URL.createObjectURL(res);
-        this.imageEmpresa = this.sanitizer.bypassSecurityTrustUrl(objectURL); 
-      },
-      error: (error) => {
-        console.error('Error al obtener la imagen', error);
-      }
     });
   }
 
@@ -76,6 +51,7 @@ export class PerfilEmpresaPage implements OnInit {
 
     this.empresaService.updateEmpresa(parseInt(this.empresa.id), nuevoDTO).subscribe({
       next: (response: any) => {
+        alert('Datos de la empresa actualizados exitosamente');
       },
       error: (err) => {
         console.error(err);
