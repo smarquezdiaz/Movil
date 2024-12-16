@@ -21,7 +21,7 @@ export class RegisterConvocatoriaPage implements OnInit {
   form!: FormGroup;
   image: string | undefined;
   selectedDate: string = '';
-  currentField!: 'fechaIniReclutamiento' | 'fechaFinReclutamiento' | 'fechaIniSeleccion' | 'fechaFinSeleccion';
+  currentField!: 'fechaInicioReclutamiento' | 'fechaFinReclutamiento' | 'fechaInicioSeleccion' | 'fechaFinSeleccion';
   userId!: number;
 
   constructor(
@@ -37,9 +37,9 @@ export class RegisterConvocatoriaPage implements OnInit {
     this.form = this.formBuilder.group({
       titulo: ['', Validators.required],
       descripcion: ['', Validators.required],
-      fechaIniReclutamiento: ['', Validators.required],
+      fechaInicioReclutamiento: ['', Validators.required],
       fechaFinReclutamiento: ['', Validators.required],
-      fechaIniSeleccion: ['', Validators.required],
+      fechaInicioSeleccion: ['', Validators.required],
       fechaFinSeleccion: ['', Validators.required],
       cantidadMaxPost: ['', Validators.required],
       imagen: [''],
@@ -86,7 +86,7 @@ export class RegisterConvocatoriaPage implements OnInit {
     return null;  
   }
   
-  openDatetimeModal(field: 'fechaIniReclutamiento' | 'fechaFinReclutamiento' | 'fechaIniSeleccion' | 'fechaFinSeleccion') {
+  openDatetimeModal(field: 'fechaInicioReclutamiento' | 'fechaFinReclutamiento' | 'fechaInicioSeleccion' | 'fechaFinSeleccion') {
     this.currentField = field;
     let initialDate: Date;
     if (this.form.get(field)?.value) {
@@ -98,25 +98,25 @@ export class RegisterConvocatoriaPage implements OnInit {
   }
 
   fechaFinNoMenorQueInicio(form: FormGroup) {
-    const fechaIniReclutamiento = form.get('fechaIniReclutamiento')?.value;
+    const fechaInicioReclutamiento = form.get('fechaInicioReclutamiento')?.value;
     const fechaFinReclutamiento = form.get('fechaFinReclutamiento')?.value;
-    const fechaIniSeleccion = form.get('fechaIniSeleccion')?.value;
+    const fechaInicioSeleccion = form.get('fechaInicioSeleccion')?.value;
     const fechaFinSeleccion = form.get('fechaFinSeleccion')?.value;
   
     let errors: any = {};
   
-    if (fechaIniReclutamiento && fechaFinReclutamiento && 
-        new Date(fechaFinReclutamiento) < new Date(fechaIniReclutamiento)) {
+    if (fechaInicioReclutamiento && fechaFinReclutamiento && 
+        new Date(fechaFinReclutamiento) < new Date(fechaInicioReclutamiento)) {
       errors.fechaFinReclutamientoInvalida = true;
     }
   
-    if (fechaFinReclutamiento && fechaIniSeleccion && 
-        new Date(fechaIniSeleccion) < new Date(fechaFinReclutamiento)) {
-      errors.fechaIniSeleccionInvalida = true;
+    if (fechaFinReclutamiento && fechaInicioSeleccion && 
+        new Date(fechaInicioSeleccion) < new Date(fechaFinReclutamiento)) {
+      errors.fechaInicioSeleccionInvalida = true;
     }
   
     if (fechaIniSeleccion && fechaFinSeleccion && 
-        new Date(fechaFinSeleccion) < new Date(fechaIniSeleccion)) {
+        new Date(fechaFinSeleccion) < new Date(fechaInicioSeleccion)) {
       errors.fechaFinSeleccionInvalida = true;
     }
   
@@ -152,9 +152,9 @@ export class RegisterConvocatoriaPage implements OnInit {
   }
 
   async registrarConvocatoria(convocatoria: Convocatoria) {
-    convocatoria.fechaIniReclutamiento = new Date(convocatoria.fechaIniReclutamiento);
+    convocatoria.fechaInicioReclutamiento = new Date(convocatoria.fechaInicioReclutamiento);
     convocatoria.fechaFinReclutamiento = new Date(convocatoria.fechaFinReclutamiento);
-    convocatoria.fechaIniSeleccion = new Date(convocatoria.fechaIniSeleccion);
+    convocatoria.fechaInicioSeleccion = new Date(convocatoria.fechaInicioSeleccion);
     convocatoria.fechaFinSeleccion = new Date(convocatoria.fechaFinSeleccion);
   
     const imageUrl = await this.uploadImage();
