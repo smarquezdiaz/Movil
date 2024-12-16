@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ConvocatoriaForTableDTO } from 'src/app/_DTO/convocatoriaForTableDTO';
 import { EmpresaDTO } from 'src/app/_DTO/empresaDTO';
 import { EmpresaService } from 'src/app/services/empresa.service';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-perfil-empresa',
