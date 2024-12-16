@@ -12,9 +12,7 @@
 
     <!-- Datos de la Empresa -->
     <ion-card>
-      <!-- Mostrar imagen de la empresa -->
-      <ion-img [src]="empresa.imagen" alt="Imagen de la Empresa" *ngIf="empresa.imagen"></ion-img>
-      
+      <ion-img *ngIf="imageEmpresa" [src]="imageEmpresa" alt="Imagen de la Empresa"></ion-img>
       <ion-card-header>
         <ion-card-title>{{ empresa.nombre }}</ion-card-title>
         <ion-card-subtitle>{{ empresa.ubicacion }}</ion-card-subtitle>
@@ -31,8 +29,10 @@
           <ion-input [(ngModel)]="empresa.ubicacion" name="ubicacion" required></ion-input>
         </ion-item>
 
-        <!-- Eliminado el campo de entrada para la imagen -->
-        <!-- El campo de la imagen ya no es necesario, ya que solo se muestra la imagen -->
+        <ion-item>
+          <ion-label position="floating">Imagen</ion-label>
+          <ion-input [(ngModel)]="empresa.imagen" name="imagen" readonly></ion-input>
+        </ion-item>
 
         <ion-item>
           <ion-label position="floating">NIT</ion-label>
