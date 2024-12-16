@@ -51,7 +51,6 @@ export class PerfilEmpresaPage implements OnInit {
 
     this.empresaService.updateEmpresa(parseInt(this.empresa.id), nuevoDTO).subscribe({
       next: (response: any) => {
-        alert('Datos de la empresa actualizados exitosamente');
       },
       error: (err) => {
         console.error(err);
