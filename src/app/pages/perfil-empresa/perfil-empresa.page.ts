@@ -32,7 +32,6 @@ export class PerfilEmpresaPage implements OnInit {
     const idEmpresa = localStorage.getItem('userId');
     if (idEmpresa) {
       this.getEmpresaDetails(Number(idEmpresa));  
-      this.getConvocatoriasPasadas(Number(idEmpresa));  
     }
   }
 
