@@ -32,10 +32,10 @@ export interface ConvocatoriaParaMostrar {
   descripcion: string;  
   imagen: string;  
   cantidadMaxPost: number;  
-  fechaInicioReclutamiento: string;  
-  fechaFinReclutamiento: string;  
-  fechaInicioSeleccion: string;  
-  fechaFinSeleccion: string;  
+  fechaInicioReclutamiento: Date;  
+  fechaFinReclutamiento: Date;  
+  fechaInicioSeleccion: Date;  
+  fechaFinSeleccion: Date;  
   empresa: number;  
 }
 
@@ -46,9 +46,9 @@ export interface ConvocatoriaParaPostulantes {
   descripcion: string;  
   imagen: string;  
   cantidadMaxPost: number;  
-  fechaInicioReclutamiento: string;  
-  fechaFinReclutamiento: string;  
-  fechaInicioSeleccion: string;  
-  fechaFinSeleccion: string;  
+  fechaInicioReclutamiento: Date;  
+  fechaFinReclutamiento: Date;  
+  fechaInicioSeleccion: Date;  
+  fechaFinSeleccion: Date;  
   empresa: Empresa;  
 }
