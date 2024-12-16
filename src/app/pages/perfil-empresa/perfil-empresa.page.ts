@@ -54,10 +54,12 @@ export class PerfilEmpresaPage implements OnInit {
 
   // Obtener la imagen de la empresa
   getImagenEmpresa(nameImage: string) {
-    this.imagenService.obtenerImagen(nameImage).subscribe({
+    const imageUrl = `${this.apiUrl}/uploads/${nameImage}`;  
+    
+    this.imagenService.obtenerImagen(imageUrl).subscribe({
       next: (res: Blob) => {
         let objectURL = URL.createObjectURL(res);
-        this.imageEmpresa = this.sanitizer.bypassSecurityTrustUrl(objectURL);  // Usamos el sanitizer para asegurar la URL
+        this.imageEmpresa = this.sanitizer.bypassSecurityTrustUrl(objectURL); 
       },
       error: (error) => {
         console.error('Error al obtener la imagen', error);
