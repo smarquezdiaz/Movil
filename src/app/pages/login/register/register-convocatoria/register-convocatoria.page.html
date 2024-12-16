@@ -46,9 +46,9 @@
 
   <ion-label position="stacked">Fecha de Inicio de Reclutamiento*</ion-label>
   <div style="display: flex;">
-    <ion-input class="generic-input" fill="outline" formControlName="fechaIniReclutamiento" placeholder="Fecha de inicio de reclutamiento"
-      (click)="openDatetimeModal('fechaIniReclutamiento')"></ion-input>
-    <ion-button fill="clear" (click)="openDatetimeModal('fechaIniReclutamiento')">
+    <ion-input class="generic-input" fill="outline" formControlName="fechaInicioReclutamiento" placeholder="Fecha de inicio de reclutamiento"
+      (click)="openDatetimeModal('fechaInicioReclutamiento')"></ion-input>
+    <ion-button fill="clear" (click)="openDatetimeModal('fechaInicioReclutamiento')">
       <ion-icon name="calendar-outline"></ion-icon>
     </ion-button>
   </div>
@@ -68,14 +68,14 @@
 
   <ion-label position="stacked">Fecha de Inicio de Selección*</ion-label>
 <div style="display: flex;">
-  <ion-input class="generic-input" fill="outline" formControlName="fechaIniSeleccion" placeholder="Fecha de inicio de selección"
-    (click)="openDatetimeModal('fechaIniSeleccion')"></ion-input>
-  <ion-button fill="clear" (click)="openDatetimeModal('fechaIniSeleccion')">
+  <ion-input class="generic-input" fill="outline" formControlName="fechaInicioSeleccion" placeholder="Fecha de inicio de selección"
+    (click)="openDatetimeModal('fechaInicioSeleccion')"></ion-input>
+  <ion-button fill="clear" (click)="openDatetimeModal('fechaInicioSeleccion')">
     <ion-icon name="calendar-outline"></ion-icon>
   </ion-button>
 </div>
 
-<div *ngIf="form.errors?.['fechaIniSeleccionInvalida']" style="color: red; margin-top: 5px;">
+<div *ngIf="form.errors?.['fechaInicioSeleccionInvalida']" style="color: red; margin-top: 5px;">
   La fecha de inicio de selección no puede ser menor que la fecha de fin de reclutamiento
 </div>
 
