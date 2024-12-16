@@ -115,7 +115,7 @@ export class RegisterConvocatoriaPage implements OnInit {
       errors.fechaInicioSeleccionInvalida = true;
     }
   
-    if (fechaIniSeleccion && fechaFinSeleccion && 
+    if (fechaInicioSeleccion && fechaFinSeleccion && 
         new Date(fechaFinSeleccion) < new Date(fechaInicioSeleccion)) {
       errors.fechaFinSeleccionInvalida = true;
     }
