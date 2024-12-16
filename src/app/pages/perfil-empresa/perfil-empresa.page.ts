@@ -15,7 +15,7 @@ export class PerfilEmpresaPage implements OnInit {
     id: '',  
     nombre: '',
     ubicacion: '',
-    imagen: '',  // Ya no es necesario, pero puedes dejarlo si en tu modelo es requerido
+    imagen: '',  
     nit: '',
     contrasenia: '',
   };
