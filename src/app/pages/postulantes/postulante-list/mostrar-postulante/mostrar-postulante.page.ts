@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { ModalConfirmacionComponent } from 'src/app//shared/componentes/modal-confirmacion/modal-confirmacion.component';
 import { ModalExitoComponent } from 'src/app/shared/componentes/modal-exito/modal-exito.component';
 import { ActivatedRoute } from '@angular/router';
@@ -11,6 +11,8 @@ import { ConvocatoriaService } from 'src/app/services/convocatoria.service';
 import { PostulanteDto } from 'src/app/modelos/postulante';
 import { ImagenService } from 'src/app/services/imagen.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Directory, Filesystem } from '@capacitor/filesystem';
+
 
 
 @Component({
@@ -27,6 +29,8 @@ export class MostrarPostulantePage implements OnInit {
   estado!: string;
   etapa!: string;
   pdfSrc!: any;
+  progress = 0;
+  downloading = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,8 +40,16 @@ export class MostrarPostulantePage implements OnInit {
     private emailService: EmailService,
     private convocatoriaService: ConvocatoriaService,
     private imagenService: ImagenService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    ngZone: NgZone
   ) { 
+    Filesystem.addListener('progress', (progressStatus) => {
+      ngZone.run(() => {
+        const percentage = progressStatus.bytes / progressStatus.contentLength;
+        console.log(percentage);
+        this.progress = percentage;
+      });
+    });
   }
 
   ngOnInit() {
@@ -117,4 +129,13 @@ export class MostrarPostulantePage implements OnInit {
     await modal.present();
   }
 
+  async download() {
+    const url = this.pdfSrc;
+    this.downloading = true;
+    const { path } = await Filesystem.downloadFile({ directory: Directory.Cache, path: 'mypdf.pdf', url, progress: true });
+    if (!path) {
+      throw new Error(`Unable to download ${url}`);
+    }
+    this.downloading = false;
+  }
 }

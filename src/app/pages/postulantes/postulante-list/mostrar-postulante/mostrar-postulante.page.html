@@ -56,6 +56,10 @@
     [render-text]="true" 
     [original-size]="false" 
     style="width: 100%; height: 500px"></pdf-viewer>
+    @if (downloading) {
+      <ion-progress-bar [value]="progress"></ion-progress-bar>
+      }
+    <ion-button class="main-button" [disabled]="downloading" (click)="download()">Descargar</ion-button> <br />
   </div>
 
   <!-- <div class="button-container" *ngIf="(postulante.datosAdicionales.estado === 'Pendiente') && (estado!='En curso' && estado!='Finalizado') ">
