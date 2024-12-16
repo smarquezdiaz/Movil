@@ -11,7 +11,7 @@ import { ConvocatoriaService } from 'src/app/services/convocatoria.service';
 import { PostulanteDto } from 'src/app/modelos/postulante';
 import { ImagenService } from 'src/app/services/imagen.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Directory, Filesystem } from '@capacitor/filesystem';
+import { Directory, Encoding, Filesystem } from '@capacitor/filesystem';
 
 
 
@@ -31,6 +31,7 @@ export class MostrarPostulantePage implements OnInit {
   pdfSrc!: any;
   progress = 0;
   downloading = false;
+  blob!:any;
 
   constructor(
     private route: ActivatedRoute,
@@ -73,6 +74,7 @@ export class MostrarPostulantePage implements OnInit {
         console.log('Postulante encontrado:', this.postulante);
         this.imagenService.obtenerPdf(this.postulante.datosAdicionales.curriculum).subscribe({
           next: (res) => {
+            this.blob = res;
             let objectURL = URL.createObjectURL(res);
             this.pdfSrc = objectURL;
             console.log(this.pdfSrc);
@@ -129,7 +131,7 @@ export class MostrarPostulantePage implements OnInit {
     await modal.present();
   }
 
-  async download() {
+  /* async download() {
     const url = this.pdfSrc;
     this.downloading = true;
     const { path } = await Filesystem.downloadFile({ directory: Directory.Cache, path: 'mypdf.pdf', url, progress: true });
@@ -137,5 +139,46 @@ export class MostrarPostulantePage implements OnInit {
       throw new Error(`Unable to download ${url}`);
     }
     this.downloading = false;
+  } */
+    async download() {
+      const url = this.blob; // Suponemos que este es un Blob o URL
+      this.downloading = true;
+  
+      if (url instanceof Blob) {
+          const reader = new FileReader();
+  
+          reader.onloadend = async () => {
+              const base64Data = reader.result as string;
+              const fileName = 'mypdf.pdf';
+  
+              try {
+                  // Verificar si Documents está disponible y tiene permisos
+                  const { files } = await Filesystem.readdir({
+                      directory: Directory.Documents, // Utiliza Documents en lugar de Downloads
+                      path: '' // Raíz del directorio Documents
+                  });
+  
+                  console.log('Lista de directorios:', files);
+  
+                  // Guardar el archivo en Documents
+                  const result = await Filesystem.writeFile({
+                      path: fileName,
+                      data: base64Data.split(',')[1], // Eliminar encabezado base64
+                      directory: Directory.Documents, // Directorio Documents
+                  });
+  
+                  console.log('Archivo guardado:', result.uri);
+              } catch (error) {
+                  console.error('Error al guardar el archivo:', error);
+              }
+  
+              this.downloading = false; // Indicar que la descarga ha terminado
+          };
+  
+          reader.readAsDataURL(url); // Convertir Blob a DataURL (base64)
+      } else {
+          console.error('El URL no es un Blob.');
+          this.downloading = false;
+      }
   }
 }
