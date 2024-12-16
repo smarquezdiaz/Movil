@@ -52,7 +52,7 @@ ion-input {
 }
 
 ion-button {
-  --background: #A90B71; /* Color de fondo del botón */
+  --background: #A90B71 !important; /* Color de fondo del botón */
   --color: white; /* Color del texto en el botón */
   font-size: 1rem;
   border-radius: 10px;
