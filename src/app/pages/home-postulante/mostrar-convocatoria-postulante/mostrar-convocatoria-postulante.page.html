@@ -19,9 +19,13 @@
     <div class="info-pasantia">
       <p><strong>Acerca de la pasantía</strong> <br></p>
       <p>{{convocatoria.descripcion}}</p>
-      <div fxLayout="row" fxLayoutAlign="center center" style="gap: 20px;">
+       <div fxLayout="row" fxLayoutAlign="center center" style="gap: 20px;">
+        <ion-icon name="calendar-clear-sharp"></ion-icon>
+        <p><strong>Reclutamiento:</strong> {{convocatoria.fechaInicioReclutamiento}} - {{convocatoria.fechaFinReclutamiento}}</p>
+         <div fxLayout="row" fxLayoutAlign="center center" style="gap: 20px;">
           <ion-icon name="calendar-clear-sharp"></ion-icon>
-          <p>{{convocatoria.fechaInicio}} - {{convocatoria.fechaFin}}</p>
+        <p><strong>Selección:</strong> {{convocatoria.fechaInicioSeleccion}} - {{convocatoria.fechaFinSeleccion}}</p>
+      </div>
       </div>
     </div>
     <hr class="linea">
