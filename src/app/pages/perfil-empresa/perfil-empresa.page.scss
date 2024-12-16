@@ -42,7 +42,7 @@ ion-item {
 
 ion-label {
   font-size: 1rem;
-  color: #A90B71;
+  color: #EEE;
 }
 
 ion-input {
@@ -52,7 +52,7 @@ ion-input {
 }
 
 ion-button {
-  --background: #A90B71 !important; /* Color de fondo del botón */
+  --background: #EE40A1; /* Color de fondo del botón */
   --color: white; /* Color del texto en el botón */
   font-size: 1rem;
   border-radius: 10px;
@@ -102,8 +102,4 @@ p {
 
 strong {
   color: #A90B71; /* Color destacado para las etiquetas fuertes */
-}
-
-ion-card-content {
-  font-size: 1rem; /* Aumenta el tamaño de fuente en el contenido */
 }
