@@ -6,9 +6,9 @@ export interface Convocatoria {
   descripcion: string;
   imagen: string;
   cantidadMaxPost: number;
-  fechaIniReclutamiento: Date;
+  fechaInicioReclutamiento: Date;
   fechaFinReclutamiento: Date;
-  fechaIniSeleccion: Date;
+  fechaInicioSeleccion: Date;
   fechaFinSeleccion: Date;
   empresa: number;
   postulantes?: number;

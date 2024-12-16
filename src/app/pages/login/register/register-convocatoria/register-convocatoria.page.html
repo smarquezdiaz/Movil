@@ -46,9 +46,12 @@
 
   <ion-label position="stacked">Fecha de Inicio de Reclutamiento*</ion-label>
   <div style="display: flex;">
-    <ion-input class="generic-input" fill="outline" formControlName="fechaIniReclutamiento" placeholder="Fecha de inicio de reclutamiento"
-      (click)="openDatetimeModal('fechaIniReclutamiento')"></ion-input>
-    <ion-button fill="clear" (click)="openDatetimeModal('fechaIniReclutamiento')">
+    <!-- Muestra la fecha en formato dd-mm-yyyy en el input -->
+    <ion-input class="generic-input" fill="outline" formControlName="fechaInicioReclutamiento" placeholder="Fecha de inicio de reclutamiento"
+      [value]="form.get('fechaInicioReclutamiento')?.value ? (form.get('fechaInicioReclutamiento')?.value | date:'dd-MM-yyyy') : ''"
+      (click)="openDatetimeModal('fechaInicioReclutamiento')">
+    </ion-input>
+    <ion-button fill="clear" (click)="openDatetimeModal('fechaInicioReclutamiento')">
       <ion-icon name="calendar-outline"></ion-icon>
     </ion-button>
   </div>
@@ -56,6 +59,7 @@
   <ion-label position="stacked">Fecha de Finalización de Reclutamiento*</ion-label>
   <div style="display: flex;">
     <ion-input class="generic-input" fill="outline" formControlName="fechaFinReclutamiento" placeholder="Fecha de finalización de reclutamiento"
+      [value]="form.get('fechaFinReclutamiento')?.value ? (form.get('fechaFinReclutamiento')?.value | date:'dd-MM-yyyy') : ''"
       (click)="openDatetimeModal('fechaFinReclutamiento')"></ion-input>
     <ion-button fill="clear" (click)="openDatetimeModal('fechaFinReclutamiento')">
       <ion-icon name="calendar-outline"></ion-icon>
@@ -68,9 +72,10 @@
 
   <ion-label position="stacked">Fecha de Inicio de Selección*</ion-label>
 <div style="display: flex;">
-  <ion-input class="generic-input" fill="outline" formControlName="fechaIniSeleccion" placeholder="Fecha de inicio de selección"
-    (click)="openDatetimeModal('fechaIniSeleccion')"></ion-input>
-  <ion-button fill="clear" (click)="openDatetimeModal('fechaIniSeleccion')">
+  <ion-input class="generic-input" fill="outline" formControlName="fechaInicioSeleccion" placeholder="Fecha de inicio de selección"
+    [value]="form.get('fechaInicioSeleccion')?.value ? (form.get('fechaInicioSeleccion')?.value | date:'dd-MM-yyyy') : ''"
+    (click)="openDatetimeModal('fechaInicioSeleccion')"></ion-input>
+  <ion-button fill="clear" (click)="openDatetimeModal('fechaInicioSeleccion')">
     <ion-icon name="calendar-outline"></ion-icon>
   </ion-button>
 </div>
@@ -82,6 +87,7 @@
 <ion-label position="stacked">Fecha de Finalización de Selección*</ion-label>
 <div style="display: flex;">
   <ion-input class="generic-input" fill="outline" formControlName="fechaFinSeleccion" placeholder="Fecha de finalización de selección"
+    [value]="form.get('fechaFinSeleccion')?.value ? (form.get('fechaFinSeleccion')?.value | date:'dd-MM-yyyy') : ''"
     (click)="openDatetimeModal('fechaFinSeleccion')"></ion-input>
   <ion-button fill="clear" (click)="openDatetimeModal('fechaFinSeleccion')">
     <ion-icon name="calendar-outline"></ion-icon>
@@ -108,3 +114,4 @@
   </div>
 
 </ion-content>
+<app-bottom-menu></app-bottom-menu>

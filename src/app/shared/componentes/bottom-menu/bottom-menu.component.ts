@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
+import { UtilsService } from 'src/app/services/utils.service'; 
 
 @Component({
   selector: 'app-bottom-menu',
@@ -7,12 +8,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./bottom-menu.component.scss'],
 })
 export class BottomMenuComponent implements OnInit {
-  constructor(private router: Router) {} 
+  constructor(
+    private router: Router,
+    private utilsService : UtilsService
+  ) {} 
 
   ngOnInit() {}
 
   navigateTo(page: string) {
-    this.router.navigate([page]);
+    const rol = localStorage.getItem('rol');
+    if (page === 'perfil') {
+      if (rol === '"postulante"') {
+        this.router.navigate(['/perfil-postulante']);
+      } else if (rol === '"empresa"') {
+        this.router.navigate(['/perfil-empresa']);
+      }
+    } else if (page === 'home') {
+      if (rol === '"postulante"') {
+        this.router.navigate(['/home-postulante']);
+      } else if (rol === '"empresa"') {
+        this.router.navigate(['/home']);
+      }
+    }
   }
 }
-
