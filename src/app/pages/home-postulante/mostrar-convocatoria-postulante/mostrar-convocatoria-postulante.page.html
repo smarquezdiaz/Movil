@@ -1,49 +1,55 @@
 <app-header backButton="/home-postulante" logged="true"></app-header>
 
 <ion-content *ngIf="this.convocatoria">
+  <!-- Encabezado Empresa -->
   <div class="info-empresa-container">
     <div class="image-container" *ngIf="imageEmpresa" fxLayoutAlign="center">
-      <img [src]="imageEmpresa" alt="Uploaded Image" />
+      <img [src]="imageEmpresa" alt="Logo Empresa" />
     </div>
     <div>
-      <p>{{convocatoria.empresa.nombre}}</p>
-      <h2>{{convocatoria.titulo}}</h2>
+      <p class="empresa-nombre">{{convocatoria.empresa.nombre}}</p>
+      <h2 class="titulo">{{convocatoria.titulo}}</h2>
     </div>
   </div>
   <hr class="linea">
 
-  <div *ngIf="convocatoria" class="container-mostrar-convocatoria">
+  <!-- Contenido de la Convocatoria -->
+  <div class="container-mostrar-convocatoria">
+    <!-- Imagen Principal -->
     <div class="image-container" *ngIf="imageConvocatoria" fxLayoutAlign="center">
-      <img [src]="imageConvocatoria" alt="Uploaded Image" />
+      <img [src]="imageConvocatoria" alt="Convocatoria" />
     </div>
     <hr class="linea">
 
+    <!-- Información Principal -->
     <div class="info-pasantia">
-      <p><strong>Acerca de la pasantía</strong> <br></p>
+      <p><strong>Acerca de la pasantía</strong></p>
       <p>{{convocatoria.descripcion}}</p>
 
       <!-- Fechas de Reclutamiento -->
-      <div fxLayout="row" fxLayoutAlign="center center" style="gap: 20px;">
+      <div fxLayout="row" fxLayoutAlign="center center" style="gap: 10px;">
         <ion-icon name="calendar-clear-sharp"></ion-icon>
         <p><strong>Reclutamiento:</strong> {{convocatoria.fechaInicioReclutamiento}} - {{convocatoria.fechaFinReclutamiento}}</p>
       </div>
 
       <!-- Fechas de Selección -->
-      <div fxLayout="row" fxLayoutAlign="center center" style="gap: 20px;">
+      <div fxLayout="row" fxLayoutAlign="center center" style="gap: 10px;">
         <ion-icon name="calendar-clear-sharp"></ion-icon>
         <p><strong>Selección:</strong> {{convocatoria.fechaInicioSeleccion}} - {{convocatoria.fechaFinSeleccion}}</p>
       </div>
     </div>
     <hr class="linea">
 
-    <ion-buttons fxLayoutAlign="center end">
-      <ion-button (click)="setOpen(true)" expand="block" [disabled]="isPostulated">Aplicar</ion-button>
-    </ion-buttons>
+    <!-- Botón Aplicar -->
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <ion-button class="btn-aplicar" (click)="setOpen(true)" [disabled]="isPostulated">Aplicar</ion-button>
+    </div>
   </div>
 
   <!-- Modal para subir CV -->
-  <ion-modal class="modal-postular" [isOpen]="isModalOpen" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
-    <ng-template>
+  <ion-modal [isOpen]="isModalOpen" [initialBreakpoint]="0.6" [breakpoints]="[0, 0.6]">
+    <div class="modal-content">
+      <h3>Sube tu CV</h3>
       <div class="block">
         <input
           type="file"
@@ -52,13 +58,19 @@
           style="display: none;"
           (change)="onFileSelectedAndUpload($event)"
         />
-        <ion-button class="upload" (click)="triggerFileInput()">Subir CV</ion-button>
+        <ion-button class="upload-button" (click)="triggerFileInput()">Subir Archivo</ion-button>
         <p *ngIf="uploadedFileName">{{ uploadedFileName }}</p>
       </div>
+      <!-- Spinner de carga -->
       <div *ngIf="isUploading" class="loading-container">
         <ion-spinner name="crescent"></ion-spinner>
         <p>Subiendo archivo...</p>
       </div>
-      <ion-buttons fxLayoutAlign="center end">
+      <!-- Botones de Modal -->
+      <div class="button-group">
         <ion-button class="secondary-button" (click)="setOpen(false)">Cancelar</ion-button>
-        <ion-button class="main-button" [disabled]="!uploadedFileName" (click)="postularse()">En
+        <ion-button class="main-button" [disabled]="!uploadedFileName" (click)="postularse()">Enviar</ion-button>
+      </div>
+    </div>
+  </ion-modal>
+</ion-content>
