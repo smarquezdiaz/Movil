@@ -1,70 +1,40 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Perfil Empresa</ion-title>
+    <ion-title>Perfil de la Empresa</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <form (ngSubmit)="onUpdateEmpresa()" #empresaForm="ngForm">
+<ion-content>
+  <div class="empresa-details">
+    <h2>Detalles de la Empresa</h2>
+    <!-- Nombre de la empresa -->
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input [(ngModel)]="empresa.nombre" type="text"></ion-input>
+    </ion-item>
 
-    <!-- Datos de la Empresa -->
-    <ion-card>
-      <ion-img [src]="empresa.imagen" alt="Imagen de la Empresa"></ion-img>
-      <ion-card-header>
-        <ion-card-title>{{ empresa.nombre }}</ion-card-title>
-        <ion-card-subtitle>{{ empresa.ubicacion }}</ion-card-subtitle>
-      </ion-card-header>
+    <!-- Ubicación de la empresa -->
+    <ion-item>
+      <ion-label position="floating">Ubicación</ion-label>
+      <ion-input [(ngModel)]="empresa.ubicacion" type="text"></ion-input>
+    </ion-item>
 
-      <ion-card-content>
-        <ion-item>
-          <ion-label position="floating">Nombre</ion-label>
-          <ion-input [(ngModel)]="empresa.nombre" name="nombre" required></ion-input>
-        </ion-item>
+    <!-- NIT de la empresa -->
+    <ion-item>
+      <ion-label position="floating">NIT</ion-label>
+      <ion-input [(ngModel)]="empresa.nit" type="text"></ion-input>
+    </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Ubicación</ion-label>
-          <ion-input [(ngModel)]="empresa.ubicacion" name="ubicacion" required></ion-input>
-        </ion-item>
+    <!-- Contraseña de la empresa -->
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input [(ngModel)]="empresa.contrasenia" type="password"></ion-input>
+    </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Imagen</ion-label>
-          <ion-input [(ngModel)]="empresa.imagen" name="imagen"></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label position="floating">NIT</ion-label>
-          <ion-input [(ngModel)]="empresa.nit" name="nit" required></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input type="password" [(ngModel)]="empresa.contrasenia" name="contrasenia"></ion-input>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-button expand="full" type="submit" [disabled]="!empresaForm.form.valid">Actualizar</ion-button>
-  </form>
-
-  <!-- Convocatorias Pasadas -->
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Convocatorias Pasadas</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let convocatoria of convocatorias">
-          <ion-label>
-            <h2>{{ convocatoria.titulo }}</h2>
-            <p>{{ convocatoria.descripcion }}</p>
-            <!-- Aquí hemos eliminado la línea con la fecha de cierre -->
-          </ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+    <!-- Botón para actualizar los detalles de la empresa -->
+    <ion-button expand="full" color="primary" (click)="onUpdateEmpresa()">Actualizar</ion-button>
+  </div>
 </ion-content>

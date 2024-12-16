@@ -28,11 +28,11 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cargarConvocatoriasVigentes(); 
+    this.cargarConvocatorias(); 
   }
 
   ionViewWillEnter() {
-    this.cargarConvocatoriasVigentes(); // Re-cargar convocatorias vigentes al entrar en la vista
+    this.cargarConvocatorias(); // Re-cargar convocatorias vigentes al entrar en la vista
   }
 
   cargarConvocatorias() {

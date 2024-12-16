@@ -111,7 +111,7 @@ export class RegisterConvocatoriaPage implements OnInit {
   
     if (fechaFinReclutamiento && fechaInicioSeleccion && 
         new Date(fechaInicioSeleccion) < new Date(fechaFinReclutamiento)) {
-      errors.fechaIniSeleccionInvalida = true;
+      errors.fechaInicioSeleccionInvalida = true;
     }
   
     if (fechaInicioSeleccion && fechaFinSeleccion && 
@@ -143,7 +143,6 @@ export class RegisterConvocatoriaPage implements OnInit {
   }
 
   async registrarConvocatoria(convocatoria: Convocatoria) {
-    // Las fechas ya están en el formato correcto por defecto (yyyy-mm-dd)
     convocatoria.fechaInicioReclutamiento = new Date(convocatoria.fechaInicioReclutamiento);
     convocatoria.fechaFinReclutamiento = new Date(convocatoria.fechaFinReclutamiento);
     convocatoria.fechaInicioSeleccion = new Date(convocatoria.fechaInicioSeleccion);

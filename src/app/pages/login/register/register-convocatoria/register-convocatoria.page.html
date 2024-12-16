@@ -46,7 +46,6 @@
 
   <ion-label position="stacked">Fecha de Inicio de Reclutamiento*</ion-label>
   <div style="display: flex;">
-    <!-- Muestra la fecha en formato dd-mm-yyyy en el input -->
     <ion-input class="generic-input" fill="outline" formControlName="fechaInicioReclutamiento" placeholder="Fecha de inicio de reclutamiento"
       [value]="form.get('fechaInicioReclutamiento')?.value ? (form.get('fechaInicioReclutamiento')?.value | date:'dd-MM-yyyy') : ''"
       (click)="openDatetimeModal('fechaInicioReclutamiento')">
@@ -80,7 +79,7 @@
   </ion-button>
 </div>
 
-<div *ngIf="form.errors?.['fechaIniSeleccionInvalida']" style="color: red; margin-top: 5px;">
+<div *ngIf="form.errors?.['fechaInicioSeleccionInvalida']" style="color: red; margin-top: 5px;">
   La fecha de inicio de selección no puede ser menor que la fecha de fin de reclutamiento
 </div>
 

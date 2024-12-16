@@ -31,7 +31,6 @@ export class EmpresaService {
     return this.http.put(`${this.baseUrl}/${idEmpresa}`, empresaDTO);
   }
 
-  // Métodos relacionados con las convocatorias
   getConvocatorias(idEmpresa: number): Observable<ConvocatoriaForTableDTO[]> {
     return this.http.get<ConvocatoriaForTableDTO[]>(`${this.baseUrl}/${idEmpresa}/convocatorias`);
   }
