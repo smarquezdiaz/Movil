@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { ConvocatoriaForTableDTO } from 'src/app/_DTO/convocatoriaForTableDTO';
 import { EmpresaDTO } from 'src/app/_DTO/empresaDTO';
 import { EmpresaService } from 'src/app/services/empresa.service';
+import { ImagenService } from 'src/app/services/imagen.service';  // Importamos el servicio de imágenes
 import { environment } from 'src/environments/environment';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { ImageService } from 'src/app/services/image.service';  // Importamos el servicio de imágenes
+import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-perfil-empresa',
@@ -14,65 +14,63 @@ import { ImageService } from 'src/app/services/image.service';  // Importamos el
 })
 export class PerfilEmpresaPage implements OnInit {
   empresa: any = {
-    id: '',
+    id: '',  
     nombre: '',
     ubicacion: '',
     imagen: '',
     nit: '',
     contrasenia: '',
   };
-  imageEmpresa: SafeUrl;  // Variable para manejar la imagen de manera segura
-  convocatorias: ConvocatoriaForTableDTO[] = [];
+  convocatorias: ConvocatoriaForTableDTO[] = [];  
+  imageEmpresa!: SafeUrl;  // Variable para manejar la imagen de manera segura
 
-  private apiUrl: string = environment.api;
+  private apiUrl: string = environment.api; 
 
   constructor(
-    private empresaService: EmpresaService,
+    private empresaService: EmpresaService, 
     private route: ActivatedRoute,
-    private sanitizer: DomSanitizer,  // Usamos el sanitizer para URLs seguras
-    private imageService: ImageService  // Inyectamos el ImageService
+    private imagenService: ImagenService,  // Inyectamos el servicio de imágenes
+    private sanitizer: DomSanitizer  // Inyectamos el sanitizer
   ) {}
 
   ngOnInit() {
     const idEmpresa = localStorage.getItem('userId');
     if (idEmpresa) {
-      this.getEmpresaDetails(Number(idEmpresa));
+      this.getEmpresaDetails(Number(idEmpresa));  
     }
   }
 
   // Obtener los detalles de la empresa
   getEmpresaDetails(idEmpresa: number) {
-    this.empresaService.getEmpresa(idEmpresa).subscribe((data: any) => {
+    this.empresaService.getEmpresa(idEmpresa).subscribe((data: any) => {  
+      this.empresa = data;
+
+      // Obtener y mostrar la imagen de la empresa si está disponible
       if (data.imagen) {
-        // Llamamos al servicio de imagen para obtener la imagen de manera segura
-        this.obtenerImagenEmpresa(data.imagen);
+        this.getImagenEmpresa(data.imagen);  // Llamamos al servicio para obtener la imagen
       }
-      this.empresa = data;  // Asignamos el resto de la información de la empresa
-    }, (error) => {
-      console.error('Error al cargar los detalles de la empresa', error);
     });
   }
 
-  // Obtener la imagen de la empresa utilizando ImageService
-  obtenerImagenEmpresa(imagenUrl: string) {
-    this.imageService.obtenerImagen(imagenUrl).subscribe({
-      next: (res) => {
-        let objectURL = URL.createObjectURL(res);  // Convertimos el blob en un URL de objeto
-        this.imageEmpresa = this.sanitizer.bypassSecurityTrustUrl(objectURL);  // Sanitizamos la URL para que sea segura
+  // Obtener la imagen de la empresa
+  getImagenEmpresa(nameImage: string) {
+    this.imagenService.obtenerImagen(nameImage).subscribe({
+      next: (res: Blob) => {
+        let objectURL = URL.createObjectURL(res);
+        this.imageEmpresa = this.sanitizer.bypassSecurityTrustUrl(objectURL);  // Usamos el sanitizer para asegurar la URL
       },
       error: (error) => {
-        console.log('Error al obtener la imagen:', error);
-        // Aquí podrías establecer una imagen por defecto si la carga falla
+        console.error('Error al obtener la imagen', error);
       }
     });
   }
 
-  // Actualizar los detalles de la empresa (opcional)
+  // Actualizar los detalles de la empresa
   onUpdateEmpresa() {
     let nuevoDTO = new EmpresaDTO();
     nuevoDTO = {
       ...this.empresa
-    }
+    };
 
     this.empresaService.updateEmpresa(parseInt(this.empresa.id), nuevoDTO).subscribe({
       next: (response: any) => {
@@ -85,8 +83,3 @@ export class PerfilEmpresaPage implements OnInit {
     });
   }
 }
-
-    });
-  }
-}
-
