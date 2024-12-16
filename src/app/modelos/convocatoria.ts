@@ -6,9 +6,9 @@ export interface Convocatoria {
   descripcion: string;
   imagen: string;
   cantidadMaxPost: number;
-  fechaIniReclutamiento: Date;
+  fechaInicioReclutamiento: Date;
   fechaFinReclutamiento: Date;
-  fechaIniSeleccion: Date;
+  fechaInicioSeleccion: Date;
   fechaFinSeleccion: Date;
   empresa: number;
   postulantes?: number;
@@ -18,6 +18,10 @@ export interface ConvocatoriaInfo {
 id: number;
 titulo: string;
 cantidadMaxPost: number;
+fechaInicioReclutamiento: Date;  
+fechaFinReclutamiento: Date;  
+fechaInicioSeleccion: Date;  
+fechaFinSeleccion: Date; 
 postulantes?: number;
 }
 
@@ -27,20 +31,24 @@ titulo: string;
 descripcion: string;
 imagen: string;
 cantidadMaxPost: number;
-fechaInicio: string;
-fechaFin: string;
+fechaInicioReclutamiento: Date;  
+fechaFinReclutamiento: Date;  
+fechaInicioSeleccion: Date;  
+fechaFinSeleccion: Date; 
 empresa: number;
 }
 
 export interface ConvocatoriaParaPostulantes {
-  id?: number;
-  titulo: string;
-  descripcion: string;
-  imagen: string;
-  cantidadMaxPost: number;
-  fechaInicio: string;
-  fechaFin: string;
-  empresa: Empresa;
+  id: number;  
+  titulo: string;  
+  descripcion: string;  
+  imagen: string;  
+  cantidadMaxPost: number;  
+  fechaInicioReclutamiento: string;  
+  fechaFinReclutamiento: string;  
+  fechaInicioSeleccion: string;  
+  fechaFinSeleccion: string;  
+  empresa: Empresa;  
   }
 
 export interface ConvocatoriaForTableDTO {
