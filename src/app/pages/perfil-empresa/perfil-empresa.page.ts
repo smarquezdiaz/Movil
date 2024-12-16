@@ -11,39 +11,35 @@ import { EmpresaService } from 'src/app/services/empresa.service';
 })
 export class PerfilEmpresaPage implements OnInit {
   empresa: any = {
-    id:'',  // Cambié la tipificación para que coincida con el modelo correcto
+    id:'',  
     nombre: '',
     ubicacion: '',
     imagen: '',
     nit: '',
     contrasenia: '',
   };
-  convocatorias: ConvocatoriaForTableDTO[] = [];  // Cambié la tipificación para que coincida con el modelo correcto
+  convocatorias: ConvocatoriaForTableDTO[] = [];  
 
   constructor(
-    private empresaService: EmpresaService, // Usamos el servicio EmpresaService
+    private empresaService: EmpresaService, 
     private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
     const idEmpresa = localStorage.getItem('userId');
     if (idEmpresa) {
-      this.getEmpresaDetails(Number(idEmpresa));  // Usamos el método adecuado
-      this.getConvocatoriasPasadas(Number(idEmpresa));  // Usamos el método adecuado
+      this.getEmpresaDetails(Number(idEmpresa));  
+      this.getConvocatoriasPasadas(Number(idEmpresa));  
     }
   }
 
   // Obtener los detalles de la empresa
   getEmpresaDetails(idEmpresa: number) {
-    this.empresaService.getEmpresa(idEmpresa).subscribe((data:any) => {  // Corregimos el nombre del método
+    this.empresaService.getEmpresa(idEmpresa).subscribe((data:any) => {  
+      if (data.imagen && !data.imagen.startsWith('http')) {
+        data.imagen = `${this.apiUrl}${data.imagen}`;
+      }
       this.empresa = data;
-    });
-  }
-
-  // Obtener convocatorias pasadas
-  getConvocatoriasPasadas(idEmpresa: number) {
-    this.empresaService.getConvocatoriasVigentes(idEmpresa, false).subscribe((data) => {  // Usamos el método de EmpresaService
-      this.convocatorias = data;
     });
   }
 
