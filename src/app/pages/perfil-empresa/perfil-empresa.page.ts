@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ConvocatoriaForTableDTO } from 'src/app/_DTO/convocatoriaForTableDTO';
 import { EmpresaDTO } from 'src/app/_DTO/empresaDTO';
 import { EmpresaService } from 'src/app/services/empresa.service';
-import { ImagenService } from 'src/app/services/imagen.service';  // Importamos el servicio de imágenes
+import { ImagenService } from 'src/app/services/imagen.service'; 
 import { environment } from 'src/environments/environment';
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 
@@ -22,15 +22,15 @@ export class PerfilEmpresaPage implements OnInit {
     contrasenia: '',
   };
   convocatorias: ConvocatoriaForTableDTO[] = [];  
-  imageEmpresa!: SafeUrl;  // Variable para manejar la imagen de manera segura
+  imageEmpresa!: SafeUrl;  
 
   private apiUrl: string = environment.api; 
 
   constructor(
     private empresaService: EmpresaService, 
     private route: ActivatedRoute,
-    private imagenService: ImagenService,  // Inyectamos el servicio de imágenes
-    private sanitizer: DomSanitizer  // Inyectamos el sanitizer
+    private imagenService: ImagenService,  
+    private sanitizer: DomSanitizer  
   ) {}
 
   ngOnInit() {
@@ -47,7 +47,7 @@ export class PerfilEmpresaPage implements OnInit {
 
       // Obtener y mostrar la imagen de la empresa si está disponible
       if (data.imagen) {
-        this.getImagenEmpresa(data.imagen);  // Llamamos al servicio para obtener la imagen
+        this.getImagenEmpresa(data.imagen);  
       }
     });
   }
@@ -74,7 +74,6 @@ export class PerfilEmpresaPage implements OnInit {
 
     this.empresaService.updateEmpresa(parseInt(this.empresa.id), nuevoDTO).subscribe({
       next: (response: any) => {
-        alert('Datos de la empresa actualizados exitosamente');
       },
       error: (err) => {
         console.error(err);
