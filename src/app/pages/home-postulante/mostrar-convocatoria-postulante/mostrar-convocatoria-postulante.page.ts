@@ -149,6 +149,7 @@ export class MostrarConvocatoriaPostulantePage implements OnInit {
           console.log('Respuesta del servidor:', response);
           console.log('exito?');
           this.setOpen(false);  
+          this.isPostulated = true;
           this.success();
         },
         error: (error) => {
@@ -168,5 +169,25 @@ export class MostrarConvocatoriaPostulantePage implements OnInit {
     modal1.present();
   }
 
+  loadData(){
+    this.convocatoriaService.obtenerConvocatoriaParaPostulante(this.idConvocatoria).subscribe({
+      next: (res) => {
+        this.convocatoria = res;
+        this.obtenerImagenEmpresa(this.convocatoria.empresa.imagen);
+        this.obtenerImagenConvocatoria(this.convocatoria.imagen);
+      }
+    });
+    this.postulanteService.obtenerPostulantePorConvocatoria(this.idConvocatoria, this.userId).subscribe({
+      next: (res) => {
+        this.isPostulated = true;
+      },error: () => {
+        this.isPostulated = false;
+      }
   
+    })
+  }
+  
+  ionViewWillEnter() {
+    this.loadData();
+  }
 }
