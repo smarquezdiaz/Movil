@@ -50,6 +50,9 @@
         <p *ngIf="form.get('correo')?.hasError('required')">
           <ion-text color="danger">Campo obligatorio</ion-text>
         </p>
+        <p *ngIf="form.get('correo')?.hasError('email')">
+          <ion-text color="danger">Correo electrónico inválido</ion-text>
+        </p>    
       </div>
       <hr class="divider">
       <h1>Datos Usuario</h1>

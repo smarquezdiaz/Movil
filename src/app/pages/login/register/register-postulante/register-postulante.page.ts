@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Postulante } from 'src/app/modelos/postulante';
 import { PostulanteService } from 'src/app/services/postulante.service';
@@ -24,7 +24,7 @@ export class RegisterPostulantePage implements OnInit {
       carrera: ['',Validators.required],
       descripcion: ['', Validators.required],
       celular: ['', Validators.required],
-      correo: ['', Validators.required],
+      correo: ['', [Validators.required, Validators.email]],
       usuario: ['', Validators.required],
       contrasenia: ['', Validators.required],
       confirmContrasenia: ['', Validators.required],
