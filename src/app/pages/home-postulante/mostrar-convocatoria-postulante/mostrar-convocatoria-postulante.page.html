@@ -19,18 +19,18 @@
     <div class="info-pasantia">
       <p><strong>Acerca de la pasantía</strong> <br></p>
       <p>{{convocatoria.descripcion}}</p>
-       <div fxLayout="row" fxLayoutAlign="center center" style="gap: 20px;">
-        <ion-icon name="calendar-clear-sharp"></ion-icon>
+       <div fxLayout="column" fxLayoutAlign="center center" style="gap: 5px;">
+        <!-- <ion-icon name="calendar-clear-sharp"></ion-icon> -->
         <p><strong>Reclutamiento:</strong> {{convocatoria.fechaInicioReclutamiento}} - {{convocatoria.fechaFinReclutamiento}}</p>
          <div fxLayout="row" fxLayoutAlign="center center" style="gap: 20px;">
-          <ion-icon name="calendar-clear-sharp"></ion-icon>
+          <!-- <ion-icon name="calendar-clear-sharp"></ion-icon> -->
         <p><strong>Selección:</strong> {{convocatoria.fechaInicioSeleccion}} - {{convocatoria.fechaFinSeleccion}}</p>
       </div>
       </div>
     </div>
     <hr class="linea">
-    <ion-buttons fxLayoutAlign="center end">
-      <ion-button (click)="setOpen(true)" expand="block" [disabled]="isPostulated">Aplicar</ion-button>
+    <ion-buttons fxLayoutAlign="center end" class="ion-buttons-postulante">
+      <ion-button class="ion-button-postulante"  class="main-button"  (click)="setOpen(true)" expand="block" [disabled]="isPostulated">Aplicar</ion-button>
     </ion-buttons>
   </div>
   <ion-modal class="modal-postular" [isOpen]="isModalOpen" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
@@ -52,7 +52,7 @@
       </div>
       <ion-buttons fxLayoutAlign="center end">
         <ion-button class="secondary-button"  (click)="setOpen(false)">Cancelar</ion-button>
-        <ion-button class="main-button" [disabled]="!uploadedFileName" (click)="postularse()">Enviar</ion-button>
+        <ion-button class="main-button"  [disabled]="!uploadedFileName" (click)="postularse()">Enviar</ion-button>
       </ion-buttons>
     </ng-template>
   </ion-modal>

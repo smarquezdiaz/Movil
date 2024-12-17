@@ -6,13 +6,15 @@ import { PerfilEmpresaPage } from './perfil-empresa.page';
 import { EmpresaService } from '../../services/empresa.service';
 import { ConvocatoriaService } from '../../services/convocatoria.service';
 import { PerfilEmpresaRoutingModule } from './perfil-empresa-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PerfilEmpresaRoutingModule
+    PerfilEmpresaRoutingModule,
+    SharedModule
   ],
   declarations: [PerfilEmpresaPage],
   providers: [EmpresaService, ConvocatoriaService]

@@ -6,7 +6,7 @@ export interface Empresa {
   email: string;
   usuario: string;
   convocatorias?: Convocatoria [];
-  img?:string;
+  img?:any;
 }
 export interface Convocatoria {
   id: number;

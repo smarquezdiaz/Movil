@@ -64,12 +64,6 @@ ion-list {
   margin-top: 20px;
 }
 
-ion-item {
-  background-color: #261c19; /* Fondo para los items de la lista */
-  border-radius: 8px;
-  margin-bottom: 10px;
-  padding: 10px;
-}
 
 ion-item ion-label {
   color: white;
@@ -102,4 +96,10 @@ p {
 
 strong {
   color: #A90B71; /* Color destacado para las etiquetas fuertes */
+}
+
+.empresa-details img {
+  display: flex;
+  margin: auto;
+  margin-top: 20px;
 }

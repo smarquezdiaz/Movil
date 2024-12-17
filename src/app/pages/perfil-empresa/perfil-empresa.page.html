@@ -1,37 +1,39 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
     <ion-title>Perfil de la Empresa</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
+
+<app-header backButton="/home" title="Perfil de la Empresa"></app-header>
 
 <ion-content>
   <div class="empresa-details">
+    <img *ngIf="imagenEmpresa" [src]="imagenEmpresa" alt="Uploaded Image" />
     <h2>Detalles de la Empresa</h2>
     <!-- Nombre de la empresa -->
-    <ion-item>
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input [(ngModel)]="empresa.nombre" type="text"></ion-input>
+    <ion-item class="container-input">
+      <ion-label class="container-texto" position="floating">Nombre</ion-label>
+      <ion-input class="container-campo" [(ngModel)]="empresa.nombre" type="text"></ion-input>
     </ion-item>
-
     <!-- Ubicación de la empresa -->
-    <ion-item>
-      <ion-label position="floating">Ubicación</ion-label>
-      <ion-input [(ngModel)]="empresa.ubicacion" type="text"></ion-input>
+    <ion-item class="container-input">
+      <ion-label  class="container-texto"  position="floating">Ubicación</ion-label>
+      <ion-input class="container-campo" [(ngModel)]="empresa.ubicacion" type="text"></ion-input>
     </ion-item>
 
     <!-- NIT de la empresa -->
-    <ion-item>
-      <ion-label position="floating">NIT</ion-label>
-      <ion-input [(ngModel)]="empresa.nit" type="text"></ion-input>
+    <ion-item class="container-input">
+      <ion-label  class="container-texto" position="floating">NIT</ion-label>
+      <ion-input class="container-campo" [(ngModel)]="empresa.nit" type="text"></ion-input>
     </ion-item>
 
     <!-- Contraseña de la empresa -->
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input [(ngModel)]="empresa.contrasenia" type="password"></ion-input>
+    <ion-item class="container-input">
+      <ion-label  class="container-texto" position="floating">Contraseña</ion-label>
+      <ion-input class="container-campo" [(ngModel)]="empresa.contrasenia" type="password"></ion-input>
     </ion-item>
 
     <!-- Botón para actualizar los detalles de la empresa -->

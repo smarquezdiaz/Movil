@@ -17,6 +17,7 @@ export class BottomMenuComponent implements OnInit {
 
   navigateTo(page: string) {
     const rol = localStorage.getItem('rol');
+    console.log(rol);
     if (page === 'perfil') {
       if (rol === '"postulante"') {
         this.router.navigate(['/perfil-postulante']);

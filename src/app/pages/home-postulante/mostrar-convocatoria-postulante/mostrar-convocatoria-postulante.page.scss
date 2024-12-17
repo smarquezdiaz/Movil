@@ -63,6 +63,14 @@ app-header {
   margin: 10px 0;
 }
 
+
+.info-pasantia  {
+  margin: auto;
+  width: 100vw;
+  padding: 10px;
+}
+
+
 .info-pasantia strong {
   color: #1d133b;
 }
@@ -83,22 +91,22 @@ app-header {
 }
 
 /* Botones */
-ion-buttons {
+.ion-buttons-postulante {
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
 
-ion-button {
-  --background: #a90b71;
+.ion-buttons-postulante {
+  --background: #a90b71 !important;
   --color: white;
   --border-radius: 10px;
   --padding-start: 20px;
   --padding-end: 20px;
 }
 
-ion-button[disabled] {
-  --background: #ddd;
+.ion-buttons-postulante ion-button[disabled] {
+  --background: #a90b71;
 }
 
 /* Modal */
@@ -135,7 +143,7 @@ ion-button[disabled] {
 }
 
 .main-button {
-  --background: #a90b71;
+  --background: #a90b71 !important;
   --color: white;
 }
 
