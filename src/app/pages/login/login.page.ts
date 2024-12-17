@@ -54,6 +54,7 @@ export class LoginPage implements OnInit {
           this.empresaService.loginEmpresa(this.form.value).subscribe({
             next: (res) => {
               this.utilsService.saveInLocalStorage('userId', res);
+              this.utilsService.saveInLocalStorage('rol', 'empresa');
               this.route.navigate(['/home']);
               this.form.reset();
             }, 
@@ -72,6 +73,7 @@ export class LoginPage implements OnInit {
           this.postulanteService.login(this.form.value).subscribe({
             next: (res) => {
               this.utilsService.saveInLocalStorage('userId', res);
+              this.utilsService.saveInLocalStorage('rol', 'postulante');
               this.route.navigate(['/home-postulante']);
               this.form.reset();
             }, 
