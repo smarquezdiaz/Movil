@@ -77,8 +77,15 @@ export class LoginPage implements OnInit {
               this.route.navigate(['/home-postulante']);
               this.form.reset();
             }, 
-            error: (error) => {
-              console.log(error);
+            error: async (error) => {
+              //console.log(error);
+              const alert = await this.alertController.create({
+                header: 'Error',
+                subHeader: 'No existe el usuario seleccionado',
+                message: 'Introduzca un usuario válido.',
+                buttons: ['ok'],
+              });
+              await alert.present();
             }
           })
         } else {
@@ -93,5 +100,8 @@ export class LoginPage implements OnInit {
         }
       }
     }
-    }    
+    }  
+    ionViewWillEnter() {
+      this.form.reset();
+    }  
 }

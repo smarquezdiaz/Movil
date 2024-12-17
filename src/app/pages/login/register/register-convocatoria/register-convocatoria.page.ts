@@ -49,6 +49,10 @@ export class RegisterConvocatoriaPage implements OnInit {
     this.form.patchValue({ empresa: this.userId });
   }
 
+  ionViewWillEnter() {
+    this.ngOnInit();
+  }
+
   async changeImage() {
     const image = await Camera.getPhoto({
       quality: 90,
@@ -90,8 +94,10 @@ export class RegisterConvocatoriaPage implements OnInit {
     let initialDate: Date;
     if (this.form.get(field)?.value) {
       initialDate = new Date(this.form.get(field)?.value);
+      console.log(initialDate);
     } else {
       initialDate = new Date();
+      console.log(initialDate);
     }
     this.modal.present();
   }
@@ -124,7 +130,9 @@ export class RegisterConvocatoriaPage implements OnInit {
 
   onDateSelected(event: any) {
     const selectedDate = new Date(event.detail.value); 
-    this.form.get(this.currentField)?.setValue(selectedDate.toISOString().split('T')[0]); 
+    console.log(selectedDate);
+    console.log(selectedDate.toISOString().split('T')[0]);
+    this.form.get(this.currentField)?.setValue(selectedDate); 
     this.modal.dismiss();
   }
 

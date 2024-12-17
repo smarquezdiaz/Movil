@@ -36,8 +36,8 @@
         </p>
       </div>
       <ion-label>Celular*</ion-label>
-      <ion-input formControlName="celular" class="generic-input" label-placement="stacked" fill="outline"
-        placeholder="Nuevo celular" maxlength="100"></ion-input>
+      <ion-input formControlName="celular" type="number" class="generic-input" label-placement="stacked" fill="outline"
+        placeholder="Nuevo celular" maxlength="8"></ion-input>
       <div *ngIf="form.get('celular')?.errors && (form.get('celular')?.dirty || form.get('celular')?.touched)">
         <p *ngIf="form.get('celular')?.hasError('required')">
           <ion-text color="danger">Campo obligatorio</ion-text>
